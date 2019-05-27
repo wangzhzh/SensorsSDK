@@ -17,6 +17,20 @@
 		001B1B652296B260009FB748 /* demoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 001B1B642296B260009FB748 /* demoUITests.m */; };
 		001B1BA02296B3BF009FB748 /* SensorsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 001B1B9F2296B3BF009FB748 /* SensorsSDK.framework */; };
 		001B1BA12296B3BF009FB748 /* SensorsSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 001B1B9F2296B3BF009FB748 /* SensorsSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4D956261229B81880086714F /* jpush-ios-3.2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D95625D229B81880086714F /* jpush-ios-3.2.0.a */; };
+		4D956263229B81EB0086714F /* jcore-ios-2.0.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D956262229B81EB0086714F /* jcore-ios-2.0.1.a */; };
+		4D956266229B89E00086714F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D956265229B89E00086714F /* CFNetwork.framework */; };
+		4D956268229B89EB0086714F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D956267229B89EB0086714F /* CoreFoundation.framework */; };
+		4D95626A229B89F50086714F /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D956269229B89F50086714F /* CoreTelephony.framework */; };
+		4D95626C229B89FB0086714F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D95626B229B89FB0086714F /* SystemConfiguration.framework */; };
+		4D95626E229B8A020086714F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D95626D229B8A020086714F /* CoreGraphics.framework */; };
+		4D956270229B8A0A0086714F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D95626F229B8A0A0086714F /* Foundation.framework */; };
+		4D956272229B8A130086714F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D956271229B8A130086714F /* UIKit.framework */; };
+		4D956274229B8A1A0086714F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D956273229B8A1A0086714F /* Security.framework */; };
+		4D956276229B8A200086714F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D956275229B8A200086714F /* libz.tbd */; };
+		4D956278229B8A2B0086714F /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D956277229B8A2B0086714F /* UserNotifications.framework */; };
+		4D95627A229B8A310086714F /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D956279229B8A310086714F /* libresolv.tbd */; };
+		4D95627C229B8A3D0086714F /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D95627B229B8A3D0086714F /* AdSupport.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +82,23 @@
 		001B1B642296B260009FB748 /* demoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = demoUITests.m; sourceTree = "<group>"; };
 		001B1B662296B260009FB748 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		001B1B9F2296B3BF009FB748 /* SensorsSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SensorsSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D95625A229B81880086714F /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
+		4D95625D229B81880086714F /* jpush-ios-3.2.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.2.0.a"; sourceTree = "<group>"; };
+		4D95625E229B81880086714F /* JPushNotificationExtensionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPushNotificationExtensionService.h; sourceTree = "<group>"; };
+		4D956262229B81EB0086714F /* jcore-ios-2.0.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-2.0.1.a"; sourceTree = "<group>"; };
+		4D956265229B89E00086714F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		4D956267229B89EB0086714F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		4D956269229B89F50086714F /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		4D95626B229B89FB0086714F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		4D95626D229B8A020086714F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		4D95626F229B8A0A0086714F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		4D956271229B8A130086714F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		4D956273229B8A1A0086714F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		4D956275229B8A200086714F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		4D956277229B8A2B0086714F /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		4D956279229B8A310086714F /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		4D95627B229B8A3D0086714F /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		4D95627D229B8DD00086714F /* demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = demo.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +106,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D95627C229B8A3D0086714F /* AdSupport.framework in Frameworks */,
+				4D95627A229B8A310086714F /* libresolv.tbd in Frameworks */,
+				4D956278229B8A2B0086714F /* UserNotifications.framework in Frameworks */,
+				4D956276229B8A200086714F /* libz.tbd in Frameworks */,
+				4D956274229B8A1A0086714F /* Security.framework in Frameworks */,
+				4D956272229B8A130086714F /* UIKit.framework in Frameworks */,
+				4D956270229B8A0A0086714F /* Foundation.framework in Frameworks */,
+				4D95626E229B8A020086714F /* CoreGraphics.framework in Frameworks */,
+				4D95626C229B89FB0086714F /* SystemConfiguration.framework in Frameworks */,
+				4D95626A229B89F50086714F /* CoreTelephony.framework in Frameworks */,
+				4D956268229B89EB0086714F /* CoreFoundation.framework in Frameworks */,
+				4D956266229B89E00086714F /* CFNetwork.framework in Frameworks */,
+				4D956261229B81880086714F /* jpush-ios-3.2.0.a in Frameworks */,
 				001B1BA02296B3BF009FB748 /* SensorsSDK.framework in Frameworks */,
+				4D956263229B81EB0086714F /* jcore-ios-2.0.1.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +149,7 @@
 				001B1B582296B260009FB748 /* demoTests */,
 				001B1B632296B260009FB748 /* demoUITests */,
 				001B1B3E2296B25F009FB748 /* Products */,
+				4D956264229B89E00086714F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -120,6 +166,8 @@
 		001B1B3F2296B25F009FB748 /* demo */ = {
 			isa = PBXGroup;
 			children = (
+				4D95627D229B8DD00086714F /* demo.entitlements */,
+				4D956258229B80CA0086714F /* libs */,
 				001B1B402296B25F009FB748 /* AppDelegate.h */,
 				001B1B412296B25F009FB748 /* AppDelegate.m */,
 				001B1B432296B25F009FB748 /* ViewController.h */,
@@ -149,6 +197,44 @@
 				001B1B662296B260009FB748 /* Info.plist */,
 			);
 			path = demoUITests;
+			sourceTree = "<group>";
+		};
+		4D956258229B80CA0086714F /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				4D956259229B81770086714F /* JPush */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		4D956259229B81770086714F /* JPush */ = {
+			isa = PBXGroup;
+			children = (
+				4D956262229B81EB0086714F /* jcore-ios-2.0.1.a */,
+				4D95625D229B81880086714F /* jpush-ios-3.2.0.a */,
+				4D95625E229B81880086714F /* JPushNotificationExtensionService.h */,
+				4D95625A229B81880086714F /* JPUSHService.h */,
+			);
+			path = JPush;
+			sourceTree = "<group>";
+		};
+		4D956264229B89E00086714F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4D95627B229B8A3D0086714F /* AdSupport.framework */,
+				4D956279229B8A310086714F /* libresolv.tbd */,
+				4D956277229B8A2B0086714F /* UserNotifications.framework */,
+				4D956275229B8A200086714F /* libz.tbd */,
+				4D956273229B8A1A0086714F /* Security.framework */,
+				4D956271229B8A130086714F /* UIKit.framework */,
+				4D95626F229B8A0A0086714F /* Foundation.framework */,
+				4D95626D229B8A020086714F /* CoreGraphics.framework */,
+				4D95626B229B89FB0086714F /* SystemConfiguration.framework */,
+				4D956269229B89F50086714F /* CoreTelephony.framework */,
+				4D956267229B89EB0086714F /* CoreFoundation.framework */,
+				4D956265229B89E00086714F /* CFNetwork.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,6 +305,14 @@
 				TargetAttributes = {
 					001B1B3C2296B25F009FB748 = {
 						CreatedOnToolsVersion = 10.2.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					001B1B542296B260009FB748 = {
 						CreatedOnToolsVersion = 10.2.1;
@@ -455,15 +549,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = demo/demo.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 75FYWDWHL5;
 				INFOPLIST_FILE = demo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/demo/libs/JPush",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangzhzh.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -472,15 +574,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = demo/demo.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 75FYWDWHL5;
 				INFOPLIST_FILE = demo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/demo/libs/JPush",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangzhzh.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
