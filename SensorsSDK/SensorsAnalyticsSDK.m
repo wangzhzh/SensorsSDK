@@ -8,6 +8,8 @@
 
 #include <sys/sysctl.h>
 #import "SensorsAnalyticsSDK.h"
+#import "SensorsDataSwizzle.h"
+#import "UIViewController+SensorsData.h"
 
 #define VERSION @"1.0.0"
 
@@ -34,12 +36,37 @@
         _applicationWillResignActive = NO;
         self.automaticProperties = [self collectAutomaticProperties];
         [self setUpListeners];
+        [self addSwizzles];
+        
     }
     return self;
 }
 
+- (void)addSwizzles {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+        NSError *error = NULL;
+        
+        // Navigation
+        [UIViewController sensorsdata_swizzleMethod:@selector(viewDidAppear:)
+                                withMethod:@selector(sensorsdata_viewDidAppear:)
+                                     error:&error];
+        if (error) {
+            NSLog(@"Failed to swizzle viewDidAppear: on UIViewController. Details: %@", error);
+            error = NULL;
+        }
+    });
+}
+
 - (void)setUpListeners {
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    
+    //监听 UIApplicationDidEnterBackgroundNotification 本地通知
+    [notificationCenter addObserver:self
+                           selector:@selector(applicationDidEnterBackground:)
+                               name:UIApplicationDidEnterBackgroundNotification
+                             object:nil];
     
     //监听 UIApplicationDidBecomeActiveNotification 本地通知
     [notificationCenter addObserver:self
@@ -47,16 +74,10 @@
                                name:UIApplicationDidBecomeActiveNotification
                              object:nil];
     
-    //监听 applicationWillResignActive 本地通知
+    //监听 UIApplicationWillResignActiveNotification 本地通知
     [notificationCenter addObserver:self
                            selector:@selector(applicationWillResignActive:)
                                name:UIApplicationWillResignActiveNotification
-                             object:nil];
-    
-    //监听 applicationDidEnterBackground 本地通知
-    [notificationCenter addObserver:self
-                           selector:@selector(applicationDidEnterBackground:)
-                               name:UIApplicationDidEnterBackgroundNotification
                              object:nil];
 }
 

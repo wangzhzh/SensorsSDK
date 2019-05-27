@@ -12,6 +12,10 @@
 		001B1B8D2296B2DF009FB748 /* SensorsSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 001B1B7F2296B2DF009FB748 /* SensorsSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		001B1BA52296B45C009FB748 /* SensorsAnalyticsSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 001B1BA32296B45C009FB748 /* SensorsAnalyticsSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		001B1BA62296B45C009FB748 /* SensorsAnalyticsSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 001B1BA42296B45C009FB748 /* SensorsAnalyticsSDK.m */; };
+		003BCCFF229AE6A50069F68E /* UIViewController+SensorsData.h in Headers */ = {isa = PBXBuildFile; fileRef = 003BCCFD229AE6A50069F68E /* UIViewController+SensorsData.h */; };
+		003BCD00229AE6A50069F68E /* UIViewController+SensorsData.m in Sources */ = {isa = PBXBuildFile; fileRef = 003BCCFE229AE6A50069F68E /* UIViewController+SensorsData.m */; };
+		003BCD03229AE7D00069F68E /* SensorsDataSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = 003BCD01229AE7D00069F68E /* SensorsDataSwizzle.h */; };
+		003BCD04229AE7D00069F68E /* SensorsDataSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 003BCD02229AE7D00069F68E /* SensorsDataSwizzle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +37,10 @@
 		001B1B8C2296B2DF009FB748 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		001B1BA32296B45C009FB748 /* SensorsAnalyticsSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsAnalyticsSDK.h; sourceTree = "<group>"; };
 		001B1BA42296B45C009FB748 /* SensorsAnalyticsSDK.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsAnalyticsSDK.m; sourceTree = "<group>"; };
+		003BCCFD229AE6A50069F68E /* UIViewController+SensorsData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+SensorsData.h"; sourceTree = "<group>"; };
+		003BCCFE229AE6A50069F68E /* UIViewController+SensorsData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+SensorsData.m"; sourceTree = "<group>"; };
+		003BCD01229AE7D00069F68E /* SensorsDataSwizzle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsDataSwizzle.h; sourceTree = "<group>"; };
+		003BCD02229AE7D00069F68E /* SensorsDataSwizzle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsDataSwizzle.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +87,10 @@
 				001B1B802296B2DF009FB748 /* Info.plist */,
 				001B1BA32296B45C009FB748 /* SensorsAnalyticsSDK.h */,
 				001B1BA42296B45C009FB748 /* SensorsAnalyticsSDK.m */,
+				003BCCFD229AE6A50069F68E /* UIViewController+SensorsData.h */,
+				003BCCFE229AE6A50069F68E /* UIViewController+SensorsData.m */,
+				003BCD01229AE7D00069F68E /* SensorsDataSwizzle.h */,
+				003BCD02229AE7D00069F68E /* SensorsDataSwizzle.m */,
 			);
 			path = SensorsSDK;
 			sourceTree = "<group>";
@@ -100,7 +112,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				001B1BA52296B45C009FB748 /* SensorsAnalyticsSDK.h in Headers */,
+				003BCD03229AE7D00069F68E /* SensorsDataSwizzle.h in Headers */,
 				001B1B8D2296B2DF009FB748 /* SensorsSDK.h in Headers */,
+				003BCCFF229AE6A50069F68E /* UIViewController+SensorsData.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,6 +214,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				003BCD04229AE7D00069F68E /* SensorsDataSwizzle.m in Sources */,
+				003BCD00229AE6A50069F68E /* UIViewController+SensorsData.m in Sources */,
 				001B1BA62296B45C009FB748 /* SensorsAnalyticsSDK.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
