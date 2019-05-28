@@ -12,8 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIViewController (SensorsData)
 
-- (void)sensorsdata_viewDidAppear:(BOOL)animated;
-
 @end
 
 NS_ASSUME_NONNULL_END
