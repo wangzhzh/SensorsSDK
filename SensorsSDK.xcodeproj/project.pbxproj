@@ -14,6 +14,8 @@
 		001B1BA62296B45C009FB748 /* SensorsAnalyticsSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 001B1BA42296B45C009FB748 /* SensorsAnalyticsSDK.m */; };
 		003BCCFF229AE6A50069F68E /* UIViewController+SensorsData.h in Headers */ = {isa = PBXBuildFile; fileRef = 003BCCFD229AE6A50069F68E /* UIViewController+SensorsData.h */; };
 		003BCD00229AE6A50069F68E /* UIViewController+SensorsData.m in Sources */ = {isa = PBXBuildFile; fileRef = 003BCCFE229AE6A50069F68E /* UIViewController+SensorsData.m */; };
+		0071A22D229D96C300027FBD /* UIApplication+SensorsData.h in Headers */ = {isa = PBXBuildFile; fileRef = 0071A22B229D96C300027FBD /* UIApplication+SensorsData.h */; };
+		0071A22E229D96C300027FBD /* UIApplication+SensorsData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0071A22C229D96C300027FBD /* UIApplication+SensorsData.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +39,8 @@
 		001B1BA42296B45C009FB748 /* SensorsAnalyticsSDK.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsAnalyticsSDK.m; sourceTree = "<group>"; };
 		003BCCFD229AE6A50069F68E /* UIViewController+SensorsData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+SensorsData.h"; sourceTree = "<group>"; };
 		003BCCFE229AE6A50069F68E /* UIViewController+SensorsData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+SensorsData.m"; sourceTree = "<group>"; };
+		0071A22B229D96C300027FBD /* UIApplication+SensorsData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIApplication+SensorsData.h"; sourceTree = "<group>"; };
+		0071A22C229D96C300027FBD /* UIApplication+SensorsData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+SensorsData.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +89,8 @@
 				001B1BA42296B45C009FB748 /* SensorsAnalyticsSDK.m */,
 				003BCCFD229AE6A50069F68E /* UIViewController+SensorsData.h */,
 				003BCCFE229AE6A50069F68E /* UIViewController+SensorsData.m */,
+				0071A22B229D96C300027FBD /* UIApplication+SensorsData.h */,
+				0071A22C229D96C300027FBD /* UIApplication+SensorsData.m */,
 			);
 			path = SensorsSDK;
 			sourceTree = "<group>";
@@ -106,6 +112,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				001B1BA52296B45C009FB748 /* SensorsAnalyticsSDK.h in Headers */,
+				0071A22D229D96C300027FBD /* UIApplication+SensorsData.h in Headers */,
 				001B1B8D2296B2DF009FB748 /* SensorsSDK.h in Headers */,
 				003BCCFF229AE6A50069F68E /* UIViewController+SensorsData.h in Headers */,
 			);
@@ -207,6 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0071A22E229D96C300027FBD /* UIApplication+SensorsData.m in Sources */,
 				003BCD00229AE6A50069F68E /* UIViewController+SensorsData.m in Sources */,
 				001B1BA62296B45C009FB748 /* SensorsAnalyticsSDK.m in Sources */,
 			);

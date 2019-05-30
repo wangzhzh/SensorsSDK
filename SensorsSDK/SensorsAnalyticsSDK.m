@@ -15,6 +15,7 @@
 @interface SensorsAnalyticsSDK()
 @property (nonatomic, strong) NSDictionary *automaticProperties;
 @property (nonatomic, assign) BOOL applicationWillResignActive;
+@property (nonatomic, assign) BOOL appRelaunched;
 @end
 
 @implementation SensorsAnalyticsSDK
@@ -33,6 +34,7 @@
     self = [super init];
     if (self) {
         _applicationWillResignActive = NO;
+        _appRelaunched = NO;
         self.automaticProperties = [self collectAutomaticProperties];
         [self setUpListeners];
         
@@ -42,6 +44,18 @@
 
 - (void)setUpListeners {
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    
+    //监听 UIApplicationDidFinishLaunchingNotification 本地通知
+    [notificationCenter addObserver:self
+                           selector:@selector(applicationDidFinishLaunching:)
+                               name:UIApplicationDidFinishLaunchingNotification
+                             object:nil];
+    
+    //监听 UIApplicationWillEnterForegroundNotification 本地通知
+    [notificationCenter addObserver:self
+                           selector:@selector(applicationWillEnterForeground:)
+                               name:UIApplicationWillEnterForegroundNotification
+                             object:nil];
     
     //监听 UIApplicationDidEnterBackgroundNotification 本地通知
     [notificationCenter addObserver:self
@@ -62,6 +76,16 @@
                              object:nil];
 }
 
+- (void)applicationWillEnterForeground:(NSNotification *)notification {
+    NSLog(@"applicationWillEnterForeground");
+    _appRelaunched = YES;
+}
+
+- (void)applicationDidFinishLaunching:(NSNotification *)notification {
+    NSLog(@"applicationDidFinishLaunching");
+    [self track:@"$AppStart" andProperties:nil];
+}
+
 //触发 $AppStart 事件
 - (void)applicationDidBecomeActive:(NSNotification *)notification {
     NSLog(@"applicationDidBecomeActive");
@@ -69,7 +93,10 @@
         _applicationWillResignActive = NO;
         return;
     }
-    [self track:@"$AppStart" andProperties:nil];
+    
+    if (_appRelaunched) {
+        [self track:@"$AppStart2" andProperties:nil];
+    }
 }
 
 - (void)applicationWillResignActive:(NSNotification *)notification {
