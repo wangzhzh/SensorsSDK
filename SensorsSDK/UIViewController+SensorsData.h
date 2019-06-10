@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIViewController (SensorsData)
 
++ (void)swizzleUIViewController;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -58,6 +58,8 @@
 
 - (IBAction)buttonOnClick:(id)sender {
     NSLog(@"buttonOnClick");
+//    NSArray *arr = @[@(0), @(1)];
+//    NSLog(@"%@", arr[2]); //模拟越界异常
 }
 
 - (IBAction)switchOnClick:(id)sender {

@@ -12,11 +12,17 @@
 
 @implementation UIViewController (SensorsData)
 
-+ (void)load {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        swizzleMethod([self class], @selector(viewDidAppear:), @selector(sensorsdata_viewDidAppear:));
-    });
+//+ (void)load {
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        swizzleMethod([self class], @selector(viewDidAppear:), @selector(sensorsdata_viewDidAppear:));
+//    });
+//}
+
++ (void)swizzleUIViewController {
+    Method originalMethod = class_getInstanceMethod([UIViewController class], @selector(viewDidAppear:));
+    Method swizzledMethod = class_getInstanceMethod([self class], @selector(sensorsdata_viewDidAppear:));
+    method_exchangeImplementations(originalMethod, swizzledMethod);
 }
 
 - (void)sensorsdata_viewDidAppear:(BOOL)animated {

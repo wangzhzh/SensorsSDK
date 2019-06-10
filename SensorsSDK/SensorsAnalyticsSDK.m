@@ -8,7 +8,9 @@
 
 #include <sys/sysctl.h>
 #import "SensorsAnalyticsSDK.h"
+#import "UIApplication+SensorsData.h"
 #import "UIViewController+SensorsData.h"
+#import "SensorsAnalyticsExceptionHandler.h"
 
 #define VERSION @"1.0.0"
 
@@ -37,7 +39,9 @@
         _appRelaunched = NO;
         self.automaticProperties = [self collectAutomaticProperties];
         [self setUpListeners];
-        
+        [UIViewController swizzleUIViewController];
+        [UIApplication swizzleUIApplication];
+        [[SensorsAnalyticsExceptionHandler sharedHandler] addSensorsAnalyticsInstance:self];
     }
     return self;
 }
@@ -135,6 +139,14 @@
     //print
     NSString *logString = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:eventProperties options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding];
     NSLog(@"%@", logString);
+}
+
+- (void)trackTimerStart:(NSString *)event {
+    
+}
+
+- (void)trackTimerEnd:(NSString *)event withProperties:(NSDictionary *)properties {
+    
 }
 
 + (UInt64)getCurrentTime {

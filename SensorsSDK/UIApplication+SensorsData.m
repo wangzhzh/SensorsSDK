@@ -7,16 +7,23 @@
 //
 
 #import "UIApplication+SensorsData.h"
+#import "UIView+SensorsData.h"
 #import "SensorsAnalyticsSDK.h"
 #import <objc/runtime.h>
 
 @implementation UIApplication (SensorsData)
 
-+ (void)load {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        swizzleMethod2([self class], @selector(sendAction:to:from:forEvent:), @selector(sensorsdata_sendAction:to:from:forEvent:));
-    });
+//+ (void)load {
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        swizzleMethod2([self class], @selector(sendAction:to:from:forEvent:), @selector(sensorsdata_sendAction:to:from:forEvent:));
+//    });
+//}
+
++ (void)swizzleUIApplication {
+    Method originalMethod = class_getInstanceMethod([UIApplication class], @selector(sendAction:to:from:forEvent:));
+    Method swizzledMethod = class_getInstanceMethod([self class], @selector(sensorsdata_sendAction:to:from:forEvent:));
+    method_exchangeImplementations(originalMethod, swizzledMethod);
 }
 
 void swizzleMethod2(Class class, SEL originalSelector, SEL swizzledSelector) {
@@ -36,10 +43,24 @@ void swizzleMethod2(Class class, SEL originalSelector, SEL swizzledSelector) {
 
 
 - (BOOL)sensorsdata_sendAction:(SEL)action to:(nullable id)target from:(nullable id)sender forEvent:(nullable UIEvent *)event {
-    //触发 $AppClick 事件
     NSMutableDictionary *properties = [[NSMutableDictionary alloc] init];
     
-    [[SensorsAnalyticsSDK sharedInstance] track:@"$AppClick" andProperties:nil];
+    UIView *view = (UIView *)sender;
+    
+    //只统计触摸结束时
+    if ([view isKindOfClass:[UISwitch class]] || [[[event allTouches] anyObject] phase] == UITouchPhaseEnded) {
+        //获取控件显示文本
+        [properties setValue:view.sensorsDataElementContent forKey:@"$element_content"];
+        
+        //获取控件类型
+        [properties setObject:NSStringFromClass([sender class]) forKey:@"$element_type"];
+        
+        //获取所属 UIViewController
+        [properties setValue:NSStringFromClass([[view sensorsAnalyticsViewController] class]) forKey:@"screen_name"];
+        
+        //触发 $AppClick 事件
+        [[SensorsAnalyticsSDK sharedInstance] track:@"$AppClick" andProperties:properties];
+    }
     
     // 调用旧的实现，因为它们已经被替换了
     return [self sensorsdata_sendAction:action to:target from:sender forEvent:event];

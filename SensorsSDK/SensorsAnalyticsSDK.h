@@ -35,6 +35,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)track:(NSString *)eventName andProperties:(nullable NSDictionary *)properties;
 
+- (void)trackTimerStart:(NSString *)event;
+
+- (void)trackTimerEnd:(NSString *)event withProperties:(nullable NSDictionary *)properties;
+
 @end
 
 NS_ASSUME_NONNULL_END
