@@ -54,3 +54,22 @@
     return [NSString stringWithFormat:@"%.2f",self.value];
 }
 @end
+
+@implementation UISegmentedControl (SensorsData)
+- (NSString *)sensorsDataElementContent {
+    return [self titleForSegmentAtIndex:self.selectedSegmentIndex];
+}
+@end
+
+@implementation UIStepper (SensorsData)
+- (NSString *)sensorsDataElementContent {
+    return [NSString stringWithFormat:@"%g", self.value];
+}
+@end
+
+@implementation UILabel (SensorsData)
+- (NSString *)sensorsDataElementContent {
+    return self.text;
+}
+
+@end

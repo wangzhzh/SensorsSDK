@@ -10,6 +10,8 @@
 #import "SensorsAnalyticsSDK.h"
 #import "UIApplication+SensorsData.h"
 #import "UIViewController+SensorsData.h"
+#import "UITapGestureRecognizer+SensorsData.h"
+#import "UILongPressGestureRecognizer+SensorsData.h"
 #import "SensorsAnalyticsExceptionHandler.h"
 
 #define VERSION @"1.0.0"
@@ -18,6 +20,7 @@
 @property (nonatomic, strong) NSDictionary *automaticProperties;
 @property (nonatomic, assign) BOOL applicationWillResignActive;
 @property (nonatomic, assign) BOOL appRelaunched;
+@property (nonatomic, strong) NSMutableDictionary *trackTimer;
 @end
 
 @implementation SensorsAnalyticsSDK
@@ -37,10 +40,13 @@
     if (self) {
         _applicationWillResignActive = NO;
         _appRelaunched = NO;
+        _trackTimer = [NSMutableDictionary dictionary];
         self.automaticProperties = [self collectAutomaticProperties];
         [self setUpListeners];
         [UIViewController swizzleUIViewController];
         [UIApplication swizzleUIApplication];
+        [UITapGestureRecognizer swizzleUITapGestureRecognizer];
+        [UILongPressGestureRecognizer swizzleUILongPressGestureRecognizer];
         [[SensorsAnalyticsExceptionHandler sharedHandler] addSensorsAnalyticsInstance:self];
     }
     return self;
@@ -142,11 +148,25 @@
 }
 
 - (void)trackTimerStart:(NSString *)event {
-    
+    self.trackTimer[event] = @{@"eventBegin": @([[self class] getCurrentTime])};
 }
 
 - (void)trackTimerEnd:(NSString *)event withProperties:(NSDictionary *)properties {
+    if (properties == nil) {
+        properties = [[NSMutableDictionary alloc] init];
+    }
     
+    NSMutableDictionary *p = [NSMutableDictionary dictionaryWithDictionary:properties];
+    
+    NSNumber *currentTimeStamp = @([[self class] getCurrentTime]);
+    NSDictionary *eventTimer = self.trackTimer[event];
+    if (eventTimer) {
+        [self.trackTimer removeObjectForKey:event];
+        NSNumber *eventBegin = [eventTimer valueForKey:@"eventBegin"];
+        float eventDuration = [currentTimeStamp longValue] - [eventBegin longValue];
+        [p setObject:@([[NSString stringWithFormat:@"%.3f", eventDuration] floatValue]) forKey:@"$event_duration"];
+    }
+    [self track:event andProperties:p];
 }
 
 + (UInt64)getCurrentTime {

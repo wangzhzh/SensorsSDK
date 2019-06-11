@@ -48,7 +48,10 @@ void swizzleMethod2(Class class, SEL originalSelector, SEL swizzledSelector) {
     UIView *view = (UIView *)sender;
     
     //只统计触摸结束时
-    if ([view isKindOfClass:[UISwitch class]] || [[[event allTouches] anyObject] phase] == UITouchPhaseEnded) {
+    if ([view isKindOfClass:[UISwitch class]] ||
+        [view isKindOfClass:[UISegmentedControl class]] ||
+        [view isKindOfClass:[UIStepper class]] ||
+        [[[event allTouches] anyObject] phase] == UITouchPhaseEnded) {
         //获取控件显示文本
         [properties setValue:view.sensorsDataElementContent forKey:@"$element_content"];
         

@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import <SensorsSDK/SensorsSDK.h>
 
 @interface ViewController ()
 
@@ -32,6 +33,36 @@
     //设置位置在中心
     customTitleView.textAlignment = NSTextAlignmentCenter;
     self.navigationItem.titleView = customTitleView;
+    
+    _uiLabel.userInteractionEnabled = YES;
+    UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
+    [labelTapGestureRecognizer addTarget:self action:@selector(labelTouchUpInside:)];
+    [_uiLabel addGestureRecognizer:labelTapGestureRecognizer];
+    
+    UILongPressGestureRecognizer *labelLongPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(labelLongPress:)];
+    [_uiLabel addGestureRecognizer:labelLongPressGestureRecognizer];
+    
+    _uiLabel2.userInteractionEnabled = YES;
+    UITapGestureRecognizer *labelTapGestureRecognizer2 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(labelTouchUpInside:)];
+    [_uiLabel2 addGestureRecognizer:labelTapGestureRecognizer2];
+    
+    UITapGestureRecognizer *imageViewTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageViewTouchUpInside:)];
+    _imageView.userInteractionEnabled = YES;
+    [_imageView addGestureRecognizer:imageViewTapGestureRecognizer];
+}
+
+-(void) imageViewTouchUpInside:(UITapGestureRecognizer *)recognizer{
+    NSLog(@"UIImageView被点击了");
+}
+
+-(void) labelTouchUpInside:(UITapGestureRecognizer *)recognizer{
+    UILabel *label=(UILabel*)recognizer.view;
+    NSLog(@"%@被点击了",label.text);
+}
+
+-(void) labelLongPress:(UILongPressGestureRecognizer *)recognizer{
+    UILabel *label=(UILabel*)recognizer.view;
+    NSLog(@"%@被长按了",label.text);
 }
 
 - (void)setTitle1 {
@@ -68,5 +99,20 @@
 - (IBAction)sliderOnClick:(id)sender {
 }
 
+- (IBAction)segmentOnClick:(id)sender {
+    NSLog(@"segmentOnClick");
+}
+
+- (IBAction)stepperOnClick:(id)sender {
+    NSLog(@"stepperOnClick");
+}
+
+- (IBAction)trackTimerBeginOnClick:(id)sender {
+    [[SensorsAnalyticsSDK sharedInstance] trackTimerStart:@"doSomething"];
+}
+
+- (IBAction)trackTimerEndOnClick:(id)sender {
+    [[SensorsAnalyticsSDK sharedInstance] trackTimerEnd:@"doSomething" withProperties:nil];
+}
 
 @end

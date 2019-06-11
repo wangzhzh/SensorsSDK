@@ -34,4 +34,16 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)sensorsDataElementContent;
 @end
 
+@interface UISegmentedControl (SensorsData) <SensorsDataElementContent>
+- (NSString *)sensorsDataElementContent;
+@end
+
+@interface UIStepper (SensorsData) <SensorsDataElementContent>
+- (NSString *)sensorsDataElementContent;
+@end
+
+@interface UILabel (SensorsData) <SensorsDataElementContent>
+- (NSString *)sensorsDataElementContent;
+@end
+
 NS_ASSUME_NONNULL_END
