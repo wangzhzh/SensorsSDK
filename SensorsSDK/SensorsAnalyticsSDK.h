@@ -33,11 +33,11 @@ NS_ASSUME_NONNULL_BEGIN
  * @param eventName      事件名称
  * @param properties     事件属性
  */
-- (void)track:(NSString *)eventName andProperties:(nullable NSDictionary *)properties;
+- (void)track:(NSString *)eventName properties:(nullable NSDictionary *)properties;
 
 - (void)trackTimerStart:(NSString *)event;
 
-- (void)trackTimerEnd:(NSString *)event withProperties:(nullable NSDictionary *)properties;
+- (void)trackTimerEnd:(NSString *)event properties:(nullable NSDictionary *)properties;
 
 @end
 

@@ -54,7 +54,7 @@
     [properties setValue:NSStringFromClass([[view sensorsAnalyticsViewController] class]) forKey:@"screen_name"];
     
     //触发 $AppClick 事件
-    [[SensorsAnalyticsSDK sharedInstance] track:@"$AppLongClick" andProperties:properties];
+    [[SensorsAnalyticsSDK sharedInstance] track:@"$AppLongClick" properties:properties];
 }
 
 @end

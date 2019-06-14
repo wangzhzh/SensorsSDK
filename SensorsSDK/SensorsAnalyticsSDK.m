@@ -30,12 +30,12 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         NSLog(@"initSensorsSDK");
-        sharedInstance = [[SensorsAnalyticsSDK alloc] initSensorsSDK];
+        sharedInstance = [[SensorsAnalyticsSDK alloc] init];
     });
     return sharedInstance;
 }
 
-- (instancetype)initSensorsSDK {
+- (instancetype)init {
     self = [super init];
     if (self) {
         _applicationWillResignActive = NO;
@@ -93,7 +93,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
     NSLog(@"applicationDidFinishLaunching");
-    [self track:@"$AppStart" andProperties:nil];
+    [self track:@"$AppStart" properties:nil];
 }
 
 //触发 $AppStart 事件
@@ -105,7 +105,7 @@
     }
     
     if (_appRelaunched) {
-        [self track:@"$AppStart2" andProperties:nil];
+        [self track:@"$AppStart2" properties:nil];
     }
 }
 
@@ -118,10 +118,10 @@
 - (void)applicationDidEnterBackground:(NSNotification *)notification {
     NSLog(@"applicationDidEnterBackground");
     _applicationWillResignActive = NO;
-    [self track:@"$AppEnd" andProperties:nil];
+    [self track:@"$AppEnd" properties:nil];
 }
 
-- (void)track:(NSString *)eventName andProperties:(NSDictionary *)properties {
+- (void)track:(NSString *)eventName properties:(NSDictionary *)properties {
     NSMutableDictionary *eventProperties = [[NSMutableDictionary alloc] init];
     
     //event
@@ -151,7 +151,7 @@
     self.trackTimer[event] = @{@"eventBegin": @([[self class] getCurrentTime])};
 }
 
-- (void)trackTimerEnd:(NSString *)event withProperties:(NSDictionary *)properties {
+- (void)trackTimerEnd:(NSString *)event properties:(NSDictionary *)properties {
     if (properties == nil) {
         properties = [[NSMutableDictionary alloc] init];
     }
@@ -166,7 +166,7 @@
         float eventDuration = [currentTimeStamp longValue] - [eventBegin longValue];
         [p setObject:@([[NSString stringWithFormat:@"%.3f", eventDuration] floatValue]) forKey:@"$event_duration"];
     }
-    [self track:event andProperties:p];
+    [self track:event properties:p];
 }
 
 + (UInt64)getCurrentTime {

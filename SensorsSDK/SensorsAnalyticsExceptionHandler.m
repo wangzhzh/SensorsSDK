@@ -66,7 +66,7 @@ static void SAHandleException(NSException *exception) {
 
 - (void) sa_handleUncaughtException:(NSException *)exception {
     SensorsAnalyticsExceptionHandler *handler = [SensorsAnalyticsExceptionHandler sharedHandler];
-    [_sensorsAnalyticsSDKInstances track:@"dddd" andProperties:nil];
+    [_sensorsAnalyticsSDKInstances track:@"dddd" properties:nil];
 }
 
 @end

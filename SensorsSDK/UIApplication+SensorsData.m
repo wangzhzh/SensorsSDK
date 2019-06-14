@@ -62,7 +62,7 @@ void swizzleMethod2(Class class, SEL originalSelector, SEL swizzledSelector) {
         [properties setValue:NSStringFromClass([[view sensorsAnalyticsViewController] class]) forKey:@"screen_name"];
         
         //触发 $AppClick 事件
-        [[SensorsAnalyticsSDK sharedInstance] track:@"$AppClick" andProperties:properties];
+        [[SensorsAnalyticsSDK sharedInstance] track:@"$AppClick" properties:properties];
     }
     
     // 调用旧的实现，因为它们已经被替换了

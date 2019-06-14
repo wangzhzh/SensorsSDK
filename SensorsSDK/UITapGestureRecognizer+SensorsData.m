@@ -14,13 +14,13 @@
 @implementation UITapGestureRecognizer (SensorsData)
 
 + (void)swizzleUITapGestureRecognizer {
-    Method originalMethod = class_getInstanceMethod([UITapGestureRecognizer class], @selector(addTarget:action:));
-    Method swizzledMethod = class_getInstanceMethod([self class], @selector(sensorsdata2_addTarget:action:));
-    method_exchangeImplementations(originalMethod, swizzledMethod);
-    
-    Method originalMethod2 = class_getInstanceMethod([UITapGestureRecognizer class], @selector(initWithTarget:action:));
-    Method swizzledMethod2 = class_getInstanceMethod([self class], @selector(sensorsdata2_initWithTarget:action:));
-    method_exchangeImplementations(originalMethod2, swizzledMethod2);
+//    Method originalMethod = class_getInstanceMethod([UITapGestureRecognizer class], @selector(addTarget:action:));
+//    Method swizzledMethod = class_getInstanceMethod([self class], @selector(sensorsdata2_addTarget:action:));
+//    method_exchangeImplementations(originalMethod, swizzledMethod);
+//
+//    Method originalMethod2 = class_getInstanceMethod([UITapGestureRecognizer class], @selector(initWithTarget:action:));
+//    Method swizzledMethod2 = class_getInstanceMethod([self class], @selector(sensorsdata2_initWithTarget:action:));
+//    method_exchangeImplementations(originalMethod2, swizzledMethod2);
 }
 
 - (void)trackGestureRecognizerAppClick:(UIGestureRecognizer *)gesture {
@@ -43,7 +43,7 @@
     [properties setValue:NSStringFromClass([[view sensorsAnalyticsViewController] class]) forKey:@"screen_name"];
     
     //触发 $AppClick 事件
-    [[SensorsAnalyticsSDK sharedInstance] track:@"$AppClick" andProperties:properties];
+    [[SensorsAnalyticsSDK sharedInstance] track:@"$AppClick" properties:properties];
 }
 
 - (instancetype)sensorsdata2_initWithTarget:(id)target action:(SEL)action {

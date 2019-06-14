@@ -32,15 +32,16 @@
     // track $AppViewScreen 事件
     if ([self shouldTrackAppViewScreen:self.class]) {
         NSMutableDictionary *properties = [[NSMutableDictionary alloc] init];
+        properties[@"$screen_name"] = NSStringFromClass([self class]);
         [properties setValue:NSStringFromClass([self class]) forKey:@"$screen_name"];
-        //navigationItem.titleView 的优先级高于 navigationItem.title
+        // navigationItem.titleView 的优先级高于 navigationItem.title
         NSString *title = [self contentFromView:self.navigationItem.titleView];
         if (!title) {
             title = self.navigationItem.title;
         }
-        [properties setValue:title forKey:@"$title"];
+        properties[@"$title"] = title;
         
-        [[SensorsAnalyticsSDK sharedInstance] track:@"$AppViewScreen" andProperties:properties];
+        [[SensorsAnalyticsSDK sharedInstance] track:@"$AppViewScreen" properties:properties];
     }
 }
 
