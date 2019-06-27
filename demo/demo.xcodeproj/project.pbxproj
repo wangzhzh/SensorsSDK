@@ -31,6 +31,7 @@
 		4D956278229B8A2B0086714F /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D956277229B8A2B0086714F /* UserNotifications.framework */; };
 		4D95627A229B8A310086714F /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D956279229B8A310086714F /* libresolv.tbd */; };
 		4D95627C229B8A3D0086714F /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D95627B229B8A3D0086714F /* AdSupport.framework */; };
+		CB57460822BE01CB008FB320 /* SensorsDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB57460722BE01CB008FB320 /* SensorsDataTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,8 @@
 		4D956279229B8A310086714F /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		4D95627B229B8A3D0086714F /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		4D95627D229B8DD00086714F /* demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = demo.entitlements; sourceTree = "<group>"; };
+		CB57460622BE01CB008FB320 /* SensorsDataTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsDataTableViewController.h; sourceTree = "<group>"; };
+		CB57460722BE01CB008FB320 /* SensorsDataTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsDataTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +175,8 @@
 				001B1B412296B25F009FB748 /* AppDelegate.m */,
 				001B1B432296B25F009FB748 /* ViewController.h */,
 				001B1B442296B25F009FB748 /* ViewController.m */,
+				CB57460622BE01CB008FB320 /* SensorsDataTableViewController.h */,
+				CB57460722BE01CB008FB320 /* SensorsDataTableViewController.m */,
 				001B1B462296B25F009FB748 /* Main.storyboard */,
 				001B1B492296B260009FB748 /* Assets.xcassets */,
 				001B1B4B2296B260009FB748 /* LaunchScreen.storyboard */,
@@ -378,6 +383,7 @@
 			files = (
 				001B1B452296B25F009FB748 /* ViewController.m in Sources */,
 				001B1B502296B260009FB748 /* main.m in Sources */,
+				CB57460822BE01CB008FB320 /* SensorsDataTableViewController.m in Sources */,
 				001B1B422296B25F009FB748 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

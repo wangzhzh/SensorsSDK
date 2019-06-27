@@ -15,6 +15,16 @@
 
 @implementation ViewController
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    NSLog(@"awakeFromNib");
+}
+
+- (void)loadView {
+    [super loadView];
+    NSLog(@"awakeFromNib");
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     NSLog(@"viewDidAppear");
@@ -34,21 +44,21 @@
     customTitleView.textAlignment = NSTextAlignmentCenter;
     self.navigationItem.titleView = customTitleView;
     
-    _uiLabel.userInteractionEnabled = YES;
-    UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
-    [labelTapGestureRecognizer addTarget:self action:@selector(labelTouchUpInside:)];
-    [_uiLabel addGestureRecognizer:labelTapGestureRecognizer];
-    
-    UILongPressGestureRecognizer *labelLongPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(labelLongPress:)];
-    [_uiLabel addGestureRecognizer:labelLongPressGestureRecognizer];
-    
-    _uiLabel2.userInteractionEnabled = YES;
-    UITapGestureRecognizer *labelTapGestureRecognizer2 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(labelTouchUpInside:)];
-    [_uiLabel2 addGestureRecognizer:labelTapGestureRecognizer2];
-    
-    UITapGestureRecognizer *imageViewTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageViewTouchUpInside:)];
-    _imageView.userInteractionEnabled = YES;
-    [_imageView addGestureRecognizer:imageViewTapGestureRecognizer];
+//    _uiLabel.userInteractionEnabled = YES;
+//    UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
+//    [labelTapGestureRecognizer addTarget:self action:@selector(labelTouchUpInside:)];
+//    [_uiLabel addGestureRecognizer:labelTapGestureRecognizer];
+//    
+//    UILongPressGestureRecognizer *labelLongPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(labelLongPress:)];
+//    [_uiLabel addGestureRecognizer:labelLongPressGestureRecognizer];
+//    
+//    _uiLabel2.userInteractionEnabled = YES;
+//    UITapGestureRecognizer *labelTapGestureRecognizer2 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(labelTouchUpInside:)];
+//    [_uiLabel2 addGestureRecognizer:labelTapGestureRecognizer2];
+//    
+//    UITapGestureRecognizer *imageViewTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageViewTouchUpInside:)];
+//    _imageView.userInteractionEnabled = YES;
+//    [_imageView addGestureRecognizer:imageViewTapGestureRecognizer];
 }
 
 -(void) imageViewTouchUpInside:(UITapGestureRecognizer *)recognizer{
@@ -112,7 +122,7 @@
 }
 
 - (IBAction)trackTimerEndOnClick:(id)sender {
-    [[SensorsAnalyticsSDK sharedInstance] trackTimerEnd:@"doSomething" withProperties:nil];
+    [[SensorsAnalyticsSDK sharedInstance] trackTimerEnd:@"doSomething" properties:nil];
 }
 
 @end

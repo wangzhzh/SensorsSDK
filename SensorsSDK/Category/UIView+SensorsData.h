@@ -12,38 +12,42 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol SensorsDataElementContent
-@optional
-- (NSString *)sensorsDataElementContent;
+/// 获取控件的内容
+@property (nonatomic, copy, readonly) NSString *sensorsdata_elementContent;
 @end;
 
 @interface UIView (SensorsData) <SensorsDataElementContent>
-- (NSString *)sensorsDataElementContent;
 
-- (nullable UIViewController *)sensorsAnalyticsViewController;
+@property (nonatomic, copy, readonly) NSString *sensorsdata_elementContent;
+
+/// 获取 view 所在的 viewController，或者当前的 viewController
+@property (nonatomic, readonly) UIViewController *sensorsdata_viewController;
+
 @end
 
+#pragma mark - Element
 @interface UIButton (SensorsData) <SensorsDataElementContent>
-- (NSString *)sensorsDataElementContent;
+
 @end
 
 @interface UISwitch (SensorsData) <SensorsDataElementContent>
-- (NSString *)sensorsDataElementContent;
+
 @end
 
 @interface UISlider (SensorsData) <SensorsDataElementContent>
-- (NSString *)sensorsDataElementContent;
+
 @end
 
 @interface UISegmentedControl (SensorsData) <SensorsDataElementContent>
-- (NSString *)sensorsDataElementContent;
+
 @end
 
 @interface UIStepper (SensorsData) <SensorsDataElementContent>
-- (NSString *)sensorsDataElementContent;
+
 @end
 
 @interface UILabel (SensorsData) <SensorsDataElementContent>
-- (NSString *)sensorsDataElementContent;
+
 @end
 
 NS_ASSUME_NONNULL_END

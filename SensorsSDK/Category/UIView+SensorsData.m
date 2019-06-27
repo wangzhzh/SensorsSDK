@@ -10,11 +10,11 @@
 
 @implementation UIView (SensorsData)
 
-- (NSString *)sensorsDataElementContent {
+- (NSString *)sensorsdata_elementContent {
     return nil;
 }
 
-- (UIViewController *)sensorsAnalyticsViewController {
+- (UIViewController *)sensorsdata_viewController {
     UIResponder *responder = self;
     while ((responder = [responder nextResponder])){
         if ([responder isKindOfClass: [UIViewController class]]){
@@ -29,46 +29,47 @@
 
 @implementation UIButton (SensorsData)
 
-- (NSString *)sensorsDataElementContent {
-    NSString *elementContent = self.currentAttributedTitle.string;
-    if (elementContent != nil && elementContent.length > 0) {
-        return elementContent;
-    }
+- (NSString *)sensorsdata_elementContent {
     return self.currentTitle;
 }
 
 @end
 
 @implementation UISwitch (SensorsData)
-- (NSString *)sensorsDataElementContent {
-    if (self.isOn) {
-        return @"checked";
-    } else {
-        return @"unchecked";
-    }
+
+- (NSString *)sensorsdata_elementContent {
+    return self.on ? @"checked" : @"unchecked";
 }
+
 @end
 
 @implementation UISlider (SensorsData)
-- (NSString *)sensorsDataElementContent {
+
+- (NSString *)sensorsdata_elementContent {
     return [NSString stringWithFormat:@"%.2f",self.value];
 }
+
 @end
 
 @implementation UISegmentedControl (SensorsData)
-- (NSString *)sensorsDataElementContent {
+
+- (NSString *)sensorsdata_elementContent {
     return [self titleForSegmentAtIndex:self.selectedSegmentIndex];
 }
+
 @end
 
 @implementation UIStepper (SensorsData)
-- (NSString *)sensorsDataElementContent {
+
+- (NSString *)sensorsdata_elementContent {
     return [NSString stringWithFormat:@"%g", self.value];
 }
+
 @end
 
 @implementation UILabel (SensorsData)
-- (NSString *)sensorsDataElementContent {
+
+- (NSString *)sensorsdata_elementContent {
     return self.text;
 }
 

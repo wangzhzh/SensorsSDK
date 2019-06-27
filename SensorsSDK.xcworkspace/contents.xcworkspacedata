@@ -5,6 +5,9 @@
       location = "group:SensorsSDK.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:ResponderDemo/ResponderDemo.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:demo/demo.xcodeproj">
    </FileRef>
 </Workspace>

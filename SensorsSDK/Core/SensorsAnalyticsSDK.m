@@ -8,6 +8,7 @@
 
 #include <sys/sysctl.h>
 #import "SensorsAnalyticsSDK.h"
+#import "UITableView+SensorsData.h"
 #import "UIApplication+SensorsData.h"
 #import "UIViewController+SensorsData.h"
 #import "UITapGestureRecognizer+SensorsData.h"
@@ -43,6 +44,7 @@
         _trackTimer = [NSMutableDictionary dictionary];
         self.automaticProperties = [self collectAutomaticProperties];
         [self setUpListeners];
+        [UITableView swizzleUITableView];
         [UIViewController swizzleUIViewController];
         [UIApplication swizzleUIApplication];
         [UITapGestureRecognizer swizzleUITapGestureRecognizer];

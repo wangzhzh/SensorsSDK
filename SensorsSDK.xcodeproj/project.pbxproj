@@ -24,6 +24,14 @@
 		00A316BB22AFBA6900975129 /* UITapGestureRecognizer+SensorsData.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A316B922AFBA6900975129 /* UITapGestureRecognizer+SensorsData.m */; };
 		00A316C222AFE52800975129 /* UILongPressGestureRecognizer+SensorsData.h in Headers */ = {isa = PBXBuildFile; fileRef = 00A316C022AFE52700975129 /* UILongPressGestureRecognizer+SensorsData.h */; };
 		00A316C322AFE52800975129 /* UILongPressGestureRecognizer+SensorsData.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A316C122AFE52700975129 /* UILongPressGestureRecognizer+SensorsData.m */; };
+		CB57460422BDCD09008FB320 /* NSObject+SASwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = CB57460222BDCD09008FB320 /* NSObject+SASwizzle.h */; };
+		CB57460522BDCD09008FB320 /* NSObject+SASwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = CB57460322BDCD09008FB320 /* NSObject+SASwizzle.m */; };
+		CB57460B22BE0713008FB320 /* SensorsAnalyticsSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = CB57460922BE0713008FB320 /* SensorsAnalyticsSwizzle.h */; };
+		CB57460C22BE0713008FB320 /* SensorsAnalyticsSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = CB57460A22BE0713008FB320 /* SensorsAnalyticsSwizzle.m */; };
+		CB98CC1222C385440051A82F /* SensorsAnalyticsDelegateProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = CB98CC1022C385440051A82F /* SensorsAnalyticsDelegateProxy.h */; };
+		CB98CC1322C385440051A82F /* SensorsAnalyticsDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = CB98CC1122C385440051A82F /* SensorsAnalyticsDelegateProxy.m */; };
+		CBDA55AA22BCE25F005221B7 /* UITableView+SensorsData.h in Headers */ = {isa = PBXBuildFile; fileRef = CBDA55A822BCE25F005221B7 /* UITableView+SensorsData.h */; };
+		CBDA55AB22BCE25F005221B7 /* UITableView+SensorsData.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA55A922BCE25F005221B7 /* UITableView+SensorsData.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +65,14 @@
 		00A316B922AFBA6900975129 /* UITapGestureRecognizer+SensorsData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITapGestureRecognizer+SensorsData.m"; sourceTree = "<group>"; };
 		00A316C022AFE52700975129 /* UILongPressGestureRecognizer+SensorsData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILongPressGestureRecognizer+SensorsData.h"; sourceTree = "<group>"; };
 		00A316C122AFE52700975129 /* UILongPressGestureRecognizer+SensorsData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILongPressGestureRecognizer+SensorsData.m"; sourceTree = "<group>"; };
+		CB57460222BDCD09008FB320 /* NSObject+SASwizzle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+SASwizzle.h"; sourceTree = "<group>"; };
+		CB57460322BDCD09008FB320 /* NSObject+SASwizzle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SASwizzle.m"; sourceTree = "<group>"; };
+		CB57460922BE0713008FB320 /* SensorsAnalyticsSwizzle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsAnalyticsSwizzle.h; sourceTree = "<group>"; };
+		CB57460A22BE0713008FB320 /* SensorsAnalyticsSwizzle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsAnalyticsSwizzle.m; sourceTree = "<group>"; };
+		CB98CC1022C385440051A82F /* SensorsAnalyticsDelegateProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsAnalyticsDelegateProxy.h; sourceTree = "<group>"; };
+		CB98CC1122C385440051A82F /* SensorsAnalyticsDelegateProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsAnalyticsDelegateProxy.m; sourceTree = "<group>"; };
+		CBDA55A822BCE25F005221B7 /* UITableView+SensorsData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITableView+SensorsData.h"; sourceTree = "<group>"; };
+		CBDA55A922BCE25F005221B7 /* UITableView+SensorsData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITableView+SensorsData.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,22 +115,10 @@
 		001B1B7E2296B2DF009FB748 /* SensorsSDK */ = {
 			isa = PBXGroup;
 			children = (
-				00A316C022AFE52700975129 /* UILongPressGestureRecognizer+SensorsData.h */,
-				00A316C122AFE52700975129 /* UILongPressGestureRecognizer+SensorsData.m */,
+				CB57460122BDCC69008FB320 /* Core */,
+				CBDA55AC22BCE2EF005221B7 /* Category */,
 				001B1B7F2296B2DF009FB748 /* SensorsSDK.h */,
 				001B1B802296B2DF009FB748 /* Info.plist */,
-				001B1BA32296B45C009FB748 /* SensorsAnalyticsSDK.h */,
-				001B1BA42296B45C009FB748 /* SensorsAnalyticsSDK.m */,
-				003BCCFD229AE6A50069F68E /* UIViewController+SensorsData.h */,
-				003BCCFE229AE6A50069F68E /* UIViewController+SensorsData.m */,
-				0071A22B229D96C300027FBD /* UIApplication+SensorsData.h */,
-				0071A22C229D96C300027FBD /* UIApplication+SensorsData.m */,
-				0071A22F229FB2E700027FBD /* UIView+SensorsData.h */,
-				0071A230229FB2E700027FBD /* UIView+SensorsData.m */,
-				004D001222ACEDAD00419706 /* SensorsAnalyticsExceptionHandler.h */,
-				004D001322ACEDAD00419706 /* SensorsAnalyticsExceptionHandler.m */,
-				00A316B822AFBA6900975129 /* UITapGestureRecognizer+SensorsData.h */,
-				00A316B922AFBA6900975129 /* UITapGestureRecognizer+SensorsData.m */,
 			);
 			path = SensorsSDK;
 			sourceTree = "<group>";
@@ -128,6 +132,42 @@
 			path = SensorsSDKTests;
 			sourceTree = "<group>";
 		};
+		CB57460122BDCC69008FB320 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				001B1BA32296B45C009FB748 /* SensorsAnalyticsSDK.h */,
+				001B1BA42296B45C009FB748 /* SensorsAnalyticsSDK.m */,
+				004D001222ACEDAD00419706 /* SensorsAnalyticsExceptionHandler.h */,
+				004D001322ACEDAD00419706 /* SensorsAnalyticsExceptionHandler.m */,
+				CB57460922BE0713008FB320 /* SensorsAnalyticsSwizzle.h */,
+				CB57460A22BE0713008FB320 /* SensorsAnalyticsSwizzle.m */,
+				CB98CC1022C385440051A82F /* SensorsAnalyticsDelegateProxy.h */,
+				CB98CC1122C385440051A82F /* SensorsAnalyticsDelegateProxy.m */,
+				CB57460222BDCD09008FB320 /* NSObject+SASwizzle.h */,
+				CB57460322BDCD09008FB320 /* NSObject+SASwizzle.m */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		CBDA55AC22BCE2EF005221B7 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				00A316B822AFBA6900975129 /* UITapGestureRecognizer+SensorsData.h */,
+				00A316B922AFBA6900975129 /* UITapGestureRecognizer+SensorsData.m */,
+				00A316C022AFE52700975129 /* UILongPressGestureRecognizer+SensorsData.h */,
+				00A316C122AFE52700975129 /* UILongPressGestureRecognizer+SensorsData.m */,
+				003BCCFD229AE6A50069F68E /* UIViewController+SensorsData.h */,
+				003BCCFE229AE6A50069F68E /* UIViewController+SensorsData.m */,
+				0071A22B229D96C300027FBD /* UIApplication+SensorsData.h */,
+				0071A22C229D96C300027FBD /* UIApplication+SensorsData.m */,
+				0071A22F229FB2E700027FBD /* UIView+SensorsData.h */,
+				0071A230229FB2E700027FBD /* UIView+SensorsData.m */,
+				CBDA55A822BCE25F005221B7 /* UITableView+SensorsData.h */,
+				CBDA55A922BCE25F005221B7 /* UITableView+SensorsData.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -135,10 +175,14 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBDA55AA22BCE25F005221B7 /* UITableView+SensorsData.h in Headers */,
+				CB57460B22BE0713008FB320 /* SensorsAnalyticsSwizzle.h in Headers */,
 				001B1BA52296B45C009FB748 /* SensorsAnalyticsSDK.h in Headers */,
 				0071A22D229D96C300027FBD /* UIApplication+SensorsData.h in Headers */,
+				CB57460422BDCD09008FB320 /* NSObject+SASwizzle.h in Headers */,
 				00A316BA22AFBA6900975129 /* UITapGestureRecognizer+SensorsData.h in Headers */,
 				004D001422ACEDAD00419706 /* SensorsAnalyticsExceptionHandler.h in Headers */,
+				CB98CC1222C385440051A82F /* SensorsAnalyticsDelegateProxy.h in Headers */,
 				00A316C222AFE52800975129 /* UILongPressGestureRecognizer+SensorsData.h in Headers */,
 				001B1B8D2296B2DF009FB748 /* SensorsSDK.h in Headers */,
 				003BCCFF229AE6A50069F68E /* UIViewController+SensorsData.h in Headers */,
@@ -243,12 +287,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				0071A22E229D96C300027FBD /* UIApplication+SensorsData.m in Sources */,
+				CB98CC1322C385440051A82F /* SensorsAnalyticsDelegateProxy.m in Sources */,
 				003BCD00229AE6A50069F68E /* UIViewController+SensorsData.m in Sources */,
 				004D001522ACEDAD00419706 /* SensorsAnalyticsExceptionHandler.m in Sources */,
 				00A316C322AFE52800975129 /* UILongPressGestureRecognizer+SensorsData.m in Sources */,
 				00A316BB22AFBA6900975129 /* UITapGestureRecognizer+SensorsData.m in Sources */,
 				0071A232229FB2E700027FBD /* UIView+SensorsData.m in Sources */,
+				CB57460522BDCD09008FB320 /* NSObject+SASwizzle.m in Sources */,
+				CB57460C22BE0713008FB320 /* SensorsAnalyticsSwizzle.m in Sources */,
 				001B1BA62296B45C009FB748 /* SensorsAnalyticsSDK.m in Sources */,
+				CBDA55AB22BCE25F005221B7 /* UITableView+SensorsData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

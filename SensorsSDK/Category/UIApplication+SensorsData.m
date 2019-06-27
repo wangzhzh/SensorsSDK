@@ -47,21 +47,21 @@ void swizzleMethod2(Class class, SEL originalSelector, SEL swizzledSelector) {
     
     UIView *view = (UIView *)sender;
     
-    //只统计触摸结束时
+    // 只统计触摸结束时
     if ([view isKindOfClass:[UISwitch class]] ||
         [view isKindOfClass:[UISegmentedControl class]] ||
         [view isKindOfClass:[UIStepper class]] ||
         [[[event allTouches] anyObject] phase] == UITouchPhaseEnded) {
-        //获取控件显示文本
-        [properties setValue:view.sensorsDataElementContent forKey:@"$element_content"];
+        // 获取控件显示文本
+        properties[@"$element_content"] = view.sensorsdata_elementContent;
         
-        //获取控件类型
-        [properties setObject:NSStringFromClass([sender class]) forKey:@"$element_type"];
-        
-        //获取所属 UIViewController
-        [properties setValue:NSStringFromClass([[view sensorsAnalyticsViewController] class]) forKey:@"screen_name"];
-        
-        //触发 $AppClick 事件
+        // 获取控件类型
+        properties[@"$element_type"] = NSStringFromClass([sender class]);
+
+        // 获取所属 UIViewController
+        properties[@"screen_name"] = NSStringFromClass([view.sensorsdata_viewController class]);
+
+        // 触发 $AppClick 事件
         [[SensorsAnalyticsSDK sharedInstance] track:@"$AppClick" properties:properties];
     }
     

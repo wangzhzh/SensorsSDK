@@ -45,13 +45,13 @@
     NSMutableDictionary *properties = [[NSMutableDictionary alloc] init];
     
     //获取控件显示文本
-    [properties setValue:view.sensorsDataElementContent forKey:@"$element_content"];
+    [properties setValue:view.sensorsdata_elementContent forKey:@"$element_content"];
     
     //获取控件类型
     [properties setObject:NSStringFromClass([gesture.view class]) forKey:@"$element_type"];
     
     //获取所属 UIViewController
-    [properties setValue:NSStringFromClass([[view sensorsAnalyticsViewController] class]) forKey:@"screen_name"];
+    [properties setValue:NSStringFromClass([[view sensorsdata_viewController] class]) forKey:@"screen_name"];
     
     //触发 $AppClick 事件
     [[SensorsAnalyticsSDK sharedInstance] track:@"$AppLongClick" properties:properties];
