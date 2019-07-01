@@ -10,9 +10,27 @@
 #import "NSObject+SASwizzle.h"
 #import "UIView+SensorsData.h"
 #import "SensorsAnalyticsSDK.h"
+#import "SensorsAnalyticsDynamicDelegate.h"
 #import "SensorsAnalyticsDelegateProxy.h"
 #include <objc/runtime.h>
 #include <objc/message.h>
+
+
+@interface UIScrollView (Proxy)
+- (void)sensorsdata_setDelegateProxy:(SensorsAnalyticsDelegateProxy *)proxy;
+- (SensorsAnalyticsDelegateProxy *)sensorsdata_delegateProxy;
+@end
+
+@implementation UIScrollView (Proxy)
+
+- (void)sensorsdata_setDelegateProxy:(SensorsAnalyticsDelegateProxy *)proxy {
+    objc_setAssociatedObject(self, @selector(sensorsdata_setDelegateProxy:), proxy, OBJC_ASSOCIATION_RETAIN);
+}
+- (SensorsAnalyticsDelegateProxy *)sensorsdata_delegateProxy {
+    return objc_getAssociatedObject(self, @selector(sensorsdata_delegateProxy:));
+}
+
+@end
 
 #pragma mark - NSObject+UITableView_DidSelectRow
 
@@ -71,14 +89,19 @@ static void sensorsdata_tableViewDidSelectRow(id object, SEL selector, UITableVi
 }
 
 - (void)sensorsdata_setDelegate:(id<UITableViewDelegate>)delegate {
-    // 通过 Swizzle 之后，此处相当于调用 [self setDelegate:delegate]
-    [self sensorsdata_setDelegate:delegate];
-
     // 方案一：方法交换
+    // 通过 Swizzle 之后，此处相当于调用 [self setDelegate:delegate]
+//    [self sensorsdata_setDelegate:delegate];
 //    [self sensorsdata_swizzleDidSelectRowMethodWithDelegate:delegate];
 
     // 方案二：动态子类
-    [SensorsAnalyticsDelegateProxy proxyWithTableViewDelegate:delegate];
+//    [self sensorsdata_setDelegate:delegate];
+//    [SensorsAnalyticsDynamicDelegate proxyWithTableViewDelegate:delegate];
+
+    // 方案三：NSProxy 消息转发
+    SensorsAnalyticsDelegateProxy *proxy = [SensorsAnalyticsDelegateProxy proxyWithTableViewDelegate:delegate];
+    [self sensorsdata_setDelegateProxy:proxy];
+    [self sensorsdata_setDelegate:proxy];
 }
 
 - (void)sensorsdata_swizzleDidSelectRowMethodWithDelegate:(id<UITableViewDelegate>)delegate {
@@ -107,5 +130,3 @@ static void sensorsdata_tableViewDidSelectRow(id object, SEL selector, UITableVi
 }
 
 @end
-
-
