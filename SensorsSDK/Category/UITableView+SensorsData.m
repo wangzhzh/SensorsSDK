@@ -12,25 +12,11 @@
 #import "SensorsAnalyticsSDK.h"
 #import "SensorsAnalyticsDynamicDelegate.h"
 #import "SensorsAnalyticsDelegateProxy.h"
+#import "UIScrollView+DelegateProxy.h"
+#import "TargetProxy.h"
 #include <objc/runtime.h>
 #include <objc/message.h>
 
-
-@interface UIScrollView (Proxy)
-- (void)sensorsdata_setDelegateProxy:(SensorsAnalyticsDelegateProxy *)proxy;
-- (SensorsAnalyticsDelegateProxy *)sensorsdata_delegateProxy;
-@end
-
-@implementation UIScrollView (Proxy)
-
-- (void)sensorsdata_setDelegateProxy:(SensorsAnalyticsDelegateProxy *)proxy {
-    objc_setAssociatedObject(self, @selector(sensorsdata_setDelegateProxy:), proxy, OBJC_ASSOCIATION_RETAIN);
-}
-- (SensorsAnalyticsDelegateProxy *)sensorsdata_delegateProxy {
-    return objc_getAssociatedObject(self, @selector(sensorsdata_delegateProxy:));
-}
-
-@end
 
 #pragma mark - NSObject+UITableView_DidSelectRow
 
@@ -100,7 +86,9 @@ static void sensorsdata_tableViewDidSelectRow(id object, SEL selector, UITableVi
 
     // 方案三：NSProxy 消息转发
     SensorsAnalyticsDelegateProxy *proxy = [SensorsAnalyticsDelegateProxy proxyWithTableViewDelegate:delegate];
-    [self sensorsdata_setDelegateProxy:proxy];
+    // 保存委托对象
+    self.sensorsdata_delegateProxy = proxy;
+    // 调用原始方法，将代理设置为委托对象
     [self sensorsdata_setDelegate:proxy];
 }
 
