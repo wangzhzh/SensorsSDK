@@ -208,6 +208,7 @@
 				004D001422ACEDAD00419706 /* SensorsAnalyticsExceptionHandler.h in Headers */,
 				CB98CC1222C385440051A82F /* SensorsAnalyticsDynamicDelegate.h in Headers */,
 				CBC6556222CA1EF60006CDE5 /* SensorsAnalyticsDelegateProxy.h in Headers */,
+				CB180DE722D33D9F00D42251 /* UIScrollView+DelegateProxy.h in Headers */,
 				00A316C222AFE52800975129 /* UILongPressGestureRecognizer+SensorsData.h in Headers */,
 				8801FB9722DDA0BB009FA0F3 /* UIScrollView+SensorsData.h in Headers */,
 				8801FB9B22DDA200009FA0F3 /* UICollectionView+SensorsData.h in Headers */,
@@ -327,6 +328,7 @@
 				8801FB9822DDA0BB009FA0F3 /* UIScrollView+SensorsData.m in Sources */,
 				CB57460522BDCD09008FB320 /* NSObject+SASwizzle.m in Sources */,
 				CB57460C22BE0713008FB320 /* SensorsAnalyticsSwizzle.m in Sources */,
+				CB180DE822D33D9F00D42251 /* UIScrollView+DelegateProxy.m in Sources */,
 				001B1BA62296B45C009FB748 /* SensorsAnalyticsSDK.m in Sources */,
 				CBDA55AB22BCE25F005221B7 /* UITableView+SensorsData.m in Sources */,
 			);
