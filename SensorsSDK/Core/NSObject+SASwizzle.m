@@ -9,6 +9,7 @@
 #import "NSObject+SASwizzle.h"
 #import <objc/runtime.h>
 #import <objc/message.h>
+#import "TargetProxy.h"
 
 @implementation NSObject (SASwizzle)
 

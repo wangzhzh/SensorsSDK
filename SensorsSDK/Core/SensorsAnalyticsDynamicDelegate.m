@@ -92,19 +92,21 @@ typedef void (*SensorsDidSelectImplementation)(id, SEL, UITableView *, NSIndexPa
         ((SensorsDidSelectImplementation)originalImplementation)(tableView.delegate, originalSelector, tableView, indexPath);
     }
 
-    // 第三步：埋点
-    NSMutableDictionary *properties = [[NSMutableDictionary alloc] init];
-    // 获取控件显示文本
-    properties[@"$element_content"] = tableView.sensorsdata_elementContent;
-
-    // 获取控件类型
-    properties[@"$element_type"] = NSStringFromClass([tableView class]);
-
-    // 获取所属 UIViewController
-    properties[@"screen_name"] = NSStringFromClass([tableView.sensorsdata_viewController class]);
-
-    // 触发 $AppClick 事件
-    [[SensorsAnalyticsSDK sharedInstance] track:@"$AppClick" properties:properties];
+//    // 第三步：埋点
+//    NSMutableDictionary *properties = [[NSMutableDictionary alloc] init];
+//    // 获取控件显示文本
+//    properties[@"$element_content"] = tableView.sensorsdata_elementContent;
+//
+//    // 获取控件类型
+//    properties[@"$element_type"] = NSStringFromClass([tableView class]);
+//
+//    // 获取所属 UIViewController
+//    properties[@"screen_name"] = NSStringFromClass([tableView.sensorsdata_viewController class]);
+//
+//    // 触发 $AppClick 事件
+//    [[SensorsAnalyticsSDK sharedInstance] track:@"$AppClick" properties:properties];
+    
+    [[SensorsAnalyticsSDK sharedInstance] trackTableView:tableView didSelectRowAtIndexPath:indexPath];
 }
 
 - (Class)sensorsdata_class {

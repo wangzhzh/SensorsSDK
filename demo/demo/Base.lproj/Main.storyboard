@@ -22,6 +22,7 @@
                     <connections>
                         <segue destination="SNh-qm-XvI" kind="relationship" relationship="viewControllers" id="cTG-ys-2T6"/>
                         <segue destination="175-L2-3CR" kind="relationship" relationship="viewControllers" id="xV4-u8-lEJ"/>
+                        <segue destination="AWh-Xa-M40" kind="relationship" relationship="viewControllers" id="h6X-aq-nnt"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rEn-g7-Mtq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -189,6 +190,88 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EuX-HE-war" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-686" y="-656"/>
+        </scene>
+        <!--CollectionView-->
+        <scene sceneID="qb5-5V-t04">
+            <objects>
+                <navigationController title="CollectionView" id="AWh-Xa-M40" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="m16-St-wYv"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Vpl-Yc-xHF">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="bW5-rs-CmR" kind="relationship" relationship="rootViewController" id="9tQ-c5-lao"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Del-Ia-Kk1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-688" y="667"/>
+        </scene>
+        <!--Sensor Data Collection View Controller-->
+        <scene sceneID="eyd-L2-slo">
+            <objects>
+                <viewController storyboardIdentifier="SensorDataCollectionViewController" id="bW5-rs-CmR" customClass="SensorDataCollectionViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wpT-FZ-b4e">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PJJ-Y0-deS">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yEC-gg-Q6Z">
+                                    <size key="itemSize" width="85" height="82"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UICollectionViewCell" id="Bxy-yn-W5N" customClass="SensorDataCollectionViewCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="85" height="82"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="85" height="82"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="40l-xA-XEO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="85" height="82"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="40l-xA-XEO" secondAttribute="bottom" id="Hnp-qq-ScT"/>
+                                            <constraint firstAttribute="trailing" secondItem="40l-xA-XEO" secondAttribute="trailing" id="WK3-P2-fj3"/>
+                                            <constraint firstItem="40l-xA-XEO" firstAttribute="top" secondItem="Bxy-yn-W5N" secondAttribute="top" id="bE4-8s-XcG"/>
+                                            <constraint firstItem="40l-xA-XEO" firstAttribute="leading" secondItem="Bxy-yn-W5N" secondAttribute="leading" id="rEk-VH-Kie"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="titleLabel" destination="40l-xA-XEO" id="qBl-fq-Dru"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="bW5-rs-CmR" id="kCY-b2-1Yu"/>
+                                    <outlet property="delegate" destination="bW5-rs-CmR" id="3dy-DX-g7p"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="5rt-D6-Om1" firstAttribute="trailing" secondItem="PJJ-Y0-deS" secondAttribute="trailing" id="8E0-fZ-Tv8"/>
+                            <constraint firstItem="PJJ-Y0-deS" firstAttribute="top" secondItem="5rt-D6-Om1" secondAttribute="top" id="Kpv-eV-UjY"/>
+                            <constraint firstItem="PJJ-Y0-deS" firstAttribute="leading" secondItem="5rt-D6-Om1" secondAttribute="leading" id="PTg-DT-F2u"/>
+                            <constraint firstItem="5rt-D6-Om1" firstAttribute="bottom" secondItem="PJJ-Y0-deS" secondAttribute="bottom" id="WpG-wy-qoW"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="5rt-D6-Om1"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="lAS-BE-EsD"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NkT-lU-wDz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="231.8840579710145" y="666.96428571428567"/>
         </scene>
     </scenes>
     <resources>

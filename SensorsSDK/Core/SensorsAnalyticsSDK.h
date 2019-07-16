@@ -39,6 +39,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)trackTimerEnd:(NSString *)event properties:(nullable NSDictionary *)properties;
 
+/**
+ 采集 UITableView 的 $AppClick 事件
+
+ @param tableView UITableView 控件对象
+ @param indexPath 点击选中的 NSIndexPath 对象
+ */
+- (void)trackTableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ 采集 UICollectionView 的 $AppClick 事件
+
+ @param collectionView UICollectionView 控件对象
+ @param indexPath 点击选中的 NSIndexPath 对象
+ */
+- (void)trackCollectionView:(UICollectionView *)collectionView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+
 @end
 
 NS_ASSUME_NONNULL_END

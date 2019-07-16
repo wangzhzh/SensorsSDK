@@ -9,11 +9,13 @@
 #include <sys/sysctl.h>
 #import "SensorsAnalyticsSDK.h"
 #import "UITableView+SensorsData.h"
+#import "UICollectionView+SensorsData.h"
 #import "UIApplication+SensorsData.h"
 #import "UIViewController+SensorsData.h"
 #import "UITapGestureRecognizer+SensorsData.h"
 #import "UILongPressGestureRecognizer+SensorsData.h"
 #import "SensorsAnalyticsExceptionHandler.h"
+#import "UIView+SensorsData.h"
 
 #define VERSION @"1.0.0"
 
@@ -45,6 +47,7 @@
         self.automaticProperties = [self collectAutomaticProperties];
         [self setUpListeners];
         [UITableView swizzleUITableView];
+        [UICollectionView swizzleCollectionView];
         [UIViewController swizzleUIViewController];
         [UIApplication swizzleUIApplication];
         [UITapGestureRecognizer swizzleUITapGestureRecognizer];
@@ -197,6 +200,40 @@
     sysctlbyname("hw.machine", answer, &size, NULL, 0);
     NSString *results = @(answer);
     return results;
+}
+
+- (void)trackTableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // 初始化 properties 字典对象
+    NSMutableDictionary *properties = [[NSMutableDictionary alloc] init];
+    // 设置控件类型（$element_type）
+    properties[@"$element_type"] = NSStringFromClass([tableView class]);
+    // TODO: 获取用户点击的 UITableViewCell 控件对象
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    // TODO: 设置被用户点击的 UITableViewCell 控件上的内容（$element_content）
+    properties[@"$element_content"] = cell.sensorsdata_elementContent;
+    // TODO: 设置被用户点击的 UITableViewCell 控件所在的位置（$element_position）
+    properties[@"$element_position"] = [NSString stringWithFormat: @"%ld:%ld", (long)indexPath.section, (long)indexPath.row];
+    // 设置 screen_name 属性
+    properties[@"screen_name"] = NSStringFromClass([tableView.sensorsdata_viewController class]);
+    // 触发 $AppClick 事件
+    [[SensorsAnalyticsSDK sharedInstance] track:@"$AppClick" properties:properties];
+}
+
+- (void)trackCollectionView:(UICollectionView *)collectionView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // 初始化 properties 字典对象
+    NSMutableDictionary *properties = [[NSMutableDictionary alloc] init];
+    // 设置控件类型（$element_type）
+    properties[@"$element_type"] = NSStringFromClass([collectionView class]);
+    // TODO: 获取用户点击的 UITableViewCell 控件对象
+    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+    // TODO: 设置被用户点击的 UITableViewCell 控件上的内容（$element_content）
+    properties[@"$element_content"] = cell.sensorsdata_elementContent;
+    // TODO: 设置被用户点击的 UITableViewCell 控件所在的位置（$element_position）
+    properties[@"$element_position"] = [NSString stringWithFormat: @"%ld:%ld", (long)indexPath.section, (long)indexPath.row];
+    // 设置 screen_name 属性
+    properties[@"screen_name"] = NSStringFromClass([collectionView.sensorsdata_viewController class]);
+    // 触发 $AppClick 事件
+    [[SensorsAnalyticsSDK sharedInstance] track:@"$AppClick" properties:properties];
 }
 
 @end

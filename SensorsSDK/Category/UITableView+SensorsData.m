@@ -12,25 +12,10 @@
 #import "SensorsAnalyticsSDK.h"
 #import "SensorsAnalyticsDynamicDelegate.h"
 #import "SensorsAnalyticsDelegateProxy.h"
+#import "UIScrollView+SensorsData.h"
 #include <objc/runtime.h>
 #include <objc/message.h>
-
-
-@interface UIScrollView (Proxy)
-- (void)sensorsdata_setDelegateProxy:(SensorsAnalyticsDelegateProxy *)proxy;
-- (SensorsAnalyticsDelegateProxy *)sensorsdata_delegateProxy;
-@end
-
-@implementation UIScrollView (Proxy)
-
-- (void)sensorsdata_setDelegateProxy:(SensorsAnalyticsDelegateProxy *)proxy {
-    objc_setAssociatedObject(self, @selector(sensorsdata_setDelegateProxy:), proxy, OBJC_ASSOCIATION_RETAIN);
-}
-- (SensorsAnalyticsDelegateProxy *)sensorsdata_delegateProxy {
-    return objc_getAssociatedObject(self, @selector(sensorsdata_delegateProxy:));
-}
-
-@end
+#import "TargetProxy.h"
 
 #pragma mark - NSObject+UITableView_DidSelectRow
 
@@ -66,18 +51,20 @@ static void sensorsdata_tableViewDidSelectRow(id object, SEL selector, UITableVi
     // 通过消息发送，调用原始的 tableView:didSelectRowAtIndexPath: 方法实现
     ((void(*)(id, SEL, id, id))objc_msgSend)(object, destinationSelector, tableView, indexPath);
 
-    NSMutableDictionary *properties = [[NSMutableDictionary alloc] init];
-    // 获取控件显示文本
-    properties[@"$element_content"] = tableView.sensorsdata_elementContent;
+//    NSMutableDictionary *properties = [[NSMutableDictionary alloc] init];
+//    // 获取控件显示文本
+//    properties[@"$element_content"] = tableView.sensorsdata_elementContent;
+//
+//    // 获取控件类型
+//    properties[@"$element_type"] = NSStringFromClass([tableView class]);
+//
+//    // 获取所属 UIViewController
+//    properties[@"screen_name"] = NSStringFromClass([tableView.sensorsdata_viewController class]);
+//
+//    // 触发 $AppClick 事件
+//    [[SensorsAnalyticsSDK sharedInstance] track:@"$AppClick" properties:properties];
 
-    // 获取控件类型
-    properties[@"$element_type"] = NSStringFromClass([tableView class]);
-
-    // 获取所属 UIViewController
-    properties[@"screen_name"] = NSStringFromClass([tableView.sensorsdata_viewController class]);
-
-    // 触发 $AppClick 事件
-    [[SensorsAnalyticsSDK sharedInstance] track:@"$AppClick" properties:properties];
+    [[SensorsAnalyticsSDK sharedInstance] trackTableView:tableView didSelectRowAtIndexPath:indexPath];
 }
 
 #pragma mark - UITableView+SensorsData
@@ -100,7 +87,9 @@ static void sensorsdata_tableViewDidSelectRow(id object, SEL selector, UITableVi
 
     // 方案三：NSProxy 消息转发
     SensorsAnalyticsDelegateProxy *proxy = [SensorsAnalyticsDelegateProxy proxyWithTableViewDelegate:delegate];
-    [self sensorsdata_setDelegateProxy:proxy];
+    // 保存委托对象
+    self.sensorsdata_delegateProxy = proxy;
+    // 调用原始方法，将代理设置为委托对象
     [self sensorsdata_setDelegate:proxy];
 }
 
