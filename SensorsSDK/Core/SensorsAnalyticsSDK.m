@@ -12,8 +12,6 @@
 #import "UICollectionView+SensorsData.h"
 #import "UIApplication+SensorsData.h"
 #import "UIViewController+SensorsData.h"
-#import "UITapGestureRecognizer+SensorsData.h"
-#import "UILongPressGestureRecognizer+SensorsData.h"
 #import "SensorsAnalyticsExceptionHandler.h"
 #import "UIView+SensorsData.h"
 
@@ -21,6 +19,11 @@
 
 @interface SensorsAnalyticsSDK()
 @property (nonatomic, strong) NSDictionary *automaticProperties;
+
+@property (nonatomic, assign, getter=isLaunchedPassively) BOOL launchedPassively;
+/// 保存被动启动时触发的事件
+@property (nonatomic, strong) NSMutableArray *passivelyEvents;
+
 @property (nonatomic, assign) BOOL applicationWillResignActive;
 @property (nonatomic, assign) BOOL appRelaunched;
 @property (nonatomic, strong) NSMutableDictionary *trackTimer;
@@ -41,6 +44,18 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+        // 获取主线程
+        dispatch_queue_t mainQueue = dispatch_get_main_queue();
+        dispatch_block_t block = ^ {
+            // 当 App 处于 UIApplicationStateBackground 状态时，应用是被动启动
+            self.launchedPassively = UIApplication.sharedApplication.applicationState == UIApplicationStateBackground;
+        };
+        // 判断当前线程是否为主线程
+        if (strcmp(dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL), dispatch_queue_get_label(mainQueue)) == 0) {
+            block();
+        } else {
+            dispatch_sync(mainQueue, block);
+        }
         _applicationWillResignActive = NO;
         _appRelaunched = NO;
         _trackTimer = [NSMutableDictionary dictionary];
@@ -50,9 +65,8 @@
         [UICollectionView swizzleCollectionView];
         [UIViewController swizzleUIViewController];
         [UIApplication swizzleUIApplication];
-        [UITapGestureRecognizer swizzleUITapGestureRecognizer];
-        [UILongPressGestureRecognizer swizzleUILongPressGestureRecognizer];
-        [[SensorsAnalyticsExceptionHandler sharedHandler] addSensorsAnalyticsInstance:self];
+        // 调用异常处理单例对象，进行初始化
+        [SensorsAnalyticsExceptionHandler sharedInstance];
     }
     return self;
 }
@@ -98,19 +112,33 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
     NSLog(@"applicationDidFinishLaunching");
-    [self track:@"$AppStart" properties:nil];
+    if (self.launchedPassively) {
+        [self track:@"$AppStartPassively" properties:nil];
+    }
 }
 
-//触发 $AppStart 事件
+// 触发 $AppStart 事件
 - (void)applicationDidBecomeActive:(NSNotification *)notification {
     NSLog(@"applicationDidBecomeActive");
     if (_applicationWillResignActive) {
         _applicationWillResignActive = NO;
         return;
     }
-    
+
+    // 当内存中保存了被动启动过程中记录的事件时，进行上传
+    if (self.passivelyEvents.count > 0) {
+        for (NSDictionary *event in self.passivelyEvents) {
+            // 这里先在控制台打印事件，表示成功记录事件
+            // 在实际项目中需要将事件入库上传
+            NSString *logString = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:event options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding];
+            NSLog(@"%@", logString);
+        }
+        // 将被动启动标记设为 NO，正常记录事件
+        self.launchedPassively = NO;
+    }
+
     if (_appRelaunched) {
-        [self track:@"$AppStart2" properties:nil];
+        [self track:@"$AppStart" properties:nil];
     }
 }
 
@@ -146,10 +174,19 @@
     }
     
     [eventProperties setObject:libProperties forKey:@"properties"];
-    
-    //print
-    NSString *logString = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:eventProperties options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding];
-    NSLog(@"%@", logString);
+
+    // 判断是否为被动启动过程中记录的事件，不包含被动启动事件
+    if (self.launchedPassively && ![eventName isEqualToString:@"$AppStartPassively"]) {
+        if (!self.passivelyEvents) {
+            self.passivelyEvents = [NSMutableArray array];
+        }
+        // 保存被动启动状态下记录的事件
+        [self.passivelyEvents addObject:eventProperties];
+    } else {
+        //print
+        NSString *logString = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:eventProperties options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding];
+        NSLog(@"%@", logString);
+    }
 }
 
 - (void)trackTimerStart:(NSString *)event {

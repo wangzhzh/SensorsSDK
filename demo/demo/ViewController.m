@@ -44,11 +44,11 @@
     customTitleView.textAlignment = NSTextAlignmentCenter;
     self.navigationItem.titleView = customTitleView;
     
-//    _uiLabel.userInteractionEnabled = YES;
-//    UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
-//    [labelTapGestureRecognizer addTarget:self action:@selector(labelTouchUpInside:)];
-//    [_uiLabel addGestureRecognizer:labelTapGestureRecognizer];
-//    
+    _tappedLabel.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];
+    [tap addTarget:self action:@selector(tapAction:)];
+    [_tappedLabel addGestureRecognizer:tap];
+
 //    UILongPressGestureRecognizer *labelLongPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(labelLongPress:)];
 //    [_uiLabel addGestureRecognizer:labelLongPressGestureRecognizer];
 //    
@@ -65,9 +65,9 @@
     NSLog(@"UIImageView被点击了");
 }
 
--(void) labelTouchUpInside:(UITapGestureRecognizer *)recognizer{
-    UILabel *label=(UILabel*)recognizer.view;
-    NSLog(@"%@被点击了",label.text);
+- (void)tapAction:(UITapGestureRecognizer *)sender {
+    UILabel *label= (UILabel*)sender.view;
+    NSLog(@"%@被点击了", label.text);
 }
 
 -(void) labelLongPress:(UILongPressGestureRecognizer *)recognizer{

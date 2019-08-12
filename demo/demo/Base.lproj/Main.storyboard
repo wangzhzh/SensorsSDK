@@ -93,8 +93,8 @@
                                     <action selector="trackTimerEndOnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AWu-oF-UHT"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="addTargetLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fuy-Dl-CRw">
-                                <rect key="frame" x="12" y="260" width="120" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tapped Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fuy-Dl-CRw">
+                                <rect key="frame" x="12" y="260" width="103" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -118,7 +118,7 @@
                     <navigationItem key="navigationItem" id="k1E-cD-Kxk"/>
                     <connections>
                         <outlet property="imageView" destination="GfE-pb-rKH" id="qwH-6k-NhX"/>
-                        <outlet property="uiLabel" destination="fuy-Dl-CRw" id="GFp-qZ-TK5"/>
+                        <outlet property="tappedLabel" destination="fuy-Dl-CRw" id="GFp-qZ-TK5"/>
                         <outlet property="uiLabel2" destination="ahl-OR-7R6" id="5oj-cZ-3I9"/>
                     </connections>
                 </viewController>

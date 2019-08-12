@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <SensorsSDK/SensorsSDK.h>
+#import "SensorsDataReleaseObject.h"
 
 #import "JPUSHService.h"
 // iOS10 注册 APNs 所需头文件
@@ -29,8 +30,27 @@ static NSString *const JPush_AppKey = @"7049fbac28974cd3b1faae99";
     // Override point for customization after application launch.
     
     [SensorsAnalyticsSDK sharedInstance];
-    
+    [[SensorsAnalyticsSDK sharedInstance] track:@"pppp" properties:nil];
+
+
     [self setupJPushNotification:launchOptions];
+
+    // 测试应用层未捕获异常
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSArray *array = @[];
+        NSLog(@"%@", array[0]);
+    });
+
+    // 测试信号异常
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"sensorsdata_app_crashed_reason"];
+//    NSString *crashedReason = [[NSUserDefaults standardUserDefaults] stringForKey:@"sensorsdata_app_crashed_reason"];
+//    if (crashedReason) {
+//        NSLog(@"%@", crashedReason);
+//    } else {
+//        SensorsDataReleaseObject *obj = [[SensorsDataReleaseObject alloc] init];
+//        [obj signalCrash];
+//    }
+
     return YES;
 }
 

@@ -24,7 +24,10 @@
         return NO;
     }
 
-    method_exchangeImplementations(sourceMethod, destinationMethod);
+    class_addMethod(self, sourceSelector, method_getImplementation(sourceMethod), method_getTypeEncoding(sourceMethod));
+    class_addMethod(self, destinationSelector, method_getImplementation(destinationMethod), method_getTypeEncoding(destinationMethod));
+
+    method_exchangeImplementations(class_getInstanceMethod(self, sourceSelector), class_getInstanceMethod(self, destinationSelector));
     return YES;
 }
 

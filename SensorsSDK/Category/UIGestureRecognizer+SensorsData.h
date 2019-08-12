@@ -1,8 +1,8 @@
 //
-//  UITapGestureRecognizer+SensorsData.h
+//  UIGestureRecognizer+SensorsData.h
 //  SensorsSDK
 //
-//  Created by 王灼洲 on 2019/6/11.
+//  Created by 张敏超🍎 on 2019/7/31.
 //  Copyright © 2019 王灼洲. All rights reserved.
 //
 
@@ -11,7 +11,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UITapGestureRecognizer (SensorsData)
-+ (void)swizzleUITapGestureRecognizer;
+
+@end
+
+@interface UILongPressGestureRecognizer (SensorsData)
+
 @end
 
 NS_ASSUME_NONNULL_END

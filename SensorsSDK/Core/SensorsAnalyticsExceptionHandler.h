@@ -7,13 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SensorsAnalyticsSDK.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SensorsAnalyticsExceptionHandler : NSObject
-+ (instancetype)sharedHandler;
-- (void)addSensorsAnalyticsInstance:(SensorsAnalyticsSDK *)instance;
+
++ (instancetype)sharedInstance;
+
 @end
 
 NS_ASSUME_NONNULL_END

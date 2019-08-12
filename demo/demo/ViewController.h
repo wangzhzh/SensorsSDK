@@ -10,7 +10,7 @@
 
 @interface ViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UILabel *uiLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tappedLabel;
 @property (weak, nonatomic) IBOutlet UILabel *uiLabel2;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 

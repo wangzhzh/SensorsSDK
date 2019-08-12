@@ -32,6 +32,7 @@
 		4D95627A229B8A310086714F /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D956279229B8A310086714F /* libresolv.tbd */; };
 		4D95627C229B8A3D0086714F /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D95627B229B8A3D0086714F /* AdSupport.framework */; };
 		8801FB9F22DDA8F5009FA0F3 /* SensorDataCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8801FB9E22DDA8F5009FA0F3 /* SensorDataCollectionViewController.m */; };
+		88B5BA9423010D4300205C15 /* SensorsDataReleaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 88B5BA9323010D4300205C15 /* SensorsDataReleaseObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CB57460822BE01CB008FB320 /* SensorsDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB57460722BE01CB008FB320 /* SensorsDataTableViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -103,6 +104,8 @@
 		4D95627D229B8DD00086714F /* demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = demo.entitlements; sourceTree = "<group>"; };
 		8801FB9D22DDA8F5009FA0F3 /* SensorDataCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorDataCollectionViewController.h; sourceTree = "<group>"; };
 		8801FB9E22DDA8F5009FA0F3 /* SensorDataCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorDataCollectionViewController.m; sourceTree = "<group>"; };
+		88B5BA9223010D4300205C15 /* SensorsDataReleaseObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsDataReleaseObject.h; sourceTree = "<group>"; };
+		88B5BA9323010D4300205C15 /* SensorsDataReleaseObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsDataReleaseObject.m; sourceTree = "<group>"; };
 		CB57460622BE01CB008FB320 /* SensorsDataTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsDataTableViewController.h; sourceTree = "<group>"; };
 		CB57460722BE01CB008FB320 /* SensorsDataTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsDataTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -176,6 +179,8 @@
 				4D956258229B80CA0086714F /* libs */,
 				001B1B402296B25F009FB748 /* AppDelegate.h */,
 				001B1B412296B25F009FB748 /* AppDelegate.m */,
+				88B5BA9223010D4300205C15 /* SensorsDataReleaseObject.h */,
+				88B5BA9323010D4300205C15 /* SensorsDataReleaseObject.m */,
 				001B1B432296B25F009FB748 /* ViewController.h */,
 				001B1B442296B25F009FB748 /* ViewController.m */,
 				CB57460622BE01CB008FB320 /* SensorsDataTableViewController.h */,
@@ -388,6 +393,7 @@
 			files = (
 				001B1B452296B25F009FB748 /* ViewController.m in Sources */,
 				001B1B502296B260009FB748 /* main.m in Sources */,
+				88B5BA9423010D4300205C15 /* SensorsDataReleaseObject.m in Sources */,
 				CB57460822BE01CB008FB320 /* SensorsDataTableViewController.m in Sources */,
 				8801FB9F22DDA8F5009FA0F3 /* SensorDataCollectionViewController.m in Sources */,
 				001B1B422296B25F009FB748 /* AppDelegate.m in Sources */,
