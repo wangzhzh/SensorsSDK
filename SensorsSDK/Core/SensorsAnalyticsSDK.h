@@ -35,9 +35,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)track:(NSString *)eventName properties:(nullable NSDictionary *)properties;
 
-- (void)trackTimerStart:(NSString *)event;
+@end
 
-- (void)trackTimerEnd:(NSString *)event properties:(nullable NSDictionary *)properties;
+@interface SensorsAnalyticsSDK (AppClick)
+
+- (void)trackAppClickWithView:(UIView *)view;
+
 
 /**
  采集 UITableView 的 $AppClick 事件
@@ -54,6 +57,49 @@ NS_ASSUME_NONNULL_BEGIN
  @param indexPath 点击选中的 NSIndexPath 对象
  */
 - (void)trackCollectionView:(UICollectionView *)collectionView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+
+@end
+
+@interface SensorsAnalyticsSDK (Timer)
+
+/**
+ 开始统计事件时长
+
+ 调用这个接口时，并不会真正触发一次事件
+
+ @param event 事件名
+ */
+- (void)trackTimerStart:(NSString *)event;
+
+/**
+ 暂停统计事件时长
+
+ 如果该事件未开始，即没有调用 trackTimerStart: 方法，则不做任何操作
+
+ @param event 事件名
+ */
+- (void)trackTimerPause:(NSString *)event;
+
+/**
+ 恢复统计事件时长
+
+ 如果该事件并未暂停，即没有调用 trackTimerPause: 方法，则没有影响
+
+ @param event 事件名
+ */
+- (void)trackTimerResume:(NSString *)event;
+
+/**
+ 结束事件时长统计，计算时长
+
+ 事件发生时长是从调用 trackTimerStart: 开始计算，到调用 trackTimerEnd:properties: 的时间。
+ 如果多次调用 trackTimerStart: 从最后一次调用开始计算。
+ 如果没有调用 trackTimerStart: 直接调用 trackTimerEnd:properties: 则触发一次普通事件，不会带时长属性
+
+ @param event 事件名，与 start 时事件名一一对应
+ @param properties 事件属性
+ */
+- (void)trackTimerEnd:(NSString *)event properties:(nullable NSDictionary *)properties;
 
 @end
 

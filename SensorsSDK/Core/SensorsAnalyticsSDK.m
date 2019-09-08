@@ -14,8 +14,15 @@
 #import "UIViewController+SensorsData.h"
 #import "SensorsAnalyticsExceptionHandler.h"
 #import "UIView+SensorsData.h"
+#import "SensorsAnalyticsFileStore.h"
+#import "SensorsAnalyticsDatabase.h"
 
 #define VERSION @"1.0.0"
+
+static NSString *SensorsAnalyticsEventBeginKey = @"event_begin";
+static NSString *SensorsAnalyticsEventDurationKey = @"event_duration";
+static NSString *SensorsAnalyticsEventIsPauseKey = @"is_pause";
+static NSString *SensorsAnalyticsEventDidEnterBackgroundKey = @"did_enter_background";
 
 @interface SensorsAnalyticsSDK()
 @property (nonatomic, strong) NSDictionary *automaticProperties;
@@ -26,7 +33,18 @@
 
 @property (nonatomic, assign) BOOL applicationWillResignActive;
 @property (nonatomic, assign) BOOL appRelaunched;
-@property (nonatomic, strong) NSMutableDictionary *trackTimer;
+
+/// 保存进入后台时，未暂停的事件
+@property (nonatomic, strong) NSMutableArray<NSString *> *enterBackgroundTrackTimerEvents;
+/// 事件时长计算
+@property (nonatomic, strong) NSMutableDictionary<NSString *, NSDictionary *> *trackTimer;
+
+/// 文件缓存事件数据对象
+@property (nonatomic, strong) SensorsAnalyticsFileStore *fileStore;
+
+/// 数据库存储对象
+@property (nonatomic, strong) SensorsAnalyticsDatabase *database;
+
 @end
 
 @implementation SensorsAnalyticsSDK
@@ -58,17 +76,34 @@
         }
         _applicationWillResignActive = NO;
         _appRelaunched = NO;
+        _enterBackgroundTrackTimerEvents = [NSMutableArray array];
         _trackTimer = [NSMutableDictionary dictionary];
         self.automaticProperties = [self collectAutomaticProperties];
         [self setUpListeners];
         [UITableView swizzleUITableView];
         [UICollectionView swizzleCollectionView];
         [UIViewController swizzleUIViewController];
-        [UIApplication swizzleUIApplication];
+//        [UIApplication swizzleUIApplication];
         // 调用异常处理单例对象，进行初始化
         [SensorsAnalyticsExceptionHandler sharedInstance];
+
+        _fileStore = [[SensorsAnalyticsFileStore alloc] init];
+        NSLog(@"%ld", [_fileStore allEvents].count);
+//        [_fileStore deleteEventsForCount:10];
+//        NSLog(@"%ld", [_fileStore allEvents].count);
+
+        // 初始化 SensorsAnalyticsDatabase 类的对象，使用默认路径
+        _database = [[SensorsAnalyticsDatabase alloc] init];
+        NSLog(@"%@", [_database selectEventsForCount:50]);
+        [_database deleteEventsForCount:2];
+        NSLog(@"%@", [_database selectEventsForCount:50]);
     }
     return self;
+}
+
+- (void)sensorsdata_execute:(UIControl *)sender {
+//    NSLog(@"Function: %s, Sender: %@, Event: %@", __FUNCTION__, sender, event);
+    NSLog(@"-----");
 }
 
 - (void)setUpListeners {
@@ -128,10 +163,8 @@
     // 当内存中保存了被动启动过程中记录的事件时，进行上传
     if (self.passivelyEvents.count > 0) {
         for (NSDictionary *event in self.passivelyEvents) {
-            // 这里先在控制台打印事件，表示成功记录事件
-            // 在实际项目中需要将事件入库上传
-            NSString *logString = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:event options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding];
-            NSLog(@"%@", logString);
+//            [_fileStore saveEvent:event];
+            [_database insertEvent:event];
         }
         // 将被动启动标记设为 NO，正常记录事件
         self.launchedPassively = NO;
@@ -140,6 +173,15 @@
     if (_appRelaunched) {
         [self track:@"$AppStart" properties:nil];
     }
+
+    // 恢复所有事件时长统计
+    for (NSString *event in self.enterBackgroundTrackTimerEvents) {
+        [self trackTimerResume:event];
+    }
+    [self.enterBackgroundTrackTimerEvents removeAllObjects];
+
+    // 开始 $AppEnd 事件计时
+    [self trackTimerStart:@"$AppEnd"];
 }
 
 - (void)applicationWillResignActive:(NSNotification *)notification {
@@ -147,11 +189,20 @@
     _applicationWillResignActive = YES;
 }
 
-//触发 $AppEnd 事件
+// 触发 $AppEnd 事件
 - (void)applicationDidEnterBackground:(NSNotification *)notification {
     NSLog(@"applicationDidEnterBackground");
     _applicationWillResignActive = NO;
-    [self track:@"$AppEnd" properties:nil];
+//    [self track:@"$AppEnd" properties:nil];
+    [self trackTimerEnd:@"$AppEnd" properties:nil];
+
+    // 暂停所有事件时长统计
+    [self.trackTimer enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSDictionary * _Nonnull obj, BOOL * _Nonnull stop) {
+        if (![obj[SensorsAnalyticsEventIsPauseKey] boolValue]) {
+            [self.enterBackgroundTrackTimerEvents addObject:key];
+            [self trackTimerPause:key];
+        }
+    }];
 }
 
 - (void)track:(NSString *)eventName properties:(NSDictionary *)properties {
@@ -161,7 +212,7 @@
     [eventProperties setObject:eventName forKey:@"event"];
     
     //time
-    NSNumber *timeStamp = @([[self class] getCurrentTime]);
+    NSNumber *timeStamp = @([SensorsAnalyticsSDK currentTime]);
     [eventProperties setObject:timeStamp forKey:@"time"];
     
     NSMutableDictionary *libProperties = [[NSMutableDictionary alloc] init];
@@ -174,6 +225,7 @@
     }
     
     [eventProperties setObject:libProperties forKey:@"properties"];
+    NSLog(@"[Event]: %@", eventProperties);
 
     // 判断是否为被动启动过程中记录的事件，不包含被动启动事件
     if (self.launchedPassively && ![eventName isEqualToString:@"$AppStartPassively"]) {
@@ -183,36 +235,17 @@
         // 保存被动启动状态下记录的事件
         [self.passivelyEvents addObject:eventProperties];
     } else {
-        //print
-        NSString *logString = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:eventProperties options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding];
-        NSLog(@"%@", logString);
+//        [_fileStore saveEvent:eventProperties];
+        [_database insertEvent:eventProperties];
     }
 }
 
-- (void)trackTimerStart:(NSString *)event {
-    self.trackTimer[event] = @{@"eventBegin": @([[self class] getCurrentTime])};
-}
-
-- (void)trackTimerEnd:(NSString *)event properties:(NSDictionary *)properties {
-    if (properties == nil) {
-        properties = [[NSMutableDictionary alloc] init];
-    }
-    
-    NSMutableDictionary *p = [NSMutableDictionary dictionaryWithDictionary:properties];
-    
-    NSNumber *currentTimeStamp = @([[self class] getCurrentTime]);
-    NSDictionary *eventTimer = self.trackTimer[event];
-    if (eventTimer) {
-        [self.trackTimer removeObjectForKey:event];
-        NSNumber *eventBegin = [eventTimer valueForKey:@"eventBegin"];
-        float eventDuration = [currentTimeStamp longValue] - [eventBegin longValue];
-        [p setObject:@([[NSString stringWithFormat:@"%.3f", eventDuration] floatValue]) forKey:@"$event_duration"];
-    }
-    [self track:event properties:p];
-}
-
-+ (UInt64)getCurrentTime {
++ (double)currentTime {
     return [[NSDate date] timeIntervalSince1970] * 1000;
+}
+
++ (double)systemUpTime {
+    return NSProcessInfo.processInfo.systemUptime * 1000;
 }
 
 - (NSDictionary *)collectAutomaticProperties {
@@ -237,6 +270,22 @@
     sysctlbyname("hw.machine", answer, &size, NULL, 0);
     NSString *results = @(answer);
     return results;
+}
+
+@end
+
+@implementation SensorsAnalyticsSDK (AppClick)
+
+- (void)trackAppClickWithView:(UIView *)view {
+    NSMutableDictionary *properties = [NSMutableDictionary dictionary];
+    // 获取控件显示文本
+    properties[@"$element_content"] = view.sensorsdata_elementContent;
+    // 获取控件类型
+    properties[@"$element_type"] = NSStringFromClass([view class]);
+    // 获取所属 UIViewController
+    properties[@"screen_name"] = NSStringFromClass([view.sensorsdata_viewController class]);
+    // 触发 $AppClick 事件
+    [[SensorsAnalyticsSDK sharedInstance] track:@"$AppClick" properties:properties];
 }
 
 - (void)trackTableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -271,6 +320,88 @@
     properties[@"screen_name"] = NSStringFromClass([collectionView.sensorsdata_viewController class]);
     // 触发 $AppClick 事件
     [[SensorsAnalyticsSDK sharedInstance] track:@"$AppClick" properties:properties];
+}
+
+@end
+
+
+@implementation SensorsAnalyticsSDK (Timer)
+
+- (void)trackTimerStart:(NSString *)event {
+    // 记录事件开始时间 -> 记录事件开始时系统启动时间
+    self.trackTimer[event] = @{SensorsAnalyticsEventBeginKey: @([SensorsAnalyticsSDK systemUpTime])};
+}
+
+- (void)trackTimerPause:(NSString *)event {
+    NSMutableDictionary *eventTimer = [self.trackTimer[event] mutableCopy];
+    // 如果没有开始，直接返回
+    if (!eventTimer) {
+        return;
+    }
+    // 如果该事件时长统计已经暂停，直接返回，不做任何处理
+    if ([eventTimer[SensorsAnalyticsEventIsPauseKey] boolValue]) {
+        return;
+    }
+    // 获取当前系统启动时间
+    double systemUpTime = [SensorsAnalyticsSDK systemUpTime];
+    // 获取开始时间
+    double beginTime = [eventTimer[SensorsAnalyticsEventBeginKey] doubleValue];
+    // 计算暂停前统计的时长
+    double duration = [eventTimer[SensorsAnalyticsEventDurationKey] doubleValue] + systemUpTime - beginTime;
+    eventTimer[SensorsAnalyticsEventDurationKey] = @(duration);
+    // 事件处于暂停状态
+    eventTimer[SensorsAnalyticsEventIsPauseKey] = @(YES);
+    self.trackTimer[event] = eventTimer;
+}
+
+- (void)trackTimerResume:(NSString *)event {
+    NSMutableDictionary *eventTimer = [self.trackTimer[event] mutableCopy];
+    // 如果没有开始，直接返回
+    if (!eventTimer) {
+        return;
+    }
+    // 如果该事件时长统计没有暂停，直接返回，不做任何处理
+    if (![eventTimer[SensorsAnalyticsEventIsPauseKey] boolValue]) {
+        return;
+    }
+    // 获取当前系统启动时间
+    double systemUpTime = [SensorsAnalyticsSDK systemUpTime];
+    // 重置事件开始时间
+    eventTimer[SensorsAnalyticsEventBeginKey] = @(systemUpTime);
+    // 将事件暂停标记设置为 NO
+    eventTimer[SensorsAnalyticsEventIsPauseKey] = @(NO);
+    self.trackTimer[event] = eventTimer;
+}
+
+- (void)trackTimerEnd:(NSString *)event properties:(NSDictionary *)properties {
+    NSDictionary *eventTimer = self.trackTimer[event];
+    if (!eventTimer) {
+        return [self track:event properties:properties];
+    }
+
+    NSMutableDictionary *p = [NSMutableDictionary dictionaryWithDictionary:properties];
+    // 移除
+    [self.trackTimer removeObjectForKey:event];
+
+    // 如果该事件时长统计没有暂停，直接返回，不做任何处理
+    if ([eventTimer[SensorsAnalyticsEventIsPauseKey] boolValue]) {
+        // 获取事件时长
+        double eventDuration = [eventTimer[SensorsAnalyticsEventDurationKey] doubleValue];
+        // 设置事件时长属性
+        p[@"$event_duration"] = @([[NSString stringWithFormat:@"%.3lf", eventDuration] floatValue]);
+    } else {
+        // 事件开始时间
+        double beginTime = [(NSNumber *)eventTimer[SensorsAnalyticsEventBeginKey] doubleValue];
+        // 获取当前时间 -> 获取当前系统启动时间
+        double currentTime = [SensorsAnalyticsSDK systemUpTime];
+        // 计算事件时长
+        double eventDuration = currentTime - beginTime + [eventTimer[SensorsAnalyticsEventDurationKey] doubleValue];
+        // 设置事件时长属性
+        p[@"$event_duration"] = @([[NSString stringWithFormat:@"%.3lf", eventDuration] floatValue]);
+    }
+
+    // 触发事件
+    [self track:event properties:p];
 }
 
 @end
