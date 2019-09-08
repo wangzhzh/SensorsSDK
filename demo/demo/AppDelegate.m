@@ -32,14 +32,13 @@ static NSString *const JPush_AppKey = @"7049fbac28974cd3b1faae99";
     [SensorsAnalyticsSDK sharedInstance];
     [[SensorsAnalyticsSDK sharedInstance] track:@"pppp" properties:nil];
 
-
     [self setupJPushNotification:launchOptions];
 
     // 测试应用层未捕获异常
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        NSArray *array = @[];
-        NSLog(@"%@", array[0]);
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        NSArray *array = @[];
+//        NSLog(@"%@", array[0]);
+//    });
 
     // 测试信号异常
 //    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"sensorsdata_app_crashed_reason"];

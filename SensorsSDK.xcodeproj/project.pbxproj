@@ -24,8 +24,17 @@
 		8801FB9822DDA0BB009FA0F3 /* UIScrollView+SensorsData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8801FB9622DDA0BB009FA0F3 /* UIScrollView+SensorsData.m */; };
 		8801FB9B22DDA200009FA0F3 /* UICollectionView+SensorsData.h in Headers */ = {isa = PBXBuildFile; fileRef = 8801FB9922DDA200009FA0F3 /* UICollectionView+SensorsData.h */; };
 		8801FB9C22DDA200009FA0F3 /* UICollectionView+SensorsData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8801FB9A22DDA200009FA0F3 /* UICollectionView+SensorsData.m */; };
+		8802A123230BFE2700262F9B /* SensorsAnalyticsFileStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 8802A121230BFE2700262F9B /* SensorsAnalyticsFileStore.h */; };
+		8802A124230BFE2700262F9B /* SensorsAnalyticsFileStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 8802A122230BFE2700262F9B /* SensorsAnalyticsFileStore.m */; };
+		8803D5862325198E0092C43D /* SensorsAnalyticsNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 8803D5842325198E0092C43D /* SensorsAnalyticsNetwork.h */; };
+		8803D5872325198E0092C43D /* SensorsAnalyticsNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 8803D5852325198E0092C43D /* SensorsAnalyticsNetwork.m */; };
 		88A51A3822F1831900D53786 /* UIGestureRecognizer+SensorsData.h in Headers */ = {isa = PBXBuildFile; fileRef = 88A51A3622F1831900D53786 /* UIGestureRecognizer+SensorsData.h */; };
 		88A51A3922F1831900D53786 /* UIGestureRecognizer+SensorsData.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A51A3722F1831900D53786 /* UIGestureRecognizer+SensorsData.m */; };
+		88BB239A231695340006E204 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 88BB2399231695340006E204 /* libsqlite3.0.tbd */; };
+		88BB239D231695510006E204 /* SensorsAnalyticsDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = 88BB239B231695510006E204 /* SensorsAnalyticsDatabase.h */; };
+		88BB239E231695510006E204 /* SensorsAnalyticsDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BB239C231695510006E204 /* SensorsAnalyticsDatabase.m */; };
+		88D261462320E14900FC4B79 /* UIControl+SensorsData.h in Headers */ = {isa = PBXBuildFile; fileRef = 88D261442320E14900FC4B79 /* UIControl+SensorsData.h */; };
+		88D261472320E14900FC4B79 /* UIControl+SensorsData.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D261452320E14900FC4B79 /* UIControl+SensorsData.m */; };
 		CB57460422BDCD09008FB320 /* NSObject+SASwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = CB57460222BDCD09008FB320 /* NSObject+SASwizzle.h */; };
 		CB57460522BDCD09008FB320 /* NSObject+SASwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = CB57460322BDCD09008FB320 /* NSObject+SASwizzle.m */; };
 		CB57460B22BE0713008FB320 /* SensorsAnalyticsSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = CB57460922BE0713008FB320 /* SensorsAnalyticsSwizzle.h */; };
@@ -71,8 +80,17 @@
 		8801FB9622DDA0BB009FA0F3 /* UIScrollView+SensorsData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SensorsData.m"; sourceTree = "<group>"; };
 		8801FB9922DDA200009FA0F3 /* UICollectionView+SensorsData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+SensorsData.h"; sourceTree = "<group>"; };
 		8801FB9A22DDA200009FA0F3 /* UICollectionView+SensorsData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+SensorsData.m"; sourceTree = "<group>"; };
+		8802A121230BFE2700262F9B /* SensorsAnalyticsFileStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsAnalyticsFileStore.h; sourceTree = "<group>"; };
+		8802A122230BFE2700262F9B /* SensorsAnalyticsFileStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsAnalyticsFileStore.m; sourceTree = "<group>"; };
+		8803D5842325198E0092C43D /* SensorsAnalyticsNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsAnalyticsNetwork.h; sourceTree = "<group>"; };
+		8803D5852325198E0092C43D /* SensorsAnalyticsNetwork.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsAnalyticsNetwork.m; sourceTree = "<group>"; };
 		88A51A3622F1831900D53786 /* UIGestureRecognizer+SensorsData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIGestureRecognizer+SensorsData.h"; sourceTree = "<group>"; };
 		88A51A3722F1831900D53786 /* UIGestureRecognizer+SensorsData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+SensorsData.m"; sourceTree = "<group>"; };
+		88BB2399231695340006E204 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		88BB239B231695510006E204 /* SensorsAnalyticsDatabase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsAnalyticsDatabase.h; sourceTree = "<group>"; };
+		88BB239C231695510006E204 /* SensorsAnalyticsDatabase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsAnalyticsDatabase.m; sourceTree = "<group>"; };
+		88D261442320E14900FC4B79 /* UIControl+SensorsData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIControl+SensorsData.h"; sourceTree = "<group>"; };
+		88D261452320E14900FC4B79 /* UIControl+SensorsData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIControl+SensorsData.m"; sourceTree = "<group>"; };
 		CB57460222BDCD09008FB320 /* NSObject+SASwizzle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+SASwizzle.h"; sourceTree = "<group>"; };
 		CB57460322BDCD09008FB320 /* NSObject+SASwizzle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SASwizzle.m"; sourceTree = "<group>"; };
 		CB57460922BE0713008FB320 /* SensorsAnalyticsSwizzle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsAnalyticsSwizzle.h; sourceTree = "<group>"; };
@@ -92,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88BB239A231695340006E204 /* libsqlite3.0.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +131,7 @@
 				001B1B7E2296B2DF009FB748 /* SensorsSDK */,
 				001B1B892296B2DF009FB748 /* SensorsSDKTests */,
 				001B1B7D2296B2DF009FB748 /* Products */,
+				88BB2398231695340006E204 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -144,6 +164,14 @@
 			path = SensorsSDKTests;
 			sourceTree = "<group>";
 		};
+		88BB2398231695340006E204 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				88BB2399231695340006E204 /* libsqlite3.0.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CB57460122BDCC69008FB320 /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +185,12 @@
 				CB98CC1122C385440051A82F /* SensorsAnalyticsDynamicDelegate.m */,
 				CBC6556122CA1EF60006CDE5 /* SensorsAnalyticsDelegateProxy.h */,
 				CBC6555F22CA1EDF0006CDE5 /* SensorsAnalyticsDelegateProxy.m */,
+				8802A121230BFE2700262F9B /* SensorsAnalyticsFileStore.h */,
+				8802A122230BFE2700262F9B /* SensorsAnalyticsFileStore.m */,
+				88BB239B231695510006E204 /* SensorsAnalyticsDatabase.h */,
+				88BB239C231695510006E204 /* SensorsAnalyticsDatabase.m */,
+				8803D5842325198E0092C43D /* SensorsAnalyticsNetwork.h */,
+				8803D5852325198E0092C43D /* SensorsAnalyticsNetwork.m */,
 				CB57460222BDCD09008FB320 /* NSObject+SASwizzle.h */,
 				CB57460322BDCD09008FB320 /* NSObject+SASwizzle.m */,
 				CBD8EF1222CDE5BD00D83D0B /* TargetProxy.h */,
@@ -174,6 +208,8 @@
 				0071A22C229D96C300027FBD /* UIApplication+SensorsData.m */,
 				0071A22F229FB2E700027FBD /* UIView+SensorsData.h */,
 				0071A230229FB2E700027FBD /* UIView+SensorsData.m */,
+				88D261442320E14900FC4B79 /* UIControl+SensorsData.h */,
+				88D261452320E14900FC4B79 /* UIControl+SensorsData.m */,
 				CBDA55A822BCE25F005221B7 /* UITableView+SensorsData.h */,
 				CBDA55A922BCE25F005221B7 /* UITableView+SensorsData.m */,
 				8801FB9922DDA200009FA0F3 /* UICollectionView+SensorsData.h */,
@@ -196,12 +232,16 @@
 				CBDA55AA22BCE25F005221B7 /* UITableView+SensorsData.h in Headers */,
 				88A51A3822F1831900D53786 /* UIGestureRecognizer+SensorsData.h in Headers */,
 				CB57460B22BE0713008FB320 /* SensorsAnalyticsSwizzle.h in Headers */,
+				8802A123230BFE2700262F9B /* SensorsAnalyticsFileStore.h in Headers */,
 				001B1BA52296B45C009FB748 /* SensorsAnalyticsSDK.h in Headers */,
 				0071A22D229D96C300027FBD /* UIApplication+SensorsData.h in Headers */,
 				CB57460422BDCD09008FB320 /* NSObject+SASwizzle.h in Headers */,
 				004D001422ACEDAD00419706 /* SensorsAnalyticsExceptionHandler.h in Headers */,
+				88D261462320E14900FC4B79 /* UIControl+SensorsData.h in Headers */,
 				CB98CC1222C385440051A82F /* SensorsAnalyticsDynamicDelegate.h in Headers */,
+				8803D5862325198E0092C43D /* SensorsAnalyticsNetwork.h in Headers */,
 				CBC6556222CA1EF60006CDE5 /* SensorsAnalyticsDelegateProxy.h in Headers */,
+				88BB239D231695510006E204 /* SensorsAnalyticsDatabase.h in Headers */,
 				8801FB9722DDA0BB009FA0F3 /* UIScrollView+SensorsData.h in Headers */,
 				8801FB9B22DDA200009FA0F3 /* UICollectionView+SensorsData.h in Headers */,
 				CBD8EF1422CDE5BD00D83D0B /* TargetProxy.h in Headers */,
@@ -307,9 +347,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8802A124230BFE2700262F9B /* SensorsAnalyticsFileStore.m in Sources */,
 				0071A22E229D96C300027FBD /* UIApplication+SensorsData.m in Sources */,
 				CB98CC1322C385440051A82F /* SensorsAnalyticsDynamicDelegate.m in Sources */,
 				003BCD00229AE6A50069F68E /* UIViewController+SensorsData.m in Sources */,
+				88D261472320E14900FC4B79 /* UIControl+SensorsData.m in Sources */,
 				004D001522ACEDAD00419706 /* SensorsAnalyticsExceptionHandler.m in Sources */,
 				CBC6556022CA1EDF0006CDE5 /* SensorsAnalyticsDelegateProxy.m in Sources */,
 				CBD8EF1522CDE5BD00D83D0B /* TargetProxy.m in Sources */,
@@ -320,7 +362,9 @@
 				CB57460522BDCD09008FB320 /* NSObject+SASwizzle.m in Sources */,
 				CB57460C22BE0713008FB320 /* SensorsAnalyticsSwizzle.m in Sources */,
 				001B1BA62296B45C009FB748 /* SensorsAnalyticsSDK.m in Sources */,
+				8803D5872325198E0092C43D /* SensorsAnalyticsNetwork.m in Sources */,
 				CBDA55AB22BCE25F005221B7 /* UITableView+SensorsData.m in Sources */,
+				88BB239E231695510006E204 /* SensorsAnalyticsDatabase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

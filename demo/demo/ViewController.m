@@ -49,6 +49,12 @@
     [tap addTarget:self action:@selector(tapAction:)];
     [_tappedLabel addGestureRecognizer:tap];
 
+//    UIButton *btn = [[UIButton alloc]  initWithFrame:CGRectMake(0, 0, 100, 200)];
+//    [btn setTitle:@"jjjjj" forState:UIControlStateNormal];
+//    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [btn addTarget:self action:@selector(buttonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:btn];
+
 //    UILongPressGestureRecognizer *labelLongPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(labelLongPress:)];
 //    [_uiLabel addGestureRecognizer:labelLongPressGestureRecognizer];
 //    
@@ -101,6 +107,8 @@
     NSLog(@"buttonOnClick");
 //    NSArray *arr = @[@(0), @(1)];
 //    NSLog(@"%@", arr[2]); //模拟越界异常
+//    [sender addTarget:self action:@selector(segmentOnClick:) forControlEvents:UIControlEventTouchDown];
+    [sender removeTarget:self action:@selector(buttonOnClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (IBAction)switchOnClick:(id)sender {
@@ -119,6 +127,14 @@
 
 - (IBAction)trackTimerBeginOnClick:(id)sender {
     [[SensorsAnalyticsSDK sharedInstance] trackTimerStart:@"doSomething"];
+}
+
+- (IBAction)trackTimerPauseOnClick:(id)sender {
+    [[SensorsAnalyticsSDK sharedInstance] trackTimerPause:@"doSomething"];
+}
+
+- (IBAction)trackTimerResumeOnClick:(id)sender {
+    [[SensorsAnalyticsSDK sharedInstance] trackTimerResume:@"doSomething"];
 }
 
 - (IBAction)trackTimerEndOnClick:(id)sender {
