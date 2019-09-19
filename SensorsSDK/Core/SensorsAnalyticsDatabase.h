@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 数据库文件路径
 @property (nonatomic, copy, readonly) NSString *filePath;
 
+/// 本地事件存储总量
+@property (nonatomic) NSUInteger eventCount;
+
 /**
  初始化方法
 
@@ -42,8 +45,9 @@ NS_ASSUME_NONNULL_BEGIN
  从数据库中删除一定数量的事件数据
 
  @param count 需要删除的事件数量
+ @return 是否成功删除数据
  */
-- (void)deleteEventsForCount:(NSUInteger)count;
+- (BOOL)deleteEventsForCount:(NSUInteger)count;
 
 
 @end

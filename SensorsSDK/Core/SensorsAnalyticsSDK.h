@@ -13,6 +13,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SensorsAnalyticsSDK : NSObject
 
+#pragma mark - Flush
+/// 当本地存储的事件达到这个数量时，上传数据（默认为 100）
+@property (nonatomic) NSUInteger flushBulkSize;
+/// 两次数据发送的时间间隔，单位秒
+@property (nonatomic) NSUInteger flushInterval;
+
 /**
  * @abstract
  * 获取 SDK 实例
@@ -100,6 +106,15 @@ NS_ASSUME_NONNULL_BEGIN
  @param properties 事件属性
  */
 - (void)trackTimerEnd:(NSString *)event properties:(nullable NSDictionary *)properties;
+
+@end
+
+@interface SensorsAnalyticsSDK (Flush)
+
+/**
+ 向服务器发送本地所有数据方法
+ */
+- (void)flush;
 
 @end
 

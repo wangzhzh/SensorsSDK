@@ -16,6 +16,7 @@
 #import "UIView+SensorsData.h"
 #import "SensorsAnalyticsFileStore.h"
 #import "SensorsAnalyticsDatabase.h"
+#import "SensorsAnalyticsNetwork.h"
 
 #define VERSION @"1.0.0"
 
@@ -45,6 +46,11 @@ static NSString *SensorsAnalyticsEventDidEnterBackgroundKey = @"did_enter_backgr
 /// 数据库存储对象
 @property (nonatomic, strong) SensorsAnalyticsDatabase *database;
 
+/// 数据上传等网络请求对象
+@property (nonatomic, strong) SensorsAnalyticsNetwork *network;
+/// 定时器
+@property (nonatomic, strong) NSTimer *flushTimer;
+
 @end
 
 @implementation SensorsAnalyticsSDK
@@ -62,6 +68,10 @@ static NSString *SensorsAnalyticsEventDidEnterBackgroundKey = @"did_enter_backgr
 - (instancetype)init {
     self = [super init];
     if (self) {
+        _flushBulkSize = 100;
+        _flushInterval = 15;
+        [self startFlushTimer];
+
         // 获取主线程
         dispatch_queue_t mainQueue = dispatch_get_main_queue();
         dispatch_block_t block = ^ {
@@ -106,6 +116,7 @@ static NSString *SensorsAnalyticsEventDidEnterBackgroundKey = @"did_enter_backgr
     NSLog(@"-----");
 }
 
+#pragma mark - Appliction
 - (void)setUpListeners {
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     
@@ -205,6 +216,23 @@ static NSString *SensorsAnalyticsEventDidEnterBackgroundKey = @"did_enter_backgr
     }];
 }
 
+#pragma mark - Timer
+/// 开启上传数据的定时器
+- (void)startFlushTimer {
+    // 当时间间隔设置小于5秒时，设置间隔为5秒
+    NSTimeInterval interval = self.flushInterval < 5 ? 5 : self.flushInterval;
+    // 初始化计时器
+    self.flushTimer = [NSTimer timerWithTimeInterval:interval target:self selector:@selector(flush) userInfo:nil repeats:YES];
+    // 将计时器添加到 RunLoop 中，开启定时器
+    [NSRunLoop.currentRunLoop addTimer:self.flushTimer forMode:NSRunLoopCommonModes];
+}
+// 停止上传数据的定时器
+- (void)stopFlushTimer {
+    [self.flushTimer invalidate];
+    self.flushTimer = nil;
+}
+
+#pragma mark - Track
 - (void)track:(NSString *)eventName properties:(NSDictionary *)properties {
     NSMutableDictionary *eventProperties = [[NSMutableDictionary alloc] init];
     
@@ -235,11 +263,16 @@ static NSString *SensorsAnalyticsEventDidEnterBackgroundKey = @"did_enter_backgr
         // 保存被动启动状态下记录的事件
         [self.passivelyEvents addObject:eventProperties];
     } else {
-//        [_fileStore saveEvent:eventProperties];
-        [_database insertEvent:eventProperties];
+//        [self.fileStore saveEvent:eventProperties];
+        [self.database insertEvent:eventProperties];
     }
+
+//    if (self.database.eventCount >= self.flushBulkSize) {
+//        [self flush];
+//    }
 }
 
+#pragma mark - Property
 + (double)currentTime {
     return [[NSDate date] timeIntervalSince1970] * 1000;
 }
@@ -402,6 +435,42 @@ static NSString *SensorsAnalyticsEventDidEnterBackgroundKey = @"did_enter_backgr
 
     // 触发事件
     [self track:event properties:p];
+}
+
+@end
+
+@implementation SensorsAnalyticsSDK (Flush)
+
+- (void)flush {
+    // 默认一次向服务端发送 50 条数据
+    [self flushByBlukSize:50];
+}
+
+- (void)flushByBlukSize:(NSUInteger)size {
+    // 获取本地数据
+    NSArray<NSString *> *events = [self.database selectEventsForCount:size];
+    // 当本地存储的数据为 0 或者上传失败时，直接返回，退出递归调用
+    if (events.count == 0 || ![self.network flushEvents:events]) {
+        return;
+    }
+    // 当删除数据失败时，直接返回退出递归调用，防止死循环
+    if (![self.database deleteEventsForCount:size]) {
+        return;
+    }
+    // 继续上传本地的其他数据
+    [self flushByBlukSize:size];
+}
+
+- (void)setFlushInterval:(NSUInteger)flushInterval {
+    if (_flushInterval != flushInterval) {
+        _flushInterval = flushInterval;
+        // 上传本地所有事件数据
+        [self flush];
+        // 先暂停计时器
+        [self stopFlushTimer];
+        // 重新开启定时器
+        [self startFlushTimer];
+    }
 }
 
 @end

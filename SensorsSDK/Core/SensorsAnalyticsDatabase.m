@@ -21,9 +21,6 @@ static NSString * const SensorsAnalyticsDefaultDatabaseName = @"SensorsAnalytics
 /// 保存一个先进先出的线程
 @property (nonatomic, strong) dispatch_queue_t queue;
 
-/// 本地事件存储总量
-@property (nonatomic) NSUInteger eventCount;
-
 @end
 
 @implementation SensorsAnalyticsDatabase
@@ -148,8 +145,9 @@ static sqlite3_stmt *selectStmt = NULL;
     return events;
 }
 
-- (void)deleteEventsForCount:(NSUInteger)count {
-    dispatch_async(self.queue, ^{
+- (BOOL)deleteEventsForCount:(NSUInteger)count {
+    __block BOOL success = YES;
+    dispatch_sync(self.queue, ^{
         // 当本地事件数据为 0 时，直接返回
         if (self.eventCount == 0) {
             return ;
@@ -159,10 +157,12 @@ static sqlite3_stmt *selectStmt = NULL;
         char *errmsg;
         // 执行删除语句
         if (sqlite3_exec(self.database, sql.UTF8String, NULL, NULL, &errmsg) != SQLITE_OK) {
+            success = NO;
             return NSLog(@"Failed to delete record msg=%s", errmsg);
         }
         self.eventCount -= count;
     });
+    return success;
 }
 
 - (void)queryLocalDatabaseEventCount {
