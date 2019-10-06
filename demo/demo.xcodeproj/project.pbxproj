@@ -32,7 +32,9 @@
 		4D95627A229B8A310086714F /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D956279229B8A310086714F /* libresolv.tbd */; };
 		4D95627C229B8A3D0086714F /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D95627B229B8A3D0086714F /* AdSupport.framework */; };
 		8801FB9F22DDA8F5009FA0F3 /* SensorDataCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8801FB9E22DDA8F5009FA0F3 /* SensorDataCollectionViewController.m */; };
+		88A1D11523482E1E00444297 /* sensorsdata.html in Resources */ = {isa = PBXBuildFile; fileRef = 88A1D11423482E1E00444297 /* sensorsdata.html */; };
 		88B5BA9423010D4300205C15 /* SensorsDataReleaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 88B5BA9323010D4300205C15 /* SensorsDataReleaseObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		88D37D99233F0540002FA8A3 /* SensorsDataWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D37D98233F0540002FA8A3 /* SensorsDataWebViewViewController.m */; };
 		CB57460822BE01CB008FB320 /* SensorsDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB57460722BE01CB008FB320 /* SensorsDataTableViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -104,8 +106,11 @@
 		4D95627D229B8DD00086714F /* demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = demo.entitlements; sourceTree = "<group>"; };
 		8801FB9D22DDA8F5009FA0F3 /* SensorDataCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorDataCollectionViewController.h; sourceTree = "<group>"; };
 		8801FB9E22DDA8F5009FA0F3 /* SensorDataCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorDataCollectionViewController.m; sourceTree = "<group>"; };
+		88A1D11423482E1E00444297 /* sensorsdata.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sensorsdata.html; sourceTree = "<group>"; };
 		88B5BA9223010D4300205C15 /* SensorsDataReleaseObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsDataReleaseObject.h; sourceTree = "<group>"; };
 		88B5BA9323010D4300205C15 /* SensorsDataReleaseObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsDataReleaseObject.m; sourceTree = "<group>"; };
+		88D37D97233F0540002FA8A3 /* SensorsDataWebViewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsDataWebViewViewController.h; sourceTree = "<group>"; };
+		88D37D98233F0540002FA8A3 /* SensorsDataWebViewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsDataWebViewViewController.m; sourceTree = "<group>"; };
 		CB57460622BE01CB008FB320 /* SensorsDataTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsDataTableViewController.h; sourceTree = "<group>"; };
 		CB57460722BE01CB008FB320 /* SensorsDataTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsDataTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -179,6 +184,7 @@
 				4D956258229B80CA0086714F /* libs */,
 				001B1B402296B25F009FB748 /* AppDelegate.h */,
 				001B1B412296B25F009FB748 /* AppDelegate.m */,
+				88A1D11423482E1E00444297 /* sensorsdata.html */,
 				88B5BA9223010D4300205C15 /* SensorsDataReleaseObject.h */,
 				88B5BA9323010D4300205C15 /* SensorsDataReleaseObject.m */,
 				001B1B432296B25F009FB748 /* ViewController.h */,
@@ -187,6 +193,8 @@
 				CB57460722BE01CB008FB320 /* SensorsDataTableViewController.m */,
 				8801FB9D22DDA8F5009FA0F3 /* SensorDataCollectionViewController.h */,
 				8801FB9E22DDA8F5009FA0F3 /* SensorDataCollectionViewController.m */,
+				88D37D97233F0540002FA8A3 /* SensorsDataWebViewViewController.h */,
+				88D37D98233F0540002FA8A3 /* SensorsDataWebViewViewController.m */,
 				001B1B462296B25F009FB748 /* Main.storyboard */,
 				001B1B492296B260009FB748 /* Assets.xcassets */,
 				001B1B4B2296B260009FB748 /* LaunchScreen.storyboard */,
@@ -367,6 +375,7 @@
 				001B1B4D2296B260009FB748 /* LaunchScreen.storyboard in Resources */,
 				001B1B4A2296B260009FB748 /* Assets.xcassets in Resources */,
 				001B1B482296B25F009FB748 /* Main.storyboard in Resources */,
+				88A1D11523482E1E00444297 /* sensorsdata.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,6 +400,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88D37D99233F0540002FA8A3 /* SensorsDataWebViewViewController.m in Sources */,
 				001B1B452296B25F009FB748 /* ViewController.m in Sources */,
 				001B1B502296B260009FB748 /* main.m in Sources */,
 				88B5BA9423010D4300205C15 /* SensorsDataReleaseObject.m in Sources */,

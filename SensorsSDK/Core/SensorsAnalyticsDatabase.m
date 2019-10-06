@@ -33,7 +33,7 @@ static NSString * const SensorsAnalyticsDefaultDatabaseName = @"SensorsAnalytics
     self = [super init];
     if (self) {
         // 初始化线程的唯一标识
-        NSString *label = [NSString stringWithFormat:@"cn.sensorsdata.serialQueue.%p", self];
+        NSString *label = [NSString stringWithFormat:@"cn.sensorsdata.SensorsAnalyticsDatabase.%p", self];
         // 创建一个 serial 类型的 queue，即 FIFO
         _queue = dispatch_queue_create([label UTF8String], DISPATCH_QUEUE_SERIAL);
 

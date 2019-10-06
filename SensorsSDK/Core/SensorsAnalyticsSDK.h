@@ -27,6 +27,17 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (SensorsAnalyticsSDK * _Nullable)sharedInstance;
 
+
+
+/**
+ 向服务器发送本地所有数据方法
+ */
+- (void)flush;
+
+@end
+
+@interface SensorsAnalyticsSDK (Track)
+
 /**
  * @abstract
  * 调用 track 接口，触发事件
@@ -109,12 +120,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface SensorsAnalyticsSDK (Flush)
+@interface SensorsAnalyticsSDK (WebView)
 
 /**
- 向服务器发送本地所有数据方法
- */
-- (void)flush;
+在 WebView 中添加自定义的 UserAgent，这个接口用于实现打通方案
+
+@param userAgent 自定义的 UserAgent
+*/
+- (void)addWebViewUserAgent:(nullable NSString *)userAgent;
+
+/**
+判断是否需要拦截并处理 JS SDK 发送过来的事件数据
+
+@param webView 用于页面展示的 WebView 控件
+@param request WebView 控件中的请求
+*/
+- (BOOL)shouldTrackWithWebView:(id)webView request:(NSURLRequest *)request;
 
 @end
 

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ruq-ED-fzR">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ruq-ED-fzR">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,11 +21,12 @@
                         <segue destination="SNh-qm-XvI" kind="relationship" relationship="viewControllers" id="cTG-ys-2T6"/>
                         <segue destination="175-L2-3CR" kind="relationship" relationship="viewControllers" id="xV4-u8-lEJ"/>
                         <segue destination="AWh-Xa-M40" kind="relationship" relationship="viewControllers" id="h6X-aq-nnt"/>
+                        <segue destination="iW7-tJ-Ltz" kind="relationship" relationship="viewControllers" id="RIv-Gk-FIE"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rEn-g7-Mtq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1519" y="-514"/>
+            <point key="canvasLocation" x="-2083" y="-459"/>
         </scene>
         <!--Element-->
         <scene sceneID="tne-QT-ifu">
@@ -152,7 +151,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" id="9Fz-KU-YLm">
-                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9Fz-KU-YLm" id="i36-KD-RBv">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -171,11 +170,11 @@
             </objects>
             <point key="canvasLocation" x="232" y="9"/>
         </scene>
-        <!--Item-->
+        <!--TableView-->
         <scene sceneID="acm-LK-cg9">
             <objects>
                 <navigationController id="175-L2-3CR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="62A-7U-593"/>
+                    <tabBarItem key="tabBarItem" title="TableView" id="62A-7U-593"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qIa-Vw-hTO">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -211,7 +210,7 @@
         <scene sceneID="qb5-5V-t04">
             <objects>
                 <navigationController title="CollectionView" id="AWh-Xa-M40" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="m16-St-wYv"/>
+                    <tabBarItem key="tabBarItem" title="CollectionView" id="m16-St-wYv"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Vpl-Yc-xHF">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -223,6 +222,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Del-Ia-Kk1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-688" y="667"/>
+        </scene>
+        <!--WebView-->
+        <scene sceneID="WFu-mH-YIZ">
+            <objects>
+                <viewController storyboardIdentifier="SensorsDataWebViewViewController" id="MEU-Bh-Xgt" customClass="SensorsDataWebViewViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ech-wV-SZ1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="6yQ-vY-e4d"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="WebView" id="yIK-wK-ROD"/>
+                    <navigationItem key="navigationItem" id="JUp-US-EIb"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TAP-SJ-q5M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="362" y="1419"/>
+        </scene>
+        <!--WebView-->
+        <scene sceneID="7Gp-hV-9Pe">
+            <objects>
+                <navigationController id="iW7-tJ-Ltz" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="WebView" id="Cyf-ts-LCl"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hRD-cD-K1N">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="MEU-Bh-Xgt" kind="relationship" relationship="rootViewController" id="ot4-qD-l8o"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E85-q1-eXw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-687" y="1419"/>
         </scene>
         <!--Sensor Data Collection View Controller-->
         <scene sceneID="eyd-L2-slo">

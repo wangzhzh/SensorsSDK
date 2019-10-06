@@ -26,7 +26,7 @@ static NSString * const SensorsAnalyticsDefaultFileName = @"SensorsAnalyticsData
     self = [super init];
     if (self) {
         // 初始化线程的唯一标识
-        NSString *label = [NSString stringWithFormat:@"cn.sensorsdata.serialQueue.%p", self];
+        NSString *label = [NSString stringWithFormat:@"cn.sensorsdata.SensorsAnalyticsFileStore.%p", self];
         // 创建一个 serial 类型的 queue，即 FIFO
         _queue = dispatch_queue_create([label UTF8String], DISPATCH_QUEUE_SERIAL);
 
@@ -88,10 +88,13 @@ static NSString * const SensorsAnalyticsDefaultFileName = @"SensorsAnalyticsData
     dispatch_async(self.queue, ^{
         // 从文件路径中读取数据
         NSData *data = [NSData dataWithContentsOfFile:filePath];
-        // 解析在文件中读取的 json 数据
-        NSMutableArray *allEvents = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        // 将文件中的数据保存在内存中
-        self.events = allEvents ?: [NSMutableArray array];
+        if (data) {
+            // 解析在文件中读取的 json 数据
+            self.events = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        }
+        if (self.events) {
+            self.events = [NSMutableArray array];
+        }
     });
 }
 

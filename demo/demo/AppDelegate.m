@@ -29,7 +29,7 @@ static NSString *const JPush_AppKey = @"7049fbac28974cd3b1faae99";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [SensorsAnalyticsSDK sharedInstance];
+    [[SensorsAnalyticsSDK sharedInstance] addWebViewUserAgent:nil];
     [[SensorsAnalyticsSDK sharedInstance] track:@"pppp" properties:nil];
 
     [self setupJPushNotification:launchOptions];

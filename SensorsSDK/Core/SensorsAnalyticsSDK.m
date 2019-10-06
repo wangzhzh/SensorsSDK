@@ -18,12 +18,18 @@
 #import "SensorsAnalyticsDatabase.h"
 #import "SensorsAnalyticsNetwork.h"
 
+#ifndef SENSORS_ANALYTICS_DISENABLE_WKWEBVIEW
+#import <WebKit/WebKit.h>
+#endif
+
 #define VERSION @"1.0.0"
 
 static NSString *SensorsAnalyticsEventBeginKey = @"event_begin";
 static NSString *SensorsAnalyticsEventDurationKey = @"event_duration";
 static NSString *SensorsAnalyticsEventIsPauseKey = @"is_pause";
 static NSString *SensorsAnalyticsEventDidEnterBackgroundKey = @"did_enter_background";
+
+static NSUInteger SensorsAnalyticsDefalutFlushEventCount = 50;
 
 @interface SensorsAnalyticsSDK()
 @property (nonatomic, strong) NSDictionary *automaticProperties;
@@ -51,6 +57,13 @@ static NSString *SensorsAnalyticsEventDidEnterBackgroundKey = @"did_enter_backgr
 /// 定时器
 @property (nonatomic, strong) NSTimer *flushTimer;
 
+@property (nonatomic, strong) dispatch_queue_t serialQueue;
+
+#ifndef SENSORS_ANALYTICS_DISENABLE_WKWEBVIEW
+// 由于 WKWebView 获取 UserAgent 是异步过程，为了在获取过程中创建的 WKWebView 对象不被销毁，需要保存创建的临时对象
+@property (nonatomic, strong) WKWebView *webView;
+#endif
+
 @end
 
 @implementation SensorsAnalyticsSDK
@@ -70,7 +83,7 @@ static NSString *SensorsAnalyticsEventDidEnterBackgroundKey = @"did_enter_backgr
     if (self) {
         _flushBulkSize = 100;
         _flushInterval = 15;
-        [self startFlushTimer];
+//        [self startFlushTimer];
 
         // 获取主线程
         dispatch_queue_t mainQueue = dispatch_get_main_queue();
@@ -107,6 +120,12 @@ static NSString *SensorsAnalyticsEventDidEnterBackgroundKey = @"did_enter_backgr
         NSLog(@"%@", [_database selectEventsForCount:50]);
         [_database deleteEventsForCount:2];
         NSLog(@"%@", [_database selectEventsForCount:50]);
+
+        _network = [[SensorsAnalyticsNetwork alloc] initWithServerURL:[NSURL URLWithString:@"www.baidu.com"]];
+
+        NSString *queueLabel = [NSString stringWithFormat:@"cn.sensorsdata.%@.%p", self.class, self];
+        _serialQueue = dispatch_queue_create([queueLabel UTF8String], DISPATCH_QUEUE_SERIAL);
+
     }
     return self;
 }
@@ -214,6 +233,26 @@ static NSString *SensorsAnalyticsEventDidEnterBackgroundKey = @"did_enter_backgr
             [self trackTimerPause:key];
         }
     }];
+
+    UIApplication *application = UIApplication.sharedApplication;
+    // 初始化标识符
+    __block UIBackgroundTaskIdentifier backgroundTaskIdentifier = UIBackgroundTaskInvalid;
+    // 结束后台任务
+    void (^endBackgroundTask)(void) = ^() {
+        [application endBackgroundTask:backgroundTaskIdentifier];
+        backgroundTaskIdentifier = UIBackgroundTaskInvalid;
+    };
+    // 标记长时间运行的后台任务
+    backgroundTaskIdentifier = [application beginBackgroundTaskWithExpirationHandler:^{
+        endBackgroundTask();
+    }];
+
+    dispatch_async(self.serialQueue, ^{
+        // 发送数据
+        [self flushByEventCount:SensorsAnalyticsDefalutFlushEventCount background:YES];
+        // 结束后台任务
+        endBackgroundTask();
+    });
 }
 
 #pragma mark - Timer
@@ -232,44 +271,37 @@ static NSString *SensorsAnalyticsEventDidEnterBackgroundKey = @"did_enter_backgr
     self.flushTimer = nil;
 }
 
-#pragma mark - Track
-- (void)track:(NSString *)eventName properties:(NSDictionary *)properties {
-    NSMutableDictionary *eventProperties = [[NSMutableDictionary alloc] init];
-    
-    //event
-    [eventProperties setObject:eventName forKey:@"event"];
-    
-    //time
-    NSNumber *timeStamp = @([SensorsAnalyticsSDK currentTime]);
-    [eventProperties setObject:timeStamp forKey:@"time"];
-    
-    NSMutableDictionary *libProperties = [[NSMutableDictionary alloc] init];
-    
-    [libProperties addEntriesFromDictionary:self.automaticProperties];
-    
-    //properties
-    if (properties) {
-        [libProperties addEntriesFromDictionary:properties];
-    }
-    
-    [eventProperties setObject:libProperties forKey:@"properties"];
-    NSLog(@"[Event]: %@", eventProperties);
+#pragma mark - Flush
+- (void)flush {
+    dispatch_async(self.serialQueue, ^{
+        // 默认一次向服务端发送 50 条数据
+        [self flushByEventCount:SensorsAnalyticsDefalutFlushEventCount background:NO];
+    });
+}
 
-    // 判断是否为被动启动过程中记录的事件，不包含被动启动事件
-    if (self.launchedPassively && ![eventName isEqualToString:@"$AppStartPassively"]) {
-        if (!self.passivelyEvents) {
-            self.passivelyEvents = [NSMutableArray array];
+- (void)flushByEventCount:(NSUInteger)count background:(BOOL)background {
+    if (background) {
+        NSTimeInterval time = UIApplication.sharedApplication.backgroundTimeRemaining;
+        // 当 app 进入前台运行时，backgroundTimeRemaining 会返回 DBL_MAX
+        // 当运行时间小于请求的超时时间时，为保证数据库删除时不被应用强杀，不再继续上传
+        if (time == DBL_MAX || time <= 30.5) {
+            return;
         }
-        // 保存被动启动状态下记录的事件
-        [self.passivelyEvents addObject:eventProperties];
-    } else {
-//        [self.fileStore saveEvent:eventProperties];
-        [self.database insertEvent:eventProperties];
     }
 
-//    if (self.database.eventCount >= self.flushBulkSize) {
-//        [self flush];
-//    }
+    // 获取本地数据
+    NSArray<NSString *> *events = [self.database selectEventsForCount:count];
+    // 当本地存储的数据为 0 或者上传失败时，直接返回，退出递归调用
+    if (events.count == 0 || [self.network flushEvents:events]) {
+        return;
+    }
+    // 当删除数据失败时，直接返回退出递归调用，防止死循环
+    if (![self.database deleteEventsForCount:count]) {
+        return;
+    }
+
+    // 继续上传本地的其他数据
+    [self flushByEventCount:count background:background];
 }
 
 #pragma mark - Property
@@ -303,6 +335,101 @@ static NSString *SensorsAnalyticsEventDidEnterBackgroundKey = @"did_enter_backgr
     sysctlbyname("hw.machine", answer, &size, NULL, 0);
     NSString *results = @(answer);
     return results;
+}
+
+- (void)setFlushInterval:(NSUInteger)flushInterval {
+    if (_flushInterval != flushInterval) {
+        _flushInterval = flushInterval;
+        // 上传本地所有事件数据
+        [self flush];
+        // 先暂停计时器
+        [self stopFlushTimer];
+        // 重新开启定时器
+        [self startFlushTimer];
+    }
+}
+
+@end
+
+#pragma mark - Track
+@implementation SensorsAnalyticsSDK (Track)
+
+- (void)track:(NSString *)eventName properties:(NSDictionary *)properties {
+    NSMutableDictionary *eventProperties = [[NSMutableDictionary alloc] init];
+
+    //event
+    [eventProperties setObject:eventName forKey:@"event"];
+
+    //time
+    NSNumber *timeStamp = @([SensorsAnalyticsSDK currentTime]);
+    [eventProperties setObject:timeStamp forKey:@"time"];
+
+    NSMutableDictionary *libProperties = [[NSMutableDictionary alloc] init];
+
+    [libProperties addEntriesFromDictionary:self.automaticProperties];
+
+    //properties
+    if (properties) {
+        [libProperties addEntriesFromDictionary:properties];
+    }
+
+    [eventProperties setObject:libProperties forKey:@"properties"];
+    NSLog(@"[Event]: %@", eventProperties);
+
+    // 判断是否为被动启动过程中记录的事件，不包含被动启动事件
+    if (self.launchedPassively && ![eventName isEqualToString:@"$AppStartPassively"]) {
+        if (!self.passivelyEvents) {
+            self.passivelyEvents = [NSMutableArray array];
+        }
+        // 保存被动启动状态下记录的事件
+        [self.passivelyEvents addObject:eventProperties];
+    } else {
+//        [self.fileStore saveEvent:eventProperties];
+        [self.database insertEvent:eventProperties];
+    }
+
+    if (self.database.eventCount >= self.flushBulkSize) {
+        [self flush];
+    }
+}
+
+/**
+ 采集 H5 页面中的事件数据
+
+@param jsonString JS SDK 采集的事件数据
+*/
+- (void)trackFromH5WithEvent:(NSString *)jsonString {
+    NSError *error = nil;
+    // 将 json 字符串转换成 NSData 类型
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    // 解析 json
+    NSMutableDictionary *event = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
+    if (error || !event) {
+        return;
+    }
+    // 添加一些 JS SDK 中较难获取到的信息，例如 Wi-Fi 信息
+    // 开发者可以自行添加一些其他的事件属性
+    // event[@"$wifi"] = @(YES);
+
+    // 用于区分事件来源字段，表示是 H5 采集到的数据
+    event[@"_hybrid_h5"] = @(YES);
+
+    // 移除一些无用的 key
+    [event removeObjectForKey:@"_nocache"];
+    [event removeObjectForKey:@"server_url"];
+
+    // 打印最终的入库事件数据
+    NSLog(@"[Event]: %@", event);
+
+    // 本地保存事件数据
+    // [self.fileStore saveEvent:event];
+    [self.database insertEvent:event];
+
+    // 在本地事件数据总量大于最大缓存数时，发送数据
+    // if (self.fileStore.allEvents.count >= self.flushBulkSize) {
+    if (self.database.eventCount >= self.flushBulkSize) {
+        [self flush];
+    }
 }
 
 @end
@@ -439,38 +566,70 @@ static NSString *SensorsAnalyticsEventDidEnterBackgroundKey = @"did_enter_backgr
 
 @end
 
-@implementation SensorsAnalyticsSDK (Flush)
+@implementation SensorsAnalyticsSDK (WebView)
 
-- (void)flush {
-    // 默认一次向服务端发送 50 条数据
-    [self flushByBlukSize:50];
+- (void)loadUserAgent:(void(^)(NSString *))completion {
+    dispatch_async(dispatch_get_main_queue(), ^{
+#ifdef SENSORS_ANALYTICS_DISENABLE_WKWEBVIEW
+        // 创建一个空的 webView
+        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
+        // 取出 webView 的 UserAgent
+        NSString *userAgent = [webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
+        // 调用回调，返回获取到的 UserAgent
+        completion(userAgent);
+#else
+        // 创建一个空的 webView，由于 WKWebView 执行 Javascript 代码是异步过程，所以需要强引用 webView 对象
+        self.webView = [[WKWebView alloc] initWithFrame:CGRectZero];
+        // 创建一个 self 的弱引用，防止循环引用
+        __weak typeof(self) weakSelf = self;
+        // 执行 JavaScript 代码，获取 webView 中的 UserAgent
+        [self.webView evaluateJavaScript:@"navigator.userAgent" completionHandler:^(id result, NSError *error) {
+            // 创建强引用
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            // 调用回调，返回获取到的 UserAgent
+            completion(result);
+            // 释放 webView
+            strongSelf.webView = nil;
+        }];
+#endif
+    });
 }
 
-- (void)flushByBlukSize:(NSUInteger)size {
-    // 获取本地数据
-    NSArray<NSString *> *events = [self.database selectEventsForCount:size];
-    // 当本地存储的数据为 0 或者上传失败时，直接返回，退出递归调用
-    if (events.count == 0 || ![self.network flushEvents:events]) {
-        return;
-    }
-    // 当删除数据失败时，直接返回退出递归调用，防止死循环
-    if (![self.database deleteEventsForCount:size]) {
-        return;
-    }
-    // 继续上传本地的其他数据
-    [self flushByBlukSize:size];
+- (void)addWebViewUserAgent:(nullable NSString *)userAgent {
+    [self loadUserAgent:^(NSString *oldUserAgent) {
+        // 给 UserAgent 中添加自己需要的内容
+        NSString *newUserAgent = [oldUserAgent stringByAppendingString:userAgent ?: @" /sa-sdk-ios"];
+        // 将 UserAgent 字典内容注册到 NSUserDefaults 中
+        [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"UserAgent": newUserAgent}];
+    }];
 }
 
-- (void)setFlushInterval:(NSUInteger)flushInterval {
-    if (_flushInterval != flushInterval) {
-        _flushInterval = flushInterval;
-        // 上传本地所有事件数据
-        [self flush];
-        // 先暂停计时器
-        [self stopFlushTimer];
-        // 重新开启定时器
-        [self startFlushTimer];
+static NSString * const SensorsAnalyticsJavascriptTrackEventScheme = @"sensorsanalytics://trackEvent";
+
+- (BOOL)shouldTrackWithWebView:(id)webView request:(NSURLRequest *)request {
+    if (!webView) {
+        return NO;
     }
+    // 获取请求的完整路径
+    NSString *urlString = request.URL.absoluteString;
+    // 查找在完整路径中是否包含：sensorsanalytics://trackEvent，如果不包含，那就是普通请求不做处理返回 NO
+    if ([urlString rangeOfString:SensorsAnalyticsJavascriptTrackEventScheme].location == NSNotFound) {
+        return NO;
+    }
+
+    NSMutableDictionary *queryItems = [NSMutableDictionary dictionary];
+    // 请求中的所有 Query，并解析获取数据
+    NSArray<NSString *> *allQuery = [request.URL.query componentsSeparatedByString:@"&"];
+    for (NSString *query in allQuery) {
+        NSArray<NSString *> *items = [query componentsSeparatedByString:@"="];
+        if (items.count >= 2) {
+            queryItems[items.firstObject] = [items.lastObject stringByRemovingPercentEncoding];
+        }
+    }
+
+    [self trackFromH5WithEvent:queryItems[@"event"]];
+
+    return YES;
 }
 
 @end
