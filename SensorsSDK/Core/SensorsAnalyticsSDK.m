@@ -17,6 +17,7 @@
 #import "SensorsAnalyticsFileStore.h"
 #import "SensorsAnalyticsDatabase.h"
 #import "SensorsAnalyticsNetwork.h"
+#import "SensorsAnalyticsExtensionDatsManager.h"
 
 #ifndef SENSORS_ANALYTICS_DISENABLE_WKWEBVIEW
 #import <WebKit/WebKit.h>
@@ -83,7 +84,7 @@ static NSUInteger SensorsAnalyticsDefalutFlushEventCount = 50;
     if (self) {
         _flushBulkSize = 100;
         _flushInterval = 15;
-//        [self startFlushTimer];
+        [self startFlushTimer];
 
         // 获取主线程
         dispatch_queue_t mainQueue = dispatch_get_main_queue();
@@ -200,9 +201,9 @@ static NSUInteger SensorsAnalyticsDefalutFlushEventCount = 50;
         self.launchedPassively = NO;
     }
 
-    if (_appRelaunched) {
+//    if (_appRelaunched) {
         [self track:@"$AppStart" properties:nil];
-    }
+//    }
 
     // 恢复所有事件时长统计
     for (NSString *event in self.enterBackgroundTrackTimerEvents) {
@@ -393,11 +394,6 @@ static NSUInteger SensorsAnalyticsDefalutFlushEventCount = 50;
     }
 }
 
-/**
- 采集 H5 页面中的事件数据
-
-@param jsonString JS SDK 采集的事件数据
-*/
 - (void)trackFromH5WithEvent:(NSString *)jsonString {
     NSError *error = nil;
     // 将 json 字符串转换成 NSData 类型
@@ -430,6 +426,33 @@ static NSUInteger SensorsAnalyticsDefalutFlushEventCount = 50;
     if (self.database.eventCount >= self.flushBulkSize) {
         [self flush];
     }
+}
+
+- (void)trackFromAppExtensionForApplicationGroupIdentifier:(NSString *)identifier {
+    dispatch_async(self.serialQueue, ^{
+        // 获取 App Group Identifier 对应的应用扩展中采集的事件数据
+        NSArray *allEvents = [[SensorsAnalyticsExtensionDatsManager sharedInstance] allEventsForApplicationGroupIdentifier:identifier];
+        if (allEvents.count == 0) {
+            return;
+        }
+        for (NSDictionary *dic in allEvents) {
+            NSMutableDictionary *properties = [dic[@"properties"] mutableCopy];
+            // 在采集的事件属性中加入预置属性
+            [properties addEntriesFromDictionary:self.automaticProperties];
+
+            NSMutableDictionary *event = [dic mutableCopy];
+            event[@"properties"] = properties;
+            NSLog(@"[Event]: %@", event);
+
+            // 将事件入库
+            // [self.fileStore saveEvent:event];
+            [self.database insertEvent:event];
+        }
+        // 将已经处理完成的数据删除
+        [[SensorsAnalyticsExtensionDatsManager sharedInstance] deleteAllEventsWithApplicationGroupIdentifier:identifier];
+        // 将事件上传
+        [self flush];
+    });
 }
 
 @end

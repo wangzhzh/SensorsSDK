@@ -16,6 +16,8 @@
 #import <UserNotifications/UserNotifications.h>
 #endif
 
+static NSString * const kGroupIdentifier = @"group.com.wangzhzh.demo.extension";
+
 //极光推送
 static NSString *const JPush_AppKey = @"7049fbac28974cd3b1faae99";
 
@@ -172,6 +174,7 @@ static NSString *const JPush_AppKey = @"7049fbac28974cd3b1faae99";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [[SensorsAnalyticsSDK sharedInstance] trackFromAppExtensionForApplicationGroupIdentifier:kGroupIdentifier];
 }
 
 

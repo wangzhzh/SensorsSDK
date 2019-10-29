@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--SensorsData-->
+        <scene sceneID="cwh-vc-ff4">
+            <objects>
+                <viewController title="SensorsData" id="M4Y-Lb-cyx" customClass="TodayViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="37"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CtS-0n-fSa">
+                                <rect key="frame" x="16" y="-2.5" width="30" height="42"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="+"/>
+                                <connections>
+                                    <action selector="plusAction:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="bSC-ff-lOU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J4F-My-rYk">
+                                <rect key="frame" x="274" y="-2.5" width="30" height="42"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="-"/>
+                                <connections>
+                                    <action selector="minusAction:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="HjC-fM-Fhw"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="899-vg-Gx7">
+                                <rect key="frame" x="154.5" y="8" width="11" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="CtS-0n-fSa" firstAttribute="centerY" secondItem="S3S-Oj-5AN" secondAttribute="centerY" id="FVd-kO-4FQ"/>
+                            <constraint firstItem="899-vg-Gx7" firstAttribute="centerX" secondItem="S3S-Oj-5AN" secondAttribute="centerX" id="T07-9Q-yz2"/>
+                            <constraint firstItem="899-vg-Gx7" firstAttribute="centerY" secondItem="S3S-Oj-5AN" secondAttribute="centerY" id="UjF-fK-GSO"/>
+                            <constraint firstAttribute="trailing" secondItem="J4F-My-rYk" secondAttribute="trailing" constant="16" id="eMz-it-MXl"/>
+                            <constraint firstItem="CtS-0n-fSa" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" constant="16" id="gH5-Fe-lnV"/>
+                            <constraint firstItem="J4F-My-rYk" firstAttribute="centerY" secondItem="S3S-Oj-5AN" secondAttribute="centerY" id="zH3-YM-MrY"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ssy-KU-ocm"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="37"/>
+                    <connections>
+                        <outlet property="numLabel" destination="899-vg-Gx7" id="keG-br-qB3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="121.54017857142857"/>
+        </scene>
+    </scenes>
+</document>

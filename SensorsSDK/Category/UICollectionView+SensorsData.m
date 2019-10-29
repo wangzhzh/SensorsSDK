@@ -20,17 +20,17 @@
 - (void)sensorsdata_setDelegate:(id<UICollectionViewDelegate>)delegate {
     // 方案一：方法交换
     // 通过 Swizzle 之后，此处相当于调用 [self setDelegate:delegate]
-    //    [self sensorsdata_setDelegate:delegate];
-    //    [self sensorsdata_swizzleDidSelectRowMethodWithDelegate:delegate];
+    [self sensorsdata_setDelegate:delegate];
+//    [self sensorsdata_swizzleDidSelectRowMethodWithDelegate:delegate];
 
     // 方案二：动态子类
-    //    [self sensorsdata_setDelegate:delegate];
-    //    [SensorsAnalyticsDynamicDelegate proxyWithTableViewDelegate:delegate];
+//    [self sensorsdata_setDelegate:delegate];
+//    [SensorsAnalyticsDynamicDelegate proxyWithTableViewDelegate:delegate];
 
     // 方案三：NSProxy 消息转发
-    SensorsAnalyticsDelegateProxy *proxy = [SensorsAnalyticsDelegateProxy proxyWithCollectionViewDelegate:delegate];
-    self.sensorsdata_delegateProxy = proxy;
-    [self sensorsdata_setDelegate:proxy];
+//    SensorsAnalyticsDelegateProxy *proxy = [SensorsAnalyticsDelegateProxy proxyWithCollectionViewDelegate:delegate];
+//    self.sensorsdata_delegateProxy = proxy;
+//    [self sensorsdata_setDelegate:proxy];
 }
 
 @end

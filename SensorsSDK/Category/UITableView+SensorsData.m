@@ -78,19 +78,19 @@ static void sensorsdata_tableViewDidSelectRow(id object, SEL selector, UITableVi
 - (void)sensorsdata_setDelegate:(id<UITableViewDelegate>)delegate {
     // 方案一：方法交换
     // 通过 Swizzle 之后，此处相当于调用 [self setDelegate:delegate]
-//    [self sensorsdata_setDelegate:delegate];
-//    [self sensorsdata_swizzleDidSelectRowMethodWithDelegate:delegate];
+    [self sensorsdata_setDelegate:delegate];
+    [self sensorsdata_swizzleDidSelectRowMethodWithDelegate:delegate];
 
     // 方案二：动态子类
 //    [self sensorsdata_setDelegate:delegate];
 //    [SensorsAnalyticsDynamicDelegate proxyWithTableViewDelegate:delegate];
 
     // 方案三：NSProxy 消息转发
-    SensorsAnalyticsDelegateProxy *proxy = [SensorsAnalyticsDelegateProxy proxyWithTableViewDelegate:delegate];
-    // 保存委托对象
-    self.sensorsdata_delegateProxy = proxy;
-    // 调用原始方法，将代理设置为委托对象
-    [self sensorsdata_setDelegate:proxy];
+//    SensorsAnalyticsDelegateProxy *proxy = [SensorsAnalyticsDelegateProxy proxyWithTableViewDelegate:delegate];
+//    // 保存委托对象
+//    self.sensorsdata_delegateProxy = proxy;
+//    // 调用原始方法，将代理设置为委托对象
+//    [self sensorsdata_setDelegate:proxy];
 }
 
 - (void)sensorsdata_swizzleDidSelectRowMethodWithDelegate:(id<UITableViewDelegate>)delegate {

@@ -28,11 +28,18 @@
 		8802A124230BFE2700262F9B /* SensorsAnalyticsFileStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 8802A122230BFE2700262F9B /* SensorsAnalyticsFileStore.m */; };
 		8803D5862325198E0092C43D /* SensorsAnalyticsNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 8803D5842325198E0092C43D /* SensorsAnalyticsNetwork.h */; };
 		8803D5872325198E0092C43D /* SensorsAnalyticsNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 8803D5852325198E0092C43D /* SensorsAnalyticsNetwork.m */; };
+		886467D02359CF0400CE580C /* SensorsAppExtensionSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886467C72359CF0400CE580C /* SensorsAppExtensionSDK.framework */; };
+		886467D52359CF0400CE580C /* SensorsAppExtensionSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 886467D42359CF0400CE580C /* SensorsAppExtensionSDKTests.m */; };
+		886467D72359CF0400CE580C /* SensorsAppExtensionSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 886467C92359CF0400CE580C /* SensorsAppExtensionSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		886467DE2359CF1600CE580C /* SensorsAnalyticsExtensionDatsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88C7FF042354B0EB00601DB4 /* SensorsAnalyticsExtensionDatsManager.m */; };
+		886467DF2359CF1900CE580C /* SensorsAnalyticsExtensionDatsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 88C7FF032354B0EB00601DB4 /* SensorsAnalyticsExtensionDatsManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		88A51A3822F1831900D53786 /* UIGestureRecognizer+SensorsData.h in Headers */ = {isa = PBXBuildFile; fileRef = 88A51A3622F1831900D53786 /* UIGestureRecognizer+SensorsData.h */; };
 		88A51A3922F1831900D53786 /* UIGestureRecognizer+SensorsData.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A51A3722F1831900D53786 /* UIGestureRecognizer+SensorsData.m */; };
 		88BB239A231695340006E204 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 88BB2399231695340006E204 /* libsqlite3.0.tbd */; };
 		88BB239D231695510006E204 /* SensorsAnalyticsDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = 88BB239B231695510006E204 /* SensorsAnalyticsDatabase.h */; };
 		88BB239E231695510006E204 /* SensorsAnalyticsDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BB239C231695510006E204 /* SensorsAnalyticsDatabase.m */; };
+		88C7FF052354B0EB00601DB4 /* SensorsAnalyticsExtensionDatsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 88C7FF032354B0EB00601DB4 /* SensorsAnalyticsExtensionDatsManager.h */; };
+		88C7FF062354B0EB00601DB4 /* SensorsAnalyticsExtensionDatsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88C7FF042354B0EB00601DB4 /* SensorsAnalyticsExtensionDatsManager.m */; };
 		88D261462320E14900FC4B79 /* UIControl+SensorsData.h in Headers */ = {isa = PBXBuildFile; fileRef = 88D261442320E14900FC4B79 /* UIControl+SensorsData.h */; };
 		88D261472320E14900FC4B79 /* UIControl+SensorsData.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D261452320E14900FC4B79 /* UIControl+SensorsData.m */; };
 		CB57460422BDCD09008FB320 /* NSObject+SASwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = CB57460222BDCD09008FB320 /* NSObject+SASwizzle.h */; };
@@ -56,6 +63,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 001B1B7B2296B2DF009FB748;
 			remoteInfo = SensorsSDK;
+		};
+		886467D12359CF0400CE580C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 001B1B732296B2DF009FB748 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 886467C62359CF0400CE580C;
+			remoteInfo = SensorsAppExtensionSDK;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -84,11 +98,19 @@
 		8802A122230BFE2700262F9B /* SensorsAnalyticsFileStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsAnalyticsFileStore.m; sourceTree = "<group>"; };
 		8803D5842325198E0092C43D /* SensorsAnalyticsNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsAnalyticsNetwork.h; sourceTree = "<group>"; };
 		8803D5852325198E0092C43D /* SensorsAnalyticsNetwork.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsAnalyticsNetwork.m; sourceTree = "<group>"; };
+		886467C72359CF0400CE580C /* SensorsAppExtensionSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SensorsAppExtensionSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		886467C92359CF0400CE580C /* SensorsAppExtensionSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsAppExtensionSDK.h; sourceTree = "<group>"; };
+		886467CA2359CF0400CE580C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		886467CF2359CF0400CE580C /* SensorsAppExtensionSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SensorsAppExtensionSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		886467D42359CF0400CE580C /* SensorsAppExtensionSDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsAppExtensionSDKTests.m; sourceTree = "<group>"; };
+		886467D62359CF0400CE580C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88A51A3622F1831900D53786 /* UIGestureRecognizer+SensorsData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIGestureRecognizer+SensorsData.h"; sourceTree = "<group>"; };
 		88A51A3722F1831900D53786 /* UIGestureRecognizer+SensorsData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+SensorsData.m"; sourceTree = "<group>"; };
 		88BB2399231695340006E204 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		88BB239B231695510006E204 /* SensorsAnalyticsDatabase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsAnalyticsDatabase.h; sourceTree = "<group>"; };
 		88BB239C231695510006E204 /* SensorsAnalyticsDatabase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsAnalyticsDatabase.m; sourceTree = "<group>"; };
+		88C7FF032354B0EB00601DB4 /* SensorsAnalyticsExtensionDatsManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsAnalyticsExtensionDatsManager.h; sourceTree = "<group>"; };
+		88C7FF042354B0EB00601DB4 /* SensorsAnalyticsExtensionDatsManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsAnalyticsExtensionDatsManager.m; sourceTree = "<group>"; };
 		88D261442320E14900FC4B79 /* UIControl+SensorsData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIControl+SensorsData.h"; sourceTree = "<group>"; };
 		88D261452320E14900FC4B79 /* UIControl+SensorsData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIControl+SensorsData.m"; sourceTree = "<group>"; };
 		CB57460222BDCD09008FB320 /* NSObject+SASwizzle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+SASwizzle.h"; sourceTree = "<group>"; };
@@ -122,6 +144,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		886467C42359CF0400CE580C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		886467CC2359CF0400CE580C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				886467D02359CF0400CE580C /* SensorsAppExtensionSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -130,6 +167,8 @@
 			children = (
 				001B1B7E2296B2DF009FB748 /* SensorsSDK */,
 				001B1B892296B2DF009FB748 /* SensorsSDKTests */,
+				886467C82359CF0400CE580C /* SensorsAppExtensionSDK */,
+				886467D32359CF0400CE580C /* SensorsAppExtensionSDKTests */,
 				001B1B7D2296B2DF009FB748 /* Products */,
 				88BB2398231695340006E204 /* Frameworks */,
 			);
@@ -140,6 +179,8 @@
 			children = (
 				001B1B7C2296B2DF009FB748 /* SensorsSDK.framework */,
 				001B1B852296B2DF009FB748 /* SensorsSDKTests.xctest */,
+				886467C72359CF0400CE580C /* SensorsAppExtensionSDK.framework */,
+				886467CF2359CF0400CE580C /* SensorsAppExtensionSDKTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -164,6 +205,24 @@
 			path = SensorsSDKTests;
 			sourceTree = "<group>";
 		};
+		886467C82359CF0400CE580C /* SensorsAppExtensionSDK */ = {
+			isa = PBXGroup;
+			children = (
+				886467C92359CF0400CE580C /* SensorsAppExtensionSDK.h */,
+				886467CA2359CF0400CE580C /* Info.plist */,
+			);
+			path = SensorsAppExtensionSDK;
+			sourceTree = "<group>";
+		};
+		886467D32359CF0400CE580C /* SensorsAppExtensionSDKTests */ = {
+			isa = PBXGroup;
+			children = (
+				886467D42359CF0400CE580C /* SensorsAppExtensionSDKTests.m */,
+				886467D62359CF0400CE580C /* Info.plist */,
+			);
+			path = SensorsAppExtensionSDKTests;
+			sourceTree = "<group>";
+		};
 		88BB2398231695340006E204 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +236,8 @@
 			children = (
 				001B1BA32296B45C009FB748 /* SensorsAnalyticsSDK.h */,
 				001B1BA42296B45C009FB748 /* SensorsAnalyticsSDK.m */,
+				88C7FF032354B0EB00601DB4 /* SensorsAnalyticsExtensionDatsManager.h */,
+				88C7FF042354B0EB00601DB4 /* SensorsAnalyticsExtensionDatsManager.m */,
 				004D001222ACEDAD00419706 /* SensorsAnalyticsExceptionHandler.h */,
 				004D001322ACEDAD00419706 /* SensorsAnalyticsExceptionHandler.m */,
 				CB57460922BE0713008FB320 /* SensorsAnalyticsSwizzle.h */,
@@ -230,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CBDA55AA22BCE25F005221B7 /* UITableView+SensorsData.h in Headers */,
+				88C7FF052354B0EB00601DB4 /* SensorsAnalyticsExtensionDatsManager.h in Headers */,
 				88A51A3822F1831900D53786 /* UIGestureRecognizer+SensorsData.h in Headers */,
 				CB57460B22BE0713008FB320 /* SensorsAnalyticsSwizzle.h in Headers */,
 				8802A123230BFE2700262F9B /* SensorsAnalyticsFileStore.h in Headers */,
@@ -248,6 +310,15 @@
 				001B1B8D2296B2DF009FB748 /* SensorsSDK.h in Headers */,
 				003BCCFF229AE6A50069F68E /* UIViewController+SensorsData.h in Headers */,
 				0071A231229FB2E700027FBD /* UIView+SensorsData.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		886467C22359CF0400CE580C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				886467D72359CF0400CE580C /* SensorsAppExtensionSDK.h in Headers */,
+				886467DF2359CF1900CE580C /* SensorsAnalyticsExtensionDatsManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +361,42 @@
 			productReference = 001B1B852296B2DF009FB748 /* SensorsSDKTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		886467C62359CF0400CE580C /* SensorsAppExtensionSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 886467D82359CF0400CE580C /* Build configuration list for PBXNativeTarget "SensorsAppExtensionSDK" */;
+			buildPhases = (
+				886467C22359CF0400CE580C /* Headers */,
+				886467C32359CF0400CE580C /* Sources */,
+				886467C42359CF0400CE580C /* Frameworks */,
+				886467C52359CF0400CE580C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SensorsAppExtensionSDK;
+			productName = SensorsAppExtensionSDK;
+			productReference = 886467C72359CF0400CE580C /* SensorsAppExtensionSDK.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		886467CE2359CF0400CE580C /* SensorsAppExtensionSDKTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 886467DB2359CF0400CE580C /* Build configuration list for PBXNativeTarget "SensorsAppExtensionSDKTests" */;
+			buildPhases = (
+				886467CB2359CF0400CE580C /* Sources */,
+				886467CC2359CF0400CE580C /* Frameworks */,
+				886467CD2359CF0400CE580C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				886467D22359CF0400CE580C /* PBXTargetDependency */,
+			);
+			name = SensorsAppExtensionSDKTests;
+			productName = SensorsAppExtensionSDKTests;
+			productReference = 886467CF2359CF0400CE580C /* SensorsAppExtensionSDKTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -304,6 +411,12 @@
 					};
 					001B1B842296B2DF009FB748 = {
 						CreatedOnToolsVersion = 10.2.1;
+					};
+					886467C62359CF0400CE580C = {
+						CreatedOnToolsVersion = 11.1;
+					};
+					886467CE2359CF0400CE580C = {
+						CreatedOnToolsVersion = 11.1;
 					};
 				};
 			};
@@ -321,6 +434,8 @@
 			targets = (
 				001B1B7B2296B2DF009FB748 /* SensorsSDK */,
 				001B1B842296B2DF009FB748 /* SensorsSDKTests */,
+				886467C62359CF0400CE580C /* SensorsAppExtensionSDK */,
+				886467CE2359CF0400CE580C /* SensorsAppExtensionSDKTests */,
 			);
 		};
 /* End PBXProject section */
@@ -340,6 +455,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		886467C52359CF0400CE580C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		886467CD2359CF0400CE580C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -350,6 +479,7 @@
 				8802A124230BFE2700262F9B /* SensorsAnalyticsFileStore.m in Sources */,
 				0071A22E229D96C300027FBD /* UIApplication+SensorsData.m in Sources */,
 				CB98CC1322C385440051A82F /* SensorsAnalyticsDynamicDelegate.m in Sources */,
+				88C7FF062354B0EB00601DB4 /* SensorsAnalyticsExtensionDatsManager.m in Sources */,
 				003BCD00229AE6A50069F68E /* UIViewController+SensorsData.m in Sources */,
 				88D261472320E14900FC4B79 /* UIControl+SensorsData.m in Sources */,
 				004D001522ACEDAD00419706 /* SensorsAnalyticsExceptionHandler.m in Sources */,
@@ -376,6 +506,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		886467C32359CF0400CE580C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				886467DE2359CF1600CE580C /* SensorsAnalyticsExtensionDatsManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		886467CB2359CF0400CE580C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				886467D52359CF0400CE580C /* SensorsAppExtensionSDKTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -383,6 +529,11 @@
 			isa = PBXTargetDependency;
 			target = 001B1B7B2296B2DF009FB748 /* SensorsSDK */;
 			targetProxy = 001B1B872296B2DF009FB748 /* PBXContainerItemProxy */;
+		};
+		886467D22359CF0400CE580C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 886467C62359CF0400CE580C /* SensorsAppExtensionSDK */;
+			targetProxy = 886467D12359CF0400CE580C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -583,6 +734,90 @@
 			};
 			name = Release;
 		};
+		886467D92359CF0400CE580C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 75FYWDWHL5;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SensorsAppExtensionSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = cn.sensorsdata.SensorsAppExtensionSDK;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		886467DA2359CF0400CE580C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 75FYWDWHL5;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SensorsAppExtensionSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = cn.sensorsdata.SensorsAppExtensionSDK;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		886467DC2359CF0400CE580C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 75FYWDWHL5;
+				INFOPLIST_FILE = SensorsAppExtensionSDKTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = cn.sensorsdata.SensorsAppExtensionSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		886467DD2359CF0400CE580C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 75FYWDWHL5;
+				INFOPLIST_FILE = SensorsAppExtensionSDKTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = cn.sensorsdata.SensorsAppExtensionSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -609,6 +844,24 @@
 			buildConfigurations = (
 				001B1B942296B2DF009FB748 /* Debug */,
 				001B1B952296B2DF009FB748 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		886467D82359CF0400CE580C /* Build configuration list for PBXNativeTarget "SensorsAppExtensionSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				886467D92359CF0400CE580C /* Debug */,
+				886467DA2359CF0400CE580C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		886467DB2359CF0400CE580C /* Build configuration list for PBXNativeTarget "SensorsAppExtensionSDKTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				886467DC2359CF0400CE580C /* Debug */,
+				886467DD2359CF0400CE580C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -39,18 +39,32 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SensorsAnalyticsSDK (Track)
 
 /**
- * @abstract
+ @abstract
  * 调用 track 接口，触发事件
- *
- * @discussion
- * properties 是一个 NSDictionary。
- * 其中的 key 是 Property 的名称，必须是 NSString
- * value 则是 Property 的内容
- *
- * @param eventName      事件名称
- * @param properties     事件属性
+
+ @discussion
+ properties 是一个 NSDictionary。
+ 其中的 key 是 Property 的名称，必须是 NSString
+ value 则是 Property 的内容
+
+ @param eventName      事件名称
+ @param properties     事件属性
  */
 - (void)track:(NSString *)eventName properties:(nullable NSDictionary *)properties;
+
+/**
+ 采集 H5 页面中的事件数据
+
+ @param jsonString JS SDK 采集的事件数据
+*/
+- (void)trackFromH5WithEvent:(NSString *)jsonString;
+
+/**
+ 通过 App Group Identifier 获取应用扩展中的事件数据，并先入库上传
+
+ @param identifier App Group Identifier 
+*/
+- (void)trackFromAppExtensionForApplicationGroupIdentifier:(NSString *)identifier;
 
 @end
 

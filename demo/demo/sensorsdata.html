@@ -32,7 +32,42 @@
       server_url: 'http://sdk-test.cloud.sensorsdata.cn:8006/sa?project=default&token=95c73ae661f85aa0'
     });
 
-    sa.quick('autoTrack');
+    function track(name, properties) {
+      if (window.webkit
+        && window.webkit.messageHandlers
+        && window.webkit.messageHandlers.sensorsData) {
+        // 组建数据，可自行实现采集一些事件属性
+        var event = {
+          event: name,
+          lib: {
+            $lib: 'js',
+            $lib_method: 'code',
+            $lib_version: '1.0.1'
+          },
+          properties: properties
+        };
+        var message = {
+          command: 'track',
+          event: JSON.stringify(event)
+        };
+        // 调用接口向原生发送消息
+        window.webkit.messageHandlers.sensorsData.postMessage(message);
+      } else {
+        // 不能调用 iOS 的原生 API 时，调用 JS SDK 的接口
+        console.log("No native APIs found.");
+        sa.track(name, properties)
+      }
+    }
+
+    function buttonClick() {
+      // 追踪浏览商品事件。
+      track('ViewProduct', {
+        productId: '123456',
+        productCatalog: 'Laptop Computer',
+        productName: 'MacBook Pro',
+        productPrice: 123.45
+      });
+    }
 
   </script>
 
@@ -43,7 +78,8 @@
   <br />
   body区域
   <br />
-  
+  <button id='button' value='点击' onclick="buttonClick();" style="height:100px;width:100px;"></button>
+
 </body>
 
 </html>
