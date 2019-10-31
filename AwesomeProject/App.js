@@ -17,6 +17,7 @@ import {
   Button,
   Alert,
   StatusBar,
+  TouchableHighlight,
 } from 'react-native';
 
 import {

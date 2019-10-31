@@ -153,4 +153,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface SensorsAnalyticsSDK (ReactNative)
+
+- (void)enableTrackReactNativeEvent;
+
+@end
+
 NS_ASSUME_NONNULL_END

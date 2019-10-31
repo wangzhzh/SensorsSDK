@@ -18,6 +18,9 @@
 #import "SensorsAnalyticsDatabase.h"
 #import "SensorsAnalyticsNetwork.h"
 #import "SensorsAnalyticsExtensionDatsManager.h"
+#import "NSObject+SASwizzle.h"
+
+#include <objc/runtime.h>
 
 #ifndef SENSORS_ANALYTICS_DISENABLE_WKWEBVIEW
 #import <WebKit/WebKit.h>
@@ -255,6 +258,9 @@ static NSUInteger SensorsAnalyticsDefalutFlushEventCount = 50;
         endBackgroundTask();
     });
 }
+
+#pragma mark - React Native
+
 
 #pragma mark - Timer
 /// 开启上传数据的定时器
@@ -653,6 +659,68 @@ static NSString * const SensorsAnalyticsJavascriptTrackEventScheme = @"sensorsan
     [self trackFromH5WithEvent:queryItems[@"event"]];
 
     return YES;
+}
+
+@end
+
+@implementation SensorsAnalyticsSDK (ReactNative)
+
+/**
+* 交换两个方法的实现
+*
+* @param className 需要交换的方法名称
+* @param methodName1 被交换的方法名，即原始的方法
+* @param methodName2 交换后的方法名，即新的实现方法
+* @param method2IMP 交换后的方法实现
+*/
+static inline void sensorsdata_method_exchange(const char *className, const char *methodName1, const char *methodName2, IMP method2IMP) {
+    // 通过类名获取类
+    Class cls = objc_getClass(className);
+    // 获取原始方法的名
+    SEL selector1 = sel_getUid(methodName1);
+    // 通过方法名获取方法指针
+    Method method1 = class_getInstanceMethod(cls, selector1);
+    // 获得指定方法的描述
+    struct objc_method_description *desc = method_getDescription(method1);
+    if (desc->types) {
+        // 把交换后的实现方法注册到 runtime 中
+        SEL selector2 = sel_registerName(methodName2);
+        // 通过运行时，把方法动态添加到类中
+        if (class_addMethod(cls, selector2, method2IMP, desc->types)) {
+            // 获取实例方法
+            Method method2  = class_getInstanceMethod(cls, selector2);
+            // 交换方法
+            method_exchangeImplementations(method1, method2);
+        }
+    }
+}
+
+- (void)enableTrackReactNativeEvent {
+    sensorsdata_method_exchange("RCTUIManager", "setJSResponder:blockNativeResponder:", "sensorsdata_setJSResponder:blockNativeResponder:", (IMP)sensorsdata_setJSResponder);
+}
+
+static void sensorsdata_setJSResponder(id obj, SEL cmd, NSNumber *reactTag, BOOL blockNativeResponder) {
+    // 先执行原来的方法
+    SEL oriSel = sel_getUid("sensorsdata_setJSResponder:blockNativeResponder:");
+    // 获取原始方法的实现函数指针
+    void (*imp)(id, SEL, id, BOOL) = (void (*)(id, SEL, id, BOOL))[obj methodForSelector:oriSel];
+    // 完成第一步调用原始方法，让 React Native 完成事件响应
+    imp(obj, cmd, reactTag, blockNativeResponder);
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // 获取 viewForReactTag: 的方法名，目的是获取触发当前触摸事件的控件
+        SEL viewForReactTagSelector = NSSelectorFromString(@"viewForReactTag:");
+        // 完成第二步，获取响应触摸事件的视图
+        UIView *view = ((UIView * (*)(id, SEL, NSNumber *))[obj methodForSelector:viewForReactTagSelector])(obj, viewForReactTagSelector, reactTag);
+
+        // 如果是 UIControl 的子类，例如：RCTSwitch、RCTSlider 等，直接返回
+        // 如果是 RCTScrollView，说明是在滑动的响应，并不是控件的点击
+        if ([view isKindOfClass:UIControl.class] || [view isKindOfClass:NSClassFromString(@"RCTScrollView")]) {
+            return;
+        }
+        // 触发 $AppClick 事件
+        [[SensorsAnalyticsSDK sharedInstance] trackAppClickWithView:view];
+    });
 }
 
 @end

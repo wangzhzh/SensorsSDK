@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+//static void sensorsdata_method_exchange(const char *className, const char *methodName1, const char *methodName2, IMP method2IMP);
+
 @interface NSObject (SASwizzle)
 
 /**

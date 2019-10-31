@@ -27,8 +27,8 @@
             [contents addObject:content];
         }
     }
-    // 当未获取到子控件内容时返回空。如果获取到多个子控件内容时，使用 - 拼接
-    return contents.count == 0 ? nil : [contents componentsJoinedByString:@"-"];
+    // 当未获取到子控件内容时返回 accessibilityLabel。如果获取到多个子控件内容时，使用 - 拼接
+    return contents.count == 0 ? self.accessibilityLabel : [contents componentsJoinedByString:@"-"];
 }
 
 - (UIViewController *)sensorsdata_viewController {
