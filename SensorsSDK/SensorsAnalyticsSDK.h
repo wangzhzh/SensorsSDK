@@ -156,4 +156,11 @@ value 则是 Property 的内容
 
 @end
 
+#pragma mark - ReactNative
+@interface SensorsAnalyticsSDK (ReactNative)
+
+- (void)enableTrackReactNativeEvent;
+
+@end
+
 NS_ASSUME_NONNULL_END
