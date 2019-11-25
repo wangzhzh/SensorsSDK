@@ -20,6 +20,16 @@ NS_ASSUME_NONNULL_BEGIN
 */
 + (SensorsAnalyticsSDK *)sharedInstance;
 
+/// 当本地存储的事件达到这个数量时，上传数据（默认为 100）
+@property (nonatomic) NSUInteger flushBulkSize;
+/// 两次数据发送的时间间隔，单位秒
+@property (nonatomic) NSUInteger flushInterval;
+
+/**
+ 向服务器发送本地所有数据方法
+ */
+- (void)flush;
+
 @end
 
 #pragma mark - Track
@@ -108,6 +118,34 @@ value 则是 Property 的内容
  @param properties 事件属性
  */
 - (void)trackTimerEnd:(NSString *)event properties:(nullable NSDictionary *)properties;
+
+@end
+
+#pragma mark - WebView
+@interface SensorsAnalyticsSDK (WebView)
+
+/**
+在 WebView 中添加自定义的 UserAgent，这个接口用于实现打通方案
+
+@param userAgent 自定义的 UserAgent
+*/
+- (void)addWebViewUserAgent:(nullable NSString *)userAgent;
+
+
+/**
+判断是否需要拦截并处理 JS SDK 发送过来的事件数据
+
+@param webView 用于页面展示的 WebView 控件
+@param request WebView 控件中的请求
+*/
+- (BOOL)shouldTrackWithWebView:(id)webView request:(NSURLRequest *)request;
+
+/**
+ 采集 H5 页面中的事件数据
+
+@param jsonString JS SDK 采集的事件数据
+*/
+- (void)trackFromH5WithEvent:(NSString *)jsonString;
 
 @end
 
