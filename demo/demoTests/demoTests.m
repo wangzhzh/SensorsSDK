@@ -1,18 +1,18 @@
 //
-//  demoTests.m
-//  demoTests
+//  DemoTests.m
+//  DemoTests
 //
-//  Created by 王灼洲 on 2019/5/23.
-//  Copyright © 2019 王灼洲. All rights reserved.
+//  Created by 张敏超🍎 on 2019/11/6.
+//  Copyright © 2019 SensorsData. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
 
-@interface demoTests : XCTestCase
+@interface DemoTests : XCTestCase
 
 @end
 
-@implementation demoTests
+@implementation DemoTests
 
 - (void)setUp {
     // Put setup code here. This method is called before the invocation of each test method in the class.

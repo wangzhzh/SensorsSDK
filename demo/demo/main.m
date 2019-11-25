@@ -1,16 +1,19 @@
 //
 //  main.m
-//  demo
+//  Demo
 //
-//  Created by 王灼洲 on 2019/5/23.
-//  Copyright © 2019 王灼洲. All rights reserved.
+//  Created by 张敏超🍎 on 2019/11/6.
+//  Copyright © 2019 SensorsData. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 
 int main(int argc, char * argv[]) {
+    NSString * appDelegateClassName;
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+        // Setup code that might create autoreleased objects goes here.
+        appDelegateClassName = NSStringFromClass([AppDelegate class]);
     }
+    return UIApplicationMain(argc, argv, nil, appDelegateClassName);
 }

@@ -44,28 +44,28 @@
 }
 
 #pragma mark - UIWebViewDelegate
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    if ([[SensorsAnalyticsSDK sharedInstance] shouldTrackWithWebView:webView request:request]) {
-        return NO;
-    }
-    return YES;
-}
-
-#pragma mark - WKNavigationDelegate
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-    if ([[SensorsAnalyticsSDK sharedInstance] shouldTrackWithWebView:webView request:navigationAction.request]) {
-        return decisionHandler(WKNavigationActionPolicyCancel);
-    }
-
-    decisionHandler(WKNavigationActionPolicyAllow);
-}
-
-#pragma mark - WKScriptMessageHandler
-- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
-    if ([message.body[@"command"] isEqual:@"track"]) {
-        [[SensorsAnalyticsSDK sharedInstance] trackFromH5WithEvent:message.body[@"event"]];
-//        [[SensorsAnalyticsSDK sharedInstance] track:message.body[@"event"] properties:message.body[@"properties"]];
-    }
-}
+//- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+//    if ([[SensorsAnalyticsSDK sharedInstance] shouldTrackWithWebView:webView request:request]) {
+//        return NO;
+//    }
+//    return YES;
+//}
+//
+//#pragma mark - WKNavigationDelegate
+//- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+//    if ([[SensorsAnalyticsSDK sharedInstance] shouldTrackWithWebView:webView request:navigationAction.request]) {
+//        return decisionHandler(WKNavigationActionPolicyCancel);
+//    }
+//
+//    decisionHandler(WKNavigationActionPolicyAllow);
+//}
+//
+//#pragma mark - WKScriptMessageHandler
+//- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
+//    if ([message.body[@"command"] isEqual:@"track"]) {
+//        [[SensorsAnalyticsSDK sharedInstance] trackFromH5WithEvent:message.body[@"event"]];
+////        [[SensorsAnalyticsSDK sharedInstance] track:message.body[@"event"] properties:message.body[@"properties"]];
+//    }
+//}
 
 @end
