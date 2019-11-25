@@ -12,6 +12,8 @@
 #import "SensorsDataReleaseObject.h"
 #endif
 
+static NSString * const kGroupIdentifier = @"group.com.wangzhzh.demo.extension";
+
 @interface AppDelegate ()
 
 @end
@@ -37,6 +39,11 @@
 #endif
 
     return YES;
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [[SensorsAnalyticsSDK sharedInstance] trackFromAppExtensionForApplicationGroupIdentifier:kGroupIdentifier];
 }
 
 @end

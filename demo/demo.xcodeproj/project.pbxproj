@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		88400F90238BD4C400FA28E7 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88400F8F238BD4C400FA28E7 /* NotificationCenter.framework */; };
+		88400F94238BD4C400FA28E7 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88400F93238BD4C400FA28E7 /* TodayViewController.m */; };
+		88400F97238BD4C400FA28E7 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88400F95238BD4C400FA28E7 /* MainInterface.storyboard */; };
+		88400F9B238BD4C400FA28E7 /* TodayDemo.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 88400F8E238BD4C400FA28E7 /* TodayDemo.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		88400FE3238BD86600FA28E7 /* SensorsAppExtensionSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88400FE2238BD86600FA28E7 /* SensorsAppExtensionSDK.framework */; };
+		88400FE4238BD86600FA28E7 /* SensorsAppExtensionSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 88400FE2238BD86600FA28E7 /* SensorsAppExtensionSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8871A0B72385242A00B575EF /* SensorsDataWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8871A0AE2385242A00B575EF /* SensorsDataWebViewViewController.m */; };
 		8871A0B82385242A00B575EF /* SensorsDataReleaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8871A0AF2385242A00B575EF /* SensorsDataReleaseObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8871A0B92385242A00B575EF /* sensorsdata.html in Resources */ = {isa = PBXBuildFile; fileRef = 8871A0B02385242A00B575EF /* sensorsdata.html */; };
@@ -25,6 +31,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		88400F99238BD4C400FA28E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 889C2C302372D1E2008FC64D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 88400F8D238BD4C400FA28E7;
+			remoteInfo = TodayDemo;
+		};
 		889C2C542372D1E8008FC64D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 889C2C302372D1E2008FC64D /* Project object */;
@@ -42,6 +55,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		88400F9F238BD4C400FA28E7 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				88400F9B238BD4C400FA28E7 /* TodayDemo.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		88400FE5238BD86600FA28E7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				88400FE4238BD86600FA28E7 /* SensorsAppExtensionSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		889C2C742372D271008FC64D /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -56,6 +91,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		88400F8E238BD4C400FA28E7 /* TodayDemo.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TodayDemo.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		88400F8F238BD4C400FA28E7 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		88400F92238BD4C400FA28E7 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
+		88400F93238BD4C400FA28E7 /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
+		88400F96238BD4C400FA28E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		88400F98238BD4C400FA28E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88400FC0238BD7DB00FA28E7 /* SensorsSDK_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SensorsSDK_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		88400FE2238BD86600FA28E7 /* SensorsAppExtensionSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SensorsAppExtensionSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8871A0AE2385242A00B575EF /* SensorsDataWebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SensorsDataWebViewViewController.m; sourceTree = "<group>"; };
 		8871A0AF2385242A00B575EF /* SensorsDataReleaseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SensorsDataReleaseObject.m; sourceTree = "<group>"; };
 		8871A0B02385242A00B575EF /* sensorsdata.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sensorsdata.html; sourceTree = "<group>"; };
@@ -85,6 +128,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		88400F8B238BD4C400FA28E7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88400FE3238BD86600FA28E7 /* SensorsAppExtensionSDK.framework in Frameworks */,
+				88400F90238BD4C400FA28E7 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		889C2C352372D1E2008FC64D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -110,12 +162,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		88400F91238BD4C400FA28E7 /* TodayDemo */ = {
+			isa = PBXGroup;
+			children = (
+				88400F92238BD4C400FA28E7 /* TodayViewController.h */,
+				88400F93238BD4C400FA28E7 /* TodayViewController.m */,
+				88400F95238BD4C400FA28E7 /* MainInterface.storyboard */,
+				88400F98238BD4C400FA28E7 /* Info.plist */,
+			);
+			path = TodayDemo;
+			sourceTree = "<group>";
+		};
 		889C2C2F2372D1E2008FC64D = {
 			isa = PBXGroup;
 			children = (
 				889C2C3A2372D1E2008FC64D /* Demo */,
 				889C2C562372D1E8008FC64D /* DemoTests */,
 				889C2C612372D1E8008FC64D /* DemoUITests */,
+				88400F91238BD4C400FA28E7 /* TodayDemo */,
 				889C2C392372D1E2008FC64D /* Products */,
 				889C2C702372D271008FC64D /* Frameworks */,
 			);
@@ -127,6 +191,7 @@
 				889C2C382372D1E2008FC64D /* Demo.app */,
 				889C2C532372D1E8008FC64D /* DemoTests.xctest */,
 				889C2C5E2372D1E8008FC64D /* DemoUITests.xctest */,
+				88400F8E238BD4C400FA28E7 /* TodayDemo.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -177,7 +242,10 @@
 		889C2C702372D271008FC64D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				88400FE2238BD86600FA28E7 /* SensorsAppExtensionSDK.framework */,
+				88400FC0238BD7DB00FA28E7 /* SensorsSDK_Extension.framework */,
 				889C2C712372D271008FC64D /* SensorsSDK.framework */,
+				88400F8F238BD4C400FA28E7 /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -185,6 +253,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		88400F8D238BD4C400FA28E7 /* TodayDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 88400F9C238BD4C400FA28E7 /* Build configuration list for PBXNativeTarget "TodayDemo" */;
+			buildPhases = (
+				88400F8A238BD4C400FA28E7 /* Sources */,
+				88400F8B238BD4C400FA28E7 /* Frameworks */,
+				88400F8C238BD4C400FA28E7 /* Resources */,
+				88400FE5238BD86600FA28E7 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TodayDemo;
+			productName = TodayDemo;
+			productReference = 88400F8E238BD4C400FA28E7 /* TodayDemo.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		889C2C372372D1E2008FC64D /* Demo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 889C2C672372D1E8008FC64D /* Build configuration list for PBXNativeTarget "Demo" */;
@@ -193,10 +279,12 @@
 				889C2C352372D1E2008FC64D /* Frameworks */,
 				889C2C362372D1E2008FC64D /* Resources */,
 				889C2C742372D271008FC64D /* Embed Frameworks */,
+				88400F9F238BD4C400FA28E7 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				88400F9A238BD4C400FA28E7 /* PBXTargetDependency */,
 			);
 			name = Demo;
 			productName = Demo;
@@ -248,6 +336,9 @@
 				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = SensorsData;
 				TargetAttributes = {
+					88400F8D238BD4C400FA28E7 = {
+						CreatedOnToolsVersion = 11.2.1;
+					};
 					889C2C372372D1E2008FC64D = {
 						CreatedOnToolsVersion = 11.2;
 					};
@@ -277,11 +368,20 @@
 				889C2C372372D1E2008FC64D /* Demo */,
 				889C2C522372D1E8008FC64D /* DemoTests */,
 				889C2C5D2372D1E8008FC64D /* DemoUITests */,
+				88400F8D238BD4C400FA28E7 /* TodayDemo */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		88400F8C238BD4C400FA28E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88400F97238BD4C400FA28E7 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		889C2C362372D1E2008FC64D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -310,6 +410,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		88400F8A238BD4C400FA28E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88400F94238BD4C400FA28E7 /* TodayViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		889C2C342372D1E2008FC64D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -343,6 +451,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		88400F9A238BD4C400FA28E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 88400F8D238BD4C400FA28E7 /* TodayDemo */;
+			targetProxy = 88400F99238BD4C400FA28E7 /* PBXContainerItemProxy */;
+		};
 		889C2C552372D1E8008FC64D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 889C2C372372D1E2008FC64D /* Demo */;
@@ -356,6 +469,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		88400F95238BD4C400FA28E7 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				88400F96238BD4C400FA28E7 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		889C2C442372D1E2008FC64D /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -375,6 +496,42 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		88400F9D238BD4C400FA28E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 75FYWDWHL5;
+				INFOPLIST_FILE = TodayDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = cn.sensorsdata.Demo.TodayDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		88400F9E238BD4C400FA28E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 75FYWDWHL5;
+				INFOPLIST_FILE = TodayDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = cn.sensorsdata.Demo.TodayDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		889C2C652372D1E8008FC64D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -598,6 +755,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		88400F9C238BD4C400FA28E7 /* Build configuration list for PBXNativeTarget "TodayDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				88400F9D238BD4C400FA28E7 /* Debug */,
+				88400F9E238BD4C400FA28E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		889C2C332372D1E2008FC64D /* Build configuration list for PBXProject "Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

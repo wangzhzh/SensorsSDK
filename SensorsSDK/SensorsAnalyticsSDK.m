@@ -12,6 +12,7 @@
 #import "SensorsAnalyticsDatabase.h"
 #import "SensorsAnalyticsNetwork.h"
 #import "SensorsAnalyticsExceptionHandler.h"
+#import "SensorsAnalyticsExtensionDatsManager.h"
 #include <sys/sysctl.h>
 
 #ifndef SENSORS_ANALYTICS_DISENABLE_WKWEBVIEW
@@ -416,6 +417,29 @@ static NSString * const SensorsAnalyticsJavaScriptTrackEventScheme = @"sensorsan
     [eventProperties addEntriesFromDictionary:properties];
     // 触发 $AppClick 事件
     [[SensorsAnalyticsSDK sharedInstance] trackAppClickWithView:collectionView properties:eventProperties];
+}
+
+- (void)trackFromAppExtensionForApplicationGroupIdentifier:(NSString *)identifier {
+    dispatch_async(self.serialQueue, ^{
+        // 获取 App Group Identifier 对应的应用扩展中采集的事件数据
+        NSArray *allEvents = [[SensorsAnalyticsExtensionDatsManager sharedInstance] allEventsForApplicationGroupIdentifier:identifier];
+        for (NSDictionary *dic in allEvents) {
+            NSMutableDictionary *properties = [dic[@"properties"] mutableCopy];
+            // 在采集的事件属性中加入预置属性
+            [properties addEntriesFromDictionary:self.automaticProperties];
+
+            NSMutableDictionary *event = [dic mutableCopy];
+            event[@"properties"] = properties;
+
+            // 将事件入库
+            // [self.fileStore saveEvent:event];
+            [self.database insertEvent:event];
+        }
+        // 将已经处理完成的数据删除
+        [[SensorsAnalyticsExtensionDatsManager sharedInstance] deleteAllEventsWithApplicationGroupIdentifier:identifier];
+        // 将事件上传
+        [self flush];
+    });
 }
 
 @end

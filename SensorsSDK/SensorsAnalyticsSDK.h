@@ -75,6 +75,13 @@ value 则是 Property 的内容
 */
 - (void)trackAppClickWithCollectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath properties:(nullable NSDictionary<NSString *, id> *)properties;
 
+/**
+ 通过 App Group Identifier 获取应用扩展中的事件数据，并先入库上传
+
+ @param identifier App Group Identifier
+*/
+- (void)trackFromAppExtensionForApplicationGroupIdentifier:(NSString *)identifier;
+
 @end
 
 #pragma mark - Timer

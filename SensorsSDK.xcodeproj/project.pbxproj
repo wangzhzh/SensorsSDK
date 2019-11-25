@@ -15,6 +15,11 @@
 		88400F85238BAA2300FA28E7 /* SensorsAnalyticsNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 88400F83238BAA2300FA28E7 /* SensorsAnalyticsNetwork.m */; };
 		88400F88238BB99600FA28E7 /* SensorsAnalyticsExceptionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 88400F86238BB99600FA28E7 /* SensorsAnalyticsExceptionHandler.h */; };
 		88400F89238BB99600FA28E7 /* SensorsAnalyticsExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 88400F87238BB99600FA28E7 /* SensorsAnalyticsExceptionHandler.m */; };
+		88400FA2238BD70400FA28E7 /* SensorsAnalyticsExtensionDatsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 88400FA0238BD70400FA28E7 /* SensorsAnalyticsExtensionDatsManager.h */; };
+		88400FA3238BD70400FA28E7 /* SensorsAnalyticsExtensionDatsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88400FA1238BD70400FA28E7 /* SensorsAnalyticsExtensionDatsManager.m */; };
+		88400FD9238BD81100FA28E7 /* SensorsAppExtensionSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 88400FCB238BD81000FA28E7 /* SensorsAppExtensionSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		88400FE0238BD82A00FA28E7 /* SensorsAnalyticsExtensionDatsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88400FA1238BD70400FA28E7 /* SensorsAnalyticsExtensionDatsManager.m */; };
+		88400FE1238BD83200FA28E7 /* SensorsAnalyticsExtensionDatsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 88400FA0238BD70400FA28E7 /* SensorsAnalyticsExtensionDatsManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8871A08E2382A1D200B575EF /* NSObject+SASwizzler.h in Headers */ = {isa = PBXBuildFile; fileRef = 8871A08C2382A1D200B575EF /* NSObject+SASwizzler.h */; };
 		8871A08F2382A1D200B575EF /* NSObject+SASwizzler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8871A08D2382A1D200B575EF /* NSObject+SASwizzler.m */; };
 		8871A0922382A84D00B575EF /* UIViewController+SensorsData.h in Headers */ = {isa = PBXBuildFile; fileRef = 8871A0902382A84D00B575EF /* UIViewController+SensorsData.h */; };
@@ -65,6 +70,11 @@
 		88400F83238BAA2300FA28E7 /* SensorsAnalyticsNetwork.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsAnalyticsNetwork.m; sourceTree = "<group>"; };
 		88400F86238BB99600FA28E7 /* SensorsAnalyticsExceptionHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsAnalyticsExceptionHandler.h; sourceTree = "<group>"; };
 		88400F87238BB99600FA28E7 /* SensorsAnalyticsExceptionHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsAnalyticsExceptionHandler.m; sourceTree = "<group>"; };
+		88400FA0238BD70400FA28E7 /* SensorsAnalyticsExtensionDatsManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsAnalyticsExtensionDatsManager.h; sourceTree = "<group>"; };
+		88400FA1238BD70400FA28E7 /* SensorsAnalyticsExtensionDatsManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsAnalyticsExtensionDatsManager.m; sourceTree = "<group>"; };
+		88400FC9238BD81000FA28E7 /* SensorsAppExtensionSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SensorsAppExtensionSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		88400FCB238BD81000FA28E7 /* SensorsAppExtensionSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsAppExtensionSDK.h; sourceTree = "<group>"; };
+		88400FCC238BD81000FA28E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8871A08C2382A1D200B575EF /* NSObject+SASwizzler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+SASwizzler.h"; sourceTree = "<group>"; };
 		8871A08D2382A1D200B575EF /* NSObject+SASwizzler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SASwizzler.m"; sourceTree = "<group>"; };
 		8871A0902382A84D00B575EF /* UIViewController+SensorsData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+SensorsData.h"; sourceTree = "<group>"; };
@@ -100,6 +110,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		88400FC6238BD81000FA28E7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		889C2C122372D167008FC64D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -118,11 +135,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		88400FCA238BD81000FA28E7 /* SensorsAppExtensionSDK */ = {
+			isa = PBXGroup;
+			children = (
+				88400FCB238BD81000FA28E7 /* SensorsAppExtensionSDK.h */,
+				88400FCC238BD81000FA28E7 /* Info.plist */,
+			);
+			path = SensorsAppExtensionSDK;
+			sourceTree = "<group>";
+		};
 		889C2C0B2372D167008FC64D = {
 			isa = PBXGroup;
 			children = (
 				889C2C172372D167008FC64D /* SensorsSDK */,
 				889C2C222372D167008FC64D /* SensorsSDKTests */,
+				88400FCA238BD81000FA28E7 /* SensorsAppExtensionSDK */,
 				889C2C162372D167008FC64D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -132,6 +159,7 @@
 			children = (
 				889C2C152372D167008FC64D /* SensorsSDK.framework */,
 				889C2C1E2372D167008FC64D /* SensorsSDKTests.xctest */,
+				88400FC9238BD81000FA28E7 /* SensorsAppExtensionSDK.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -153,6 +181,8 @@
 				8871A0CA23866C0D00B575EF /* SensorsAnalyticsDynamicDelegate.m */,
 				8871A0CD238674BA00B575EF /* SensorsAnalyticsDelegateProxy.h */,
 				8871A0CE238674BA00B575EF /* SensorsAnalyticsDelegateProxy.m */,
+				88400FA0238BD70400FA28E7 /* SensorsAnalyticsExtensionDatsManager.h */,
+				88400FA1238BD70400FA28E7 /* SensorsAnalyticsExtensionDatsManager.m */,
 				8871A0962382D83500B575EF /* sensorsdata_black_list.plist */,
 				8871A08C2382A1D200B575EF /* NSObject+SASwizzler.h */,
 				8871A08D2382A1D200B575EF /* NSObject+SASwizzler.m */,
@@ -191,6 +221,15 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		88400FC4238BD81000FA28E7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88400FD9238BD81100FA28E7 /* SensorsAppExtensionSDK.h in Headers */,
+				88400FE1238BD83200FA28E7 /* SensorsAnalyticsExtensionDatsManager.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		889C2C102372D167008FC64D /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -206,6 +245,7 @@
 				8871A0D3238676C400B575EF /* UIScrollView+SensorsData.h in Headers */,
 				8871A0BE2385260C00B575EF /* UIView+SensorsData.h in Headers */,
 				8871A0D7238685B800B575EF /* UICollectionView+SensorsData.h in Headers */,
+				88400FA2238BD70400FA28E7 /* SensorsAnalyticsExtensionDatsManager.h in Headers */,
 				8871A0AC2385207600B575EF /* UIApplication+SensorsData.h in Headers */,
 				8871A0CF238674BA00B575EF /* SensorsAnalyticsDelegateProxy.h in Headers */,
 				8871A0922382A84D00B575EF /* UIViewController+SensorsData.h in Headers */,
@@ -218,6 +258,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		88400FC8238BD81000FA28E7 /* SensorsAppExtensionSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 88400FDA238BD81100FA28E7 /* Build configuration list for PBXNativeTarget "SensorsAppExtensionSDK" */;
+			buildPhases = (
+				88400FC4238BD81000FA28E7 /* Headers */,
+				88400FC5238BD81000FA28E7 /* Sources */,
+				88400FC6238BD81000FA28E7 /* Frameworks */,
+				88400FC7238BD81000FA28E7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SensorsAppExtensionSDK;
+			productName = SensorsAppExtensionSDK;
+			productReference = 88400FC9238BD81000FA28E7 /* SensorsAppExtensionSDK.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		889C2C142372D167008FC64D /* SensorsSDK */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 889C2C292372D167008FC64D /* Build configuration list for PBXNativeTarget "SensorsSDK" */;
@@ -263,6 +321,9 @@
 				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = SensorsData;
 				TargetAttributes = {
+					88400FC8238BD81000FA28E7 = {
+						CreatedOnToolsVersion = 11.2.1;
+					};
 					889C2C142372D167008FC64D = {
 						CreatedOnToolsVersion = 11.2;
 					};
@@ -286,11 +347,19 @@
 			targets = (
 				889C2C142372D167008FC64D /* SensorsSDK */,
 				889C2C1D2372D167008FC64D /* SensorsSDKTests */,
+				88400FC8238BD81000FA28E7 /* SensorsAppExtensionSDK */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		88400FC7238BD81000FA28E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		889C2C132372D167008FC64D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -310,6 +379,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		88400FC5238BD81000FA28E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88400FE0238BD82A00FA28E7 /* SensorsAnalyticsExtensionDatsManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		889C2C112372D167008FC64D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -324,6 +401,7 @@
 				8871A0E02386876200B575EF /* UIGestureRecognizer+SensorsData.m in Sources */,
 				8871A0D4238676C400B575EF /* UIScrollView+SensorsData.m in Sources */,
 				8871A0AD2385207600B575EF /* UIApplication+SensorsData.m in Sources */,
+				88400FA3238BD70400FA28E7 /* SensorsAnalyticsExtensionDatsManager.m in Sources */,
 				88400F7D238B80FC00FA28E7 /* SensorsAnalyticsFileStore.m in Sources */,
 				88400F89238BB99600FA28E7 /* SensorsAnalyticsExceptionHandler.m in Sources */,
 				889C2C782372D2A7008FC64D /* SensorsAnalyticsSDK.m in Sources */,
@@ -352,6 +430,52 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		88400FDB238BD81100FA28E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 75FYWDWHL5;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SensorsAppExtensionSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = cn.sensorsdata.SensorsAppExtensionSDK;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		88400FDC238BD81100FA28E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 75FYWDWHL5;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SensorsAppExtensionSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = cn.sensorsdata.SensorsAppExtensionSDK;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		889C2C272372D167008FC64D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -551,6 +675,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		88400FDA238BD81100FA28E7 /* Build configuration list for PBXNativeTarget "SensorsAppExtensionSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				88400FDB238BD81100FA28E7 /* Debug */,
+				88400FDC238BD81100FA28E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		889C2C0F2372D167008FC64D /* Build configuration list for PBXProject "SensorsSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
