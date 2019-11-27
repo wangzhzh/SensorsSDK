@@ -14,6 +14,7 @@
 #import "SensorsAnalyticsExceptionHandler.h"
 #import "SensorsAnalyticsExtensionDatsManager.h"
 #include <sys/sysctl.h>
+#include <objc/runtime.h>
 
 #ifndef SENSORS_ANALYTICS_DISENABLE_WKWEBVIEW
 #import <WebKit/WebKit.h>
@@ -680,7 +681,7 @@ static void sensorsdata_setJSResponder(id obj, SEL cmd, NSNumber *reactTag, BOOL
             return;
         }
         // 触发 $AppClick 事件
-        [[SensorsAnalyticsSDK sharedInstance] trackAppClickWithView:view];
+        [[SensorsAnalyticsSDK sharedInstance] trackAppClickWithView:view properties:nil];
     });
 }
 

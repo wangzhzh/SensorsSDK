@@ -29,13 +29,13 @@ static NSString * const kGroupIdentifier = @"group.com.wangzhzh.demo.extension";
 //    NSLog(@"%@", array[2]);
 
 #ifdef DEBUG
-    NSString *crashedReason = [[NSUserDefaults standardUserDefaults] stringForKey:@"sensorsdata_app_crashed_reason"];
-    if (crashedReason) {
-        NSLog(@"%@", crashedReason);
-    } else {
-        SensorsDataReleaseObject *obj = [[SensorsDataReleaseObject alloc] init];
-        [obj signalCrash];
-    }
+//    NSString *crashedReason = [[NSUserDefaults standardUserDefaults] stringForKey:@"sensorsdata_app_crashed_reason"];
+//    if (crashedReason) {
+//        NSLog(@"%@", crashedReason);
+//    } else {
+//        SensorsDataReleaseObject *obj = [[SensorsDataReleaseObject alloc] init];
+//        [obj signalCrash];
+//    }
 #endif
 
     return YES;

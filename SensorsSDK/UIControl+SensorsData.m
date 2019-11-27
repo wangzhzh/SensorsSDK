@@ -16,7 +16,6 @@
     [UIControl sensorsdata_swizzleMethod:@selector(didMoveToSuperview) withMethod:@selector(sensorsdata_didMoveToSuperview)];
 }
 
-
 - (void)sensorsdata_didMoveToSuperview {
     // 调用交换前的原始方法实现
     [self sensorsdata_didMoveToSuperview];
