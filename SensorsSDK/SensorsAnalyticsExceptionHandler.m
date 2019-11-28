@@ -64,7 +64,17 @@ static void sensorsdata_uncaught_exception_handler(NSException *exception) {
     if (handle) {
         handle(exception);
     }
+
+    NSSetUncaughtExceptionHandler(NULL);
+
+    signal(SIGABRT, SIG_DFL);
+    signal(SIGILL, SIG_DFL);
+    signal(SIGSEGV, SIG_DFL);
+    signal(SIGFPE, SIG_DFL);
+    signal(SIGBUS, SIG_DFL);
+    signal(SIGPIPE, SIG_DFL);
 }
+
 static void sensorsdata_signal_exception_handler(int sig, struct __siginfo *info, void *context) {
     NSDictionary *userInfo = @{SensorDataSignalExceptionHandlerUserInfo: @(sig)};
     NSString *reason = [NSString stringWithFormat:@"Signal %d was raised.", sig];
@@ -73,6 +83,13 @@ static void sensorsdata_signal_exception_handler(int sig, struct __siginfo *info
 
     SensorsAnalyticsExceptionHandler *handler = [SensorsAnalyticsExceptionHandler sharedInstance];
     [handler trackAppCrashedWithException:exception];
+
+//    signal(SIGABRT, SIG_DFL);
+//    signal(SIGILL, SIG_DFL);
+//    signal(SIGSEGV, SIG_DFL);
+//    signal(SIGFPE, SIG_DFL);
+//    signal(SIGBUS, SIG_DFL);
+//    signal(SIGPIPE, SIG_DFL);
 }
 
 - (void)trackAppCrashedWithException:(NSException *)exception {
@@ -90,7 +107,7 @@ static void sensorsdata_signal_exception_handler(int sig, struct __siginfo *info
 
 #ifdef DEBUG
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setBool:exceptionInfo forKey:@"app_crashed_reason"];
+    [defaults setObject:exceptionInfo forKey:@"sensorsdata_app_crashed_reason"];
     [defaults synchronize];
 #endif
 
