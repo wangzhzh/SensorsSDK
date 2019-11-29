@@ -35,23 +35,23 @@ static NSString * const SensorDataSignalExceptionHandlerUserInfo = @"SignalExcep
         _previousExceptionHandler = NSGetUncaughtExceptionHandler();
         NSSetUncaughtExceptionHandler(&sensorsdata_uncaught_exception_handler);
 
-        // 定义信号集结构体
-        struct sigaction sig;
-        // 将信号集初始化为空
-        sigemptyset(&sig.sa_mask);
-        // 在回调函数中传入 __siginfo 参数
-        sig.sa_flags = SA_SIGINFO;
-        // 设置信号集回调处理函数
-        sig.sa_sigaction = &sensorsdata_signal_exception_handler;
-        // 定义需要采集的信号类型
-        int signals[] = {SIGILL, SIGABRT, SIGBUS, SIGFPE, SIGSEGV};
-        for (int i = 0; i < sizeof(signals) / sizeof(int); i++) {
-            // 注册信号回调
-            int err = sigaction(signals[i], &sig, NULL);
-            if (err) {
-                NSLog(@"Errored while trying to set up sigaction for signal %d", signals[i]);
-            }
-        }
+//        // 定义信号集结构体
+//        struct sigaction sig;
+//        // 将信号集初始化为空
+//        sigemptyset(&sig.sa_mask);
+//        // 在回调函数中传入 __siginfo 参数
+//        sig.sa_flags = SA_SIGINFO;
+//        // 设置信号集回调处理函数
+//        sig.sa_sigaction = &sensorsdata_signal_exception_handler;
+//        // 定义需要采集的信号类型
+//        int signals[] = {SIGILL, SIGABRT, SIGBUS, SIGFPE, SIGSEGV};
+//        for (int i = 0; i < sizeof(signals) / sizeof(int); i++) {
+//            // 注册信号回调
+//            int err = sigaction(signals[i], &sig, NULL);
+//            if (err) {
+//                NSLog(@"Errored while trying to set up sigaction for signal %d", signals[i]);
+//            }
+//        }
     }
     return self;
 }
@@ -64,15 +64,6 @@ static void sensorsdata_uncaught_exception_handler(NSException *exception) {
     if (handle) {
         handle(exception);
     }
-
-    NSSetUncaughtExceptionHandler(NULL);
-
-    signal(SIGABRT, SIG_DFL);
-    signal(SIGILL, SIG_DFL);
-    signal(SIGSEGV, SIG_DFL);
-    signal(SIGFPE, SIG_DFL);
-    signal(SIGBUS, SIG_DFL);
-    signal(SIGPIPE, SIG_DFL);
 }
 
 static void sensorsdata_signal_exception_handler(int sig, struct __siginfo *info, void *context) {
@@ -84,12 +75,13 @@ static void sensorsdata_signal_exception_handler(int sig, struct __siginfo *info
     SensorsAnalyticsExceptionHandler *handler = [SensorsAnalyticsExceptionHandler sharedInstance];
     [handler trackAppCrashedWithException:exception];
 
-//    signal(SIGABRT, SIG_DFL);
-//    signal(SIGILL, SIG_DFL);
-//    signal(SIGSEGV, SIG_DFL);
-//    signal(SIGFPE, SIG_DFL);
-//    signal(SIGBUS, SIG_DFL);
-//    signal(SIGPIPE, SIG_DFL);
+    NSSetUncaughtExceptionHandler(NULL);
+    signal(SIGABRT, SIG_DFL);
+    signal(SIGILL, SIG_DFL);
+    signal(SIGSEGV, SIG_DFL);
+    signal(SIGFPE, SIG_DFL);
+    signal(SIGBUS, SIG_DFL);
+    signal(SIGPIPE, SIG_DFL);
 }
 
 - (void)trackAppCrashedWithException:(NSException *)exception {
@@ -113,24 +105,37 @@ static void sensorsdata_signal_exception_handler(int sig, struct __siginfo *info
 
     [[SensorsAnalyticsSDK sharedInstance] track:@"AppCrashed" properties:properties];
 
-    // 采集 $AppEnd 回调 block
-    dispatch_block_t trackAppEndBlock = ^ {
-        // 判断应用是否处于运行状态
-        if (UIApplication.sharedApplication.applicationState == UIApplicationStateActive) {
-            // 触发事件
-            [[SensorsAnalyticsSDK sharedInstance] track:@"$AppEnd" properties:nil];
-        }
-    };
-    // 获取主线程
-    dispatch_queue_t mainQueue = dispatch_get_main_queue();
-    // 判断当前线程是否为主线程
-    if (strcmp(dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL), dispatch_queue_get_label(mainQueue)) == 0) {
-        // 如果当前线程是主线程，直接调用 block
-        trackAppEndBlock();
-    } else {
-        // 如果当前线程不是主线程，则同步调用 block
-        dispatch_sync(mainQueue, trackAppEndBlock);
-    }
+//    // 采集 $AppEnd 回调 block
+//    dispatch_block_t trackAppEndBlock = ^ {
+//        // 判断应用是否处于运行状态
+//        if (UIApplication.sharedApplication.applicationState == UIApplicationStateActive) {
+//            // 触发事件
+//            [[SensorsAnalyticsSDK sharedInstance] track:@"$AppEnd" properties:nil];
+//        }
+//    };
+//    // 获取主线程
+//    dispatch_queue_t mainQueue = dispatch_get_main_queue();
+//    // 判断当前线程是否为主线程
+//    if (strcmp(dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL), dispatch_queue_get_label(mainQueue)) == 0) {
+//        // 如果当前线程是主线程，直接调用 block
+//        trackAppEndBlock();
+//    } else {
+//        // 如果当前线程不是主线程，则同步调用 block
+//        dispatch_sync(mainQueue, trackAppEndBlock);
+//    }
+
+    NSSetUncaughtExceptionHandler(NULL);
+//
+//    int signals[] = {SIGILL, SIGABRT, SIGBUS, SIGFPE, SIGSEGV};
+//    for (int i = 0; i < sizeof(signals) / sizeof(int); i++) {
+//        signal(signals[i], SIG_DFL);
+//    }
+    signal(SIGABRT, SIG_DFL);
+//    signal(SIGILL, SIG_DFL);
+//    signal(SIGSEGV, SIG_DFL);
+//    signal(SIGFPE, SIG_DFL);
+//    signal(SIGBUS, SIG_DFL);
+//    signal(SIGPIPE, SIG_DFL);
 }
 
 @end

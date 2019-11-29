@@ -15,11 +15,11 @@
 		88400F85238BAA2300FA28E7 /* SensorsAnalyticsNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 88400F83238BAA2300FA28E7 /* SensorsAnalyticsNetwork.m */; };
 		88400F88238BB99600FA28E7 /* SensorsAnalyticsExceptionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 88400F86238BB99600FA28E7 /* SensorsAnalyticsExceptionHandler.h */; };
 		88400F89238BB99600FA28E7 /* SensorsAnalyticsExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 88400F87238BB99600FA28E7 /* SensorsAnalyticsExceptionHandler.m */; };
-		88400FA2238BD70400FA28E7 /* SensorsAnalyticsExtensionDatsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 88400FA0238BD70400FA28E7 /* SensorsAnalyticsExtensionDatsManager.h */; };
-		88400FA3238BD70400FA28E7 /* SensorsAnalyticsExtensionDatsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88400FA1238BD70400FA28E7 /* SensorsAnalyticsExtensionDatsManager.m */; };
+		88400FA2238BD70400FA28E7 /* SensorsAnalyticsExtensionDataManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 88400FA0238BD70400FA28E7 /* SensorsAnalyticsExtensionDataManager.h */; };
+		88400FA3238BD70400FA28E7 /* SensorsAnalyticsExtensionDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88400FA1238BD70400FA28E7 /* SensorsAnalyticsExtensionDataManager.m */; };
 		88400FD9238BD81100FA28E7 /* SensorsAppExtensionSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 88400FCB238BD81000FA28E7 /* SensorsAppExtensionSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		88400FE0238BD82A00FA28E7 /* SensorsAnalyticsExtensionDatsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88400FA1238BD70400FA28E7 /* SensorsAnalyticsExtensionDatsManager.m */; };
-		88400FE1238BD83200FA28E7 /* SensorsAnalyticsExtensionDatsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 88400FA0238BD70400FA28E7 /* SensorsAnalyticsExtensionDatsManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		88400FE0238BD82A00FA28E7 /* SensorsAnalyticsExtensionDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88400FA1238BD70400FA28E7 /* SensorsAnalyticsExtensionDataManager.m */; };
+		88400FE1238BD83200FA28E7 /* SensorsAnalyticsExtensionDataManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 88400FA0238BD70400FA28E7 /* SensorsAnalyticsExtensionDataManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8871A08E2382A1D200B575EF /* NSObject+SASwizzler.h in Headers */ = {isa = PBXBuildFile; fileRef = 8871A08C2382A1D200B575EF /* NSObject+SASwizzler.h */; };
 		8871A08F2382A1D200B575EF /* NSObject+SASwizzler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8871A08D2382A1D200B575EF /* NSObject+SASwizzler.m */; };
 		8871A0922382A84D00B575EF /* UIViewController+SensorsData.h in Headers */ = {isa = PBXBuildFile; fileRef = 8871A0902382A84D00B575EF /* UIViewController+SensorsData.h */; };
@@ -70,8 +70,8 @@
 		88400F83238BAA2300FA28E7 /* SensorsAnalyticsNetwork.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsAnalyticsNetwork.m; sourceTree = "<group>"; };
 		88400F86238BB99600FA28E7 /* SensorsAnalyticsExceptionHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsAnalyticsExceptionHandler.h; sourceTree = "<group>"; };
 		88400F87238BB99600FA28E7 /* SensorsAnalyticsExceptionHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsAnalyticsExceptionHandler.m; sourceTree = "<group>"; };
-		88400FA0238BD70400FA28E7 /* SensorsAnalyticsExtensionDatsManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsAnalyticsExtensionDatsManager.h; sourceTree = "<group>"; };
-		88400FA1238BD70400FA28E7 /* SensorsAnalyticsExtensionDatsManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsAnalyticsExtensionDatsManager.m; sourceTree = "<group>"; };
+		88400FA0238BD70400FA28E7 /* SensorsAnalyticsExtensionDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsAnalyticsExtensionDataManager.h; sourceTree = "<group>"; };
+		88400FA1238BD70400FA28E7 /* SensorsAnalyticsExtensionDataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsAnalyticsExtensionDataManager.m; sourceTree = "<group>"; };
 		88400FC9238BD81000FA28E7 /* SensorsAppExtensionSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SensorsAppExtensionSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88400FCB238BD81000FA28E7 /* SensorsAppExtensionSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsAppExtensionSDK.h; sourceTree = "<group>"; };
 		88400FCC238BD81000FA28E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -181,8 +181,8 @@
 				8871A0CA23866C0D00B575EF /* SensorsAnalyticsDynamicDelegate.m */,
 				8871A0CD238674BA00B575EF /* SensorsAnalyticsDelegateProxy.h */,
 				8871A0CE238674BA00B575EF /* SensorsAnalyticsDelegateProxy.m */,
-				88400FA0238BD70400FA28E7 /* SensorsAnalyticsExtensionDatsManager.h */,
-				88400FA1238BD70400FA28E7 /* SensorsAnalyticsExtensionDatsManager.m */,
+				88400FA0238BD70400FA28E7 /* SensorsAnalyticsExtensionDataManager.h */,
+				88400FA1238BD70400FA28E7 /* SensorsAnalyticsExtensionDataManager.m */,
 				8871A0962382D83500B575EF /* sensorsdata_black_list.plist */,
 				8871A08C2382A1D200B575EF /* NSObject+SASwizzler.h */,
 				8871A08D2382A1D200B575EF /* NSObject+SASwizzler.m */,
@@ -226,7 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88400FD9238BD81100FA28E7 /* SensorsAppExtensionSDK.h in Headers */,
-				88400FE1238BD83200FA28E7 /* SensorsAnalyticsExtensionDatsManager.h in Headers */,
+				88400FE1238BD83200FA28E7 /* SensorsAnalyticsExtensionDataManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,7 +245,7 @@
 				8871A0D3238676C400B575EF /* UIScrollView+SensorsData.h in Headers */,
 				8871A0BE2385260C00B575EF /* UIView+SensorsData.h in Headers */,
 				8871A0D7238685B800B575EF /* UICollectionView+SensorsData.h in Headers */,
-				88400FA2238BD70400FA28E7 /* SensorsAnalyticsExtensionDatsManager.h in Headers */,
+				88400FA2238BD70400FA28E7 /* SensorsAnalyticsExtensionDataManager.h in Headers */,
 				8871A0AC2385207600B575EF /* UIApplication+SensorsData.h in Headers */,
 				8871A0CF238674BA00B575EF /* SensorsAnalyticsDelegateProxy.h in Headers */,
 				8871A0922382A84D00B575EF /* UIViewController+SensorsData.h in Headers */,
@@ -383,7 +383,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88400FE0238BD82A00FA28E7 /* SensorsAnalyticsExtensionDatsManager.m in Sources */,
+				88400FE0238BD82A00FA28E7 /* SensorsAnalyticsExtensionDataManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,7 +401,7 @@
 				8871A0E02386876200B575EF /* UIGestureRecognizer+SensorsData.m in Sources */,
 				8871A0D4238676C400B575EF /* UIScrollView+SensorsData.m in Sources */,
 				8871A0AD2385207600B575EF /* UIApplication+SensorsData.m in Sources */,
-				88400FA3238BD70400FA28E7 /* SensorsAnalyticsExtensionDatsManager.m in Sources */,
+				88400FA3238BD70400FA28E7 /* SensorsAnalyticsExtensionDataManager.m in Sources */,
 				88400F7D238B80FC00FA28E7 /* SensorsAnalyticsFileStore.m in Sources */,
 				88400F89238BB99600FA28E7 /* SensorsAnalyticsExceptionHandler.m in Sources */,
 				889C2C782372D2A7008FC64D /* SensorsAnalyticsSDK.m in Sources */,

@@ -12,8 +12,8 @@
 
 @interface SensorsDataWebViewViewController () <UIWebViewDelegate, WKNavigationDelegate, WKScriptMessageHandler>
 
-//@property (nonatomic, strong) UIWebView *webView;
-@property (nonatomic, strong) WKWebView *webView;
+@property (nonatomic, strong) UIWebView *webView;
+//@property (nonatomic, strong) WKWebView *webView;
 
 @end
 
@@ -23,17 +23,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-//    _webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
-//    _webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-//    _webView.delegate = self;
-//    [self.view addSubview:_webView];
-
-    _webView = [[WKWebView alloc] initWithFrame:self.view.bounds];
+    _webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
     _webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    _webView.navigationDelegate = self;
+    _webView.delegate = self;
     [self.view addSubview:_webView];
 
-    [_webView.configuration.userContentController addScriptMessageHandler:self name:@"sensorsData"];
+//    _webView = [[WKWebView alloc] initWithFrame:self.view.bounds];
+//    _webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+//    _webView.navigationDelegate = self;
+//    [self.view addSubview:_webView];
+//
+//    [_webView.configuration.userContentController addScriptMessageHandler:self name:@"sensorsData"];
 
     NSURL *url = [NSBundle.mainBundle.bundleURL URLByAppendingPathComponent:@"sensorsdata.html"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];

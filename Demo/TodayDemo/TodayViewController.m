@@ -51,7 +51,7 @@ static NSString * const kGroupIdentifier = @"group.com.wangzhzh.demo.extension";
 
     [self saveToFileWithString:self.numLabel.text];
 
-    [[SensorsAnalyticsExtensionDatsManager sharedInstance] track:@"today_plus" properties:@{@"value": @(self.numLabel.text.intValue)} applicationGroupIdentifier:kGroupIdentifier];
+    [[SensorsAnalyticsExtensionDataManager sharedInstance] track:@"today_plus" properties:@{@"value": @(self.numLabel.text.intValue)} applicationGroupIdentifier:kGroupIdentifier];
 }
 
 - (IBAction)minusAction:(UIButton *)sender {
@@ -61,7 +61,7 @@ static NSString * const kGroupIdentifier = @"group.com.wangzhzh.demo.extension";
 
     [self saveToFileWithString:self.numLabel.text];
 
-    [[SensorsAnalyticsExtensionDatsManager sharedInstance] track:@"today_minus" properties:@{@"value": @(self.numLabel.text.intValue)} applicationGroupIdentifier:kGroupIdentifier];
+    [[SensorsAnalyticsExtensionDataManager sharedInstance] track:@"today_minus" properties:@{@"value": @(self.numLabel.text.intValue)} applicationGroupIdentifier:kGroupIdentifier];
 }
 
 - (void)saveToUserDefaultsWithString:(NSString *)string {

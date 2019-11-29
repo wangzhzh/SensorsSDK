@@ -22,8 +22,8 @@
 		8880C60E238FAA0D0022EC05 /* SensorDataCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8880C607238FAA0D0022EC05 /* SensorDataCollectionViewController.m */; };
 		8880C60F238FAA0D0022EC05 /* SensorsDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8880C609238FAA0D0022EC05 /* SensorsDataTableViewController.m */; };
 		8880C610238FAA0D0022EC05 /* sensorsdata.html in Resources */ = {isa = PBXBuildFile; fileRef = 8880C60B238FAA0D0022EC05 /* sensorsdata.html */; };
-		8880C612238FAA260022EC05 /* SensorsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8880C611238FAA260022EC05 /* SensorsSDK.framework */; };
-		8880C613238FAA270022EC05 /* SensorsSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8880C611238FAA260022EC05 /* SensorsSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8880C616238FB6480022EC05 /* SensorsAppExtensionSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8880C615238FB6480022EC05 /* SensorsAppExtensionSDK.framework */; };
+		8880C617238FB6480022EC05 /* SensorsAppExtensionSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8880C615238FB6480022EC05 /* SensorsAppExtensionSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +54,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8880C613238FAA270022EC05 /* SensorsSDK.framework in Embed Frameworks */,
+				8880C617238FB6480022EC05 /* SensorsAppExtensionSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -88,6 +88,7 @@
 		8880C60A238FAA0D0022EC05 /* SensorsDataWebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SensorsDataWebViewViewController.h; sourceTree = "<group>"; };
 		8880C60B238FAA0D0022EC05 /* sensorsdata.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sensorsdata.html; sourceTree = "<group>"; };
 		8880C611238FAA260022EC05 /* SensorsSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SensorsSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8880C615238FB6480022EC05 /* SensorsAppExtensionSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SensorsAppExtensionSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,8 +103,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8880C616238FB6480022EC05 /* SensorsAppExtensionSDK.framework in Frameworks */,
 				8880C5F3238FA9910022EC05 /* NotificationCenter.framework in Frameworks */,
-				8880C612238FAA260022EC05 /* SensorsSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,6 +158,7 @@
 		8880C5F1238FA9910022EC05 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8880C615238FB6480022EC05 /* SensorsAppExtensionSDK.framework */,
 				8880C611238FAA260022EC05 /* SensorsSDK.framework */,
 				8880C5F2238FA9910022EC05 /* NotificationCenter.framework */,
 			);

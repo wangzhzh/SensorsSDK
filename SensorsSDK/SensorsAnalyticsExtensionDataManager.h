@@ -1,5 +1,5 @@
 //
-//  SensorsAnalyticsExtensionDatsManager.h
+//  SensorsAnalyticsExtensionDataManager.h
 //  SensorsSDK
 //
 //  Created by 张敏超🍎 on 2019/11/25.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SensorsAnalyticsExtensionDatsManager : NSObject
+@interface SensorsAnalyticsExtensionDataManager : NSObject
 
 + (instancetype)sharedInstance;
 

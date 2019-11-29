@@ -6,17 +6,17 @@
 //  Copyright © 2019 SensorsData. All rights reserved.
 //
 
-#import "SensorsAnalyticsExtensionDatsManager.h"
+#import "SensorsAnalyticsExtensionDataManager.h"
 
 static NSString * const kSensorsExtensionFileName = @"sensors_analytics_extension_events.plist";
 
-@implementation SensorsAnalyticsExtensionDatsManager
+@implementation SensorsAnalyticsExtensionDataManager
 
 + (instancetype)sharedInstance {
     static dispatch_once_t onceToken;
-    static SensorsAnalyticsExtensionDatsManager *manager = nil;
+    static SensorsAnalyticsExtensionDataManager *manager = nil;
     dispatch_once(&onceToken, ^{
-        manager = [[SensorsAnalyticsExtensionDatsManager alloc] init];
+        manager = [[SensorsAnalyticsExtensionDataManager alloc] init];
     });
     return manager;
 }
