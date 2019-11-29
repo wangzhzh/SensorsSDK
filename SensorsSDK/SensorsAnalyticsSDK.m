@@ -35,7 +35,7 @@ static NSString * const SensorsAnalyticsJavaScriptTrackEventScheme = @"sensorsan
 @interface SensorsAnalyticsSDK ()
 
 /// 由 SDK 自动采集的事件属性，即预置属性
-@property (nonatomic, strong) NSDictionary<NSString *, id> *automaticProperties;
+@property (nonatomic, copy) NSDictionary<NSString *, id> *automaticProperties;
 
 /// 标记应用程序是否将进入非活跃状态
 @property (nonatomic) BOOL applicationWillResignActive;
