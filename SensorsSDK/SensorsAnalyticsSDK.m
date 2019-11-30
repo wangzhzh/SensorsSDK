@@ -87,6 +87,8 @@ static NSString * const SensorsAnalyticsJavaScriptTrackEventScheme = @"sensorsan
         _trackTimer = [NSMutableDictionary dictionary];
 
         _automaticProperties = [self collectAutomaticProperties];
+        // 设置是否被动启动标记
+        _launchedPassively = UIApplication.sharedApplication.backgroundTimeRemaining != UIApplicationBackgroundFetchIntervalNever;
 
         NSString *queueLabel = [NSString stringWithFormat:@"cn.sensorsdata.%@.%p", self.class, self];
         _serialQueue = dispatch_queue_create([queueLabel UTF8String], DISPATCH_QUEUE_SERIAL);
@@ -220,12 +222,10 @@ static NSString * const SensorsAnalyticsJavaScriptTrackEventScheme = @"sensorsan
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
     NSLog(@"Application did finish launching.");
 
-    // 当应用程序处于 UIApplicationStateBackground 状态时，说明应用程序启动是被动启动
-    if (UIApplication.sharedApplication.applicationState == UIApplicationStateBackground) {
+        // 当应用程序在后台运行时，触发被动启动事件
+    if (self.isLaunchedPassively) {
         // 触发被动启动事件
         [self track:@"$AppStartPassively" properties:nil];
-        // 设置被动启动标记
-        self.launchedPassively = YES;
     }
 }
 
@@ -616,7 +616,7 @@ static NSString * const SensorsAnalyticsJavaScriptTrackEventScheme = @"sensorsan
     for (NSString *query in allQuery) {
         NSArray<NSString *> *items = [query componentsSeparatedByString:@"="];
         if (items.count >= 2) {
-            queryItems[items.firstObject] = items.lastObject;
+            queryItems[items.firstObject] = [items.lastObject stringByRemovingPercentEncoding];
         }
     }
 

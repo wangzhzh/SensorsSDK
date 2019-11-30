@@ -27,9 +27,9 @@
 - (void)sensorsdata_setDelegate:(id<UITableViewDelegate>)delegate {
     // 方案一：方法交换
     // 调用原始的设置代理的方法
-//    [self sensorsdata_setDelegate:delegate];
+    [self sensorsdata_setDelegate:delegate];
     // 交换 delegate 中的 tableView:didSelectRowAtIndexPath: 方法
-//    [self sensorsdata_swizzleDidSelectRowAtIndexPathMethodWithDelegate:delegate];
+    [self sensorsdata_swizzleDidSelectRowAtIndexPathMethodWithDelegate:delegate];
 
     // 方案二：动态子类
     // 调用原始的设置代理的方法
@@ -38,11 +38,11 @@
 //    [SensorsAnalyticsDynamicDelegate proxyWithTableViewDelegate:delegate];
 
     // 方案三：NSProxy 消息转发
-    SensorsAnalyticsDelegateProxy *proxy = [SensorsAnalyticsDelegateProxy proxyWithTableViewDelegate:delegate];
-    // 保存委托对象
-    self.sensorsdata_delegateProxy = proxy;
-    // 将 delegate 设置成委托类
-    [self sensorsdata_setDelegate:proxy];
+//    SensorsAnalyticsDelegateProxy *proxy = [SensorsAnalyticsDelegateProxy proxyWithTableViewDelegate:delegate];
+//    // 保存委托对象
+//    self.sensorsdata_delegateProxy = proxy;
+//    // 将 delegate 设置成委托类
+//    [self sensorsdata_setDelegate:proxy];
 }
 
 static void sensorsdata_tableViewDidSelectRow(id object, SEL selector, UITableView *tableView, NSIndexPath *indexPath) {
