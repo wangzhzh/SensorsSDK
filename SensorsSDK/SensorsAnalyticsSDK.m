@@ -22,6 +22,8 @@
 
 static NSString * const kVersion = @"1.0.0";
 
+static NSString * const SensorsAnalyticsLoginId = @"cn.sensorsdata.login_id";
+
 static NSString * const SensorsAnalyticsEventBeginKey = @"event_begin";
 static NSString * const SensorsAnalyticsEventDurationKey = @"event_duration";
 static NSString * const SensorsAnalyticsEventIsPauseKey = @"is_pause";
@@ -43,6 +45,9 @@ static NSString * const SensorsAnalyticsJavaScriptTrackEventScheme = @"sensorsan
 @property (nonatomic, getter=isLaunchedPassively) BOOL launchedPassively;
 /// 保存被动启动时触发的事件
 @property (nonatomic, strong) NSMutableArray *passivelyEvents;
+
+/// 登录 ID
+@property (nonatomic, copy) NSString *loginId;
 
 /// 保存进入后台时，未暂停的事件
 @property (nonatomic, strong) NSMutableArray<NSString *> *enterBackgroundTrackTimerEvents;
@@ -86,6 +91,8 @@ static NSString * const SensorsAnalyticsJavaScriptTrackEventScheme = @"sensorsan
         _enterBackgroundTrackTimerEvents = [NSMutableArray array];
         _trackTimer = [NSMutableDictionary dictionary];
 
+        _loginId = [[NSUserDefaults standardUserDefaults] objectForKey:SensorsAnalyticsLoginId];
+
         _automaticProperties = [self collectAutomaticProperties];
         // 设置是否被动启动标记
         _launchedPassively = UIApplication.sharedApplication.backgroundTimeRemaining != UIApplicationBackgroundFetchIntervalNever;
@@ -110,6 +117,10 @@ static NSString * const SensorsAnalyticsJavaScriptTrackEventScheme = @"sensorsan
         [self startFlushTimer];
     }
     return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)printEvent:(NSDictionary *)event {
@@ -161,7 +172,7 @@ static NSString * const SensorsAnalyticsJavaScriptTrackEventScheme = @"sensorsan
     // 设置本机型号
     properties[@"$model"] = [self deviceModel];
     // 设置系统版本
-    properties[@"os_version"] = UIDevice.currentDevice.systemVersion;
+    properties[@"$os_version"] = UIDevice.currentDevice.systemVersion;
     // 设置应用版本
     properties[@"$app_version"] = NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"];
     return [properties copy];
@@ -276,7 +287,7 @@ static NSString * const SensorsAnalyticsJavaScriptTrackEventScheme = @"sensorsan
     }
 
     // 当应用程序处于被动启动
-    if (self.launchedPassively) {
+    if (self.isLaunchedPassively) {
         // 处理被动启动期间触发的所有事件
         for (NSDictionary *event in self.passivelyEvents) {
             [self printEvent:event];
@@ -287,11 +298,27 @@ static NSString * const SensorsAnalyticsJavaScriptTrackEventScheme = @"sensorsan
 
     // 触发 $AppStart 事件
     [self track:@"$AppStart" properties:nil];
+
+    // 恢复所有事件时长统计
+    for (NSString *event in self.enterBackgroundTrackTimerEvents) {
+        [self trackTimerResume:event];
+    }
+    [self.enterBackgroundTrackTimerEvents removeAllObjects];
+    // 开始 $AppEnd 事件计时
+    [self trackTimerStart:@"$AppEnd"];
 }
 
 - (void)applicationWillResignActive:(NSNotification *)notification {
     NSLog(@"Application will resign active.");
     self.applicationWillResignActive = YES;
+}
+
+#pragma mark - Login
+- (void)login:(NSString *)loginId {
+    self.loginId = loginId;
+    // 在本地保存登录 ID
+    [[NSUserDefaults standardUserDefaults] setObject:loginId forKey:SensorsAnalyticsLoginId];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #pragma mark - Flush
@@ -351,6 +378,9 @@ static NSString * const SensorsAnalyticsJavaScriptTrackEventScheme = @"sensorsan
     }
     // 设置事件属性
     event[@"properties"] = eventProperties;
+
+    // 设置事件的 distinct_id，用于唯一标识一个用户
+    event[@"distinct_id"] = self.loginId;
 
     // 判断是否为被动启动过程中记录的事件，不包含被动启动事件
     if (self.launchedPassively && ![eventName isEqualToString:@"$AppStartPassively"]) {

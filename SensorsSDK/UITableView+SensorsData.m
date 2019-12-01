@@ -26,15 +26,15 @@
 
 - (void)sensorsdata_setDelegate:(id<UITableViewDelegate>)delegate {
     // 方案一：方法交换
-    // 调用原始的设置代理的方法
-    [self sensorsdata_setDelegate:delegate];
-    // 交换 delegate 中的 tableView:didSelectRowAtIndexPath: 方法
-    [self sensorsdata_swizzleDidSelectRowAtIndexPathMethodWithDelegate:delegate];
+//    // 调用原始的设置代理的方法
+//    [self sensorsdata_setDelegate:delegate];
+//    // 交换 delegate 中的 tableView:didSelectRowAtIndexPath: 方法
+//    [self sensorsdata_swizzleDidSelectRowAtIndexPathMethodWithDelegate:delegate];
 
     // 方案二：动态子类
-    // 调用原始的设置代理的方法
+//    // 调用原始的设置代理的方法
 //    [self sensorsdata_setDelegate:delegate];
-    // 设置 delegate 的动态子类
+//    // 设置 delegate 的动态子类
 //    [SensorsAnalyticsDynamicDelegate proxyWithTableViewDelegate:delegate];
 
     // 方案三：NSProxy 消息转发

@@ -51,4 +51,46 @@ static NSString * const kSensorsDataBlackListFileName = @"sensorsdata_black_list
     }
 }
 
+- (NSString *)contentFromView:(UIView *)rootView {
+    if (rootView.isHidden) {
+        return nil;
+    }
+
+    NSMutableString *elementContent = [NSMutableString string];
+
+    if ([rootView isKindOfClass:[UIButton class]]) {
+        UIButton *button = (UIButton *)rootView;
+        NSString *title = button.currentAttributedTitle.string;
+        if (title.length > 0) {
+            [elementContent appendString:title];
+        }
+    } else if ([rootView isKindOfClass:[UILabel class]]) {
+        UILabel *label = (UILabel *)rootView;
+        NSString *title = label.attributedText.string;
+        if (title.length > 0) {
+            [elementContent appendString:title];
+        }
+    } else if ([rootView isKindOfClass:[UITextView class]]) {
+        UITextView *textView = (UITextView *)rootView;
+        NSString *title = textView.attributedText.string;
+        if (title.length > 0) {
+            [elementContent appendString:title];
+        }
+    } else {
+        NSMutableArray<NSString *> *elementContentArray = [NSMutableArray array];
+
+        for (UIView *subview in rootView.subviews) {
+            NSString *temp = [self contentFromView:subview];
+            if (temp.length > 0) {
+                [elementContentArray addObject:temp];
+            }
+        }
+        if (elementContentArray.count > 0) {
+            [elementContent appendString:[elementContentArray componentsJoinedByString:@"-"]];
+        }
+    }
+
+    return [elementContent copy];
+}
+
 @end

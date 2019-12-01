@@ -25,6 +25,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// 两次数据发送的时间间隔，单位秒
 @property (nonatomic) NSUInteger flushInterval;
 
+@property (nonatomic, copy, readonly) NSString *loginId;
+
+/**
+用户登录，设置登录 ID
+
+@param loginId 用户的登录 ID
+*/
+- (void)login:(NSString *)loginId;
+
 /**
  向服务器发送本地所有数据方法
  */
