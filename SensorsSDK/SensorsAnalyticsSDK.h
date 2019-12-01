@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy, readonly) NSString *loginId;
 
+@property (nonatomic, copy) NSString *anonymousId;
+
 /**
 用户登录，设置登录 ID
 

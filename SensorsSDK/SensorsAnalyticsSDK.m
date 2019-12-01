@@ -23,6 +23,7 @@
 static NSString * const kVersion = @"1.0.0";
 
 static NSString * const SensorsAnalyticsLoginId = @"cn.sensorsdata.login_id";
+static NSString * const SensorsAnalyticsAnonymousId = @"cn.sensorsdata.anonymous_id";
 
 static NSString * const SensorsAnalyticsEventBeginKey = @"event_begin";
 static NSString * const SensorsAnalyticsEventDurationKey = @"event_duration";
@@ -73,7 +74,9 @@ static NSString * const SensorsAnalyticsJavaScriptTrackEventScheme = @"sensorsan
 
 @end
 
-@implementation SensorsAnalyticsSDK
+@implementation SensorsAnalyticsSDK {
+    NSString *_anonymousId;
+}
 
 + (SensorsAnalyticsSDK *)sharedInstance {
     static dispatch_once_t onceToken;
@@ -198,6 +201,46 @@ static NSString * const SensorsAnalyticsJavaScriptTrackEventScheme = @"sensorsan
         // 重新开启定时器
         [self startFlushTimer];
     }
+}
+
+- (void)setAnonymousId:(NSString *)anonymousId {
+    _anonymousId = anonymousId;
+    [[NSUserDefaults standardUserDefaults] setObject:_anonymousId forKey:SensorsAnalyticsAnonymousId];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSString *)anonymousId {
+    if (!_anonymousId) {
+        // 从 NSUserDefaults 中读取设备 ID
+        NSString *anonymousId = [[NSUserDefaults standardUserDefaults] objectForKey:SensorsAnalyticsAnonymousId];
+        if (anonymousId) {
+            return _anonymousId = anonymousId;
+        }
+        // 获取 IDFA
+        Class cls = NSClassFromString(@"ASIdentifierManager");
+        if (cls) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+            id manager = [cls performSelector:@selector(sharedManager)];
+            if ([[manager performSelector:@selector(isAdvertisingTrackingEnabled)] boolValue]) {
+                // 使用 IDFA 作为设备 ID
+                _anonymousId = [(NSUUID *)[manager performSelector:@selector(advertisingIdentifier)] UUIDString];
+            }
+#pragma clang diagnostic pop
+        }
+        if (!_anonymousId) {
+            // 使用 IDFV 作为设备 ID
+            _anonymousId = UIDevice.currentDevice.identifierForVendor.UUIDString;
+        }
+        if (!_anonymousId) {
+            // 使用 UUID 作为设备 ID
+            _anonymousId = NSUUID.UUID.UUIDString;
+        }
+        // 保存设备 ID
+        [[NSUserDefaults standardUserDefaults] setObject:_anonymousId forKey:SensorsAnalyticsAnonymousId];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    return _anonymousId;
 }
 
 #pragma mark - Application lifecycle
@@ -380,7 +423,7 @@ static NSString * const SensorsAnalyticsJavaScriptTrackEventScheme = @"sensorsan
     event[@"properties"] = eventProperties;
 
     // 设置事件的 distinct_id，用于唯一标识一个用户
-    event[@"distinct_id"] = self.loginId;
+    event[@"distinct_id"] = self.loginId ?: self.anonymousId;
 
     // 判断是否为被动启动过程中记录的事件，不包含被动启动事件
     if (self.launchedPassively && ![eventName isEqualToString:@"$AppStartPassively"]) {
