@@ -76,7 +76,7 @@ value 则是 Property 的内容
 - (void)trackAppClickWithView:(UIView *)view properties:(nullable NSDictionary<NSString *, id> *)properties;
 
 /**
-让 UITableView 的视图触发 $AppClick 事件
+支持 UITableView 触发 $AppClick 事件
 
 @param tableView 触发事件的 UITableView 视图
 @param indexPath 在 UITableView 中点击的位置
@@ -85,7 +85,7 @@ value 则是 Property 的内容
 - (void)trackAppClickWithTableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath properties:(nullable NSDictionary<NSString *, id> *)properties;
 
 /**
-让 UICollectionView 的视图触发 $AppClick 事件
+支持 UICollectionView 触发 $AppClick 事件
 
 @param collectionView 触发事件的 UICollectionView 视图
 @param indexPath 在 UICollectionView 中点击的位置

@@ -21,7 +21,9 @@ static NSString * const kGroupIdentifier = @"group.com.wangzhzh.demo.extension";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
+
+    [SensorsAnalyticsSDK startWithServerURL:[NSURL URLWithString:@"http://sdk-test.cloud.sensorsdata.cn:8006/sa?project=default&token=95c73ae661f85aa0"]];
+
     [[SensorsAnalyticsSDK sharedInstance] addWebViewUserAgent:nil];
     [[SensorsAnalyticsSDK sharedInstance] track:@"pppp" properties:nil];
 

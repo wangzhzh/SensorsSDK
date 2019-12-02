@@ -146,6 +146,9 @@ static SensorsAnalyticsSDK *sharedInstance = nil;
 
 /// 开启上传数据的定时器
 - (void)startFlushTimer {
+    if (self.flushTimer) {
+        return;
+    }
     NSTimeInterval interval = self.flushInterval < 5 ? 5 : self.flushInterval;
     self.flushTimer = [NSTimer timerWithTimeInterval:interval target:self selector:@selector(flush) userInfo:nil repeats:YES];
     [NSRunLoop.currentRunLoop addTimer:self.flushTimer forMode:NSRunLoopCommonModes];
@@ -296,17 +299,6 @@ static SensorsAnalyticsSDK *sharedInstance = nil;
 //    [self track:@"$AppEnd" properties:nil];
     [self trackTimerEnd:@"$AppEnd" properties:nil];
 
-    // 暂停所有事件时长统计
-    [self.trackTimer enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSDictionary * _Nonnull obj, BOOL * _Nonnull stop) {
-        if (![obj[SensorsAnalyticsEventIsPauseKey] boolValue]) {
-            [self.enterBackgroundTrackTimerEvents addObject:key];
-            [self trackTimerPause:key];
-        }
-    }];
-
-    // 停止计时器
-    [self stopFlushTimer];
-
     UIApplication *application = UIApplication.sharedApplication;
     // 初始化标识符
     __block UIBackgroundTaskIdentifier backgroundTaskIdentifier = UIBackgroundTaskInvalid;
@@ -326,6 +318,17 @@ static SensorsAnalyticsSDK *sharedInstance = nil;
         // 结束后台任务
         endBackgroundTask();
     });
+
+    // 暂停所有事件时长统计
+    [self.trackTimer enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSDictionary * _Nonnull obj, BOOL * _Nonnull stop) {
+        if (![obj[SensorsAnalyticsEventIsPauseKey] boolValue]) {
+            [self.enterBackgroundTrackTimerEvents addObject:key];
+            [self trackTimerPause:key];
+        }
+    }];
+
+    // 停止计时器
+    [self stopFlushTimer];
 }
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification {
@@ -385,10 +388,12 @@ static SensorsAnalyticsSDK *sharedInstance = nil;
 
 - (void)flushByEventCount:(NSUInteger)count background:(BOOL)background {
     if (background) {
-        NSTimeInterval time = UIApplication.sharedApplication.backgroundTimeRemaining;
-        // 当 app 进入前台运行时，backgroundTimeRemaining 会返回 DBL_MAX
-        // 当运行时间小于请求的超时时间时，为保证数据库删除时不被应用强杀，不再继续上传
-        if (time == DBL_MAX || time <= 30) {
+        __block BOOL isContinue = YES;
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            // 当运行时间大于于请求的超时时间时，为保证数据库删除时不被应用强杀，不再继续上传
+            isContinue = UIApplication.sharedApplication.backgroundTimeRemaining >= 30;
+        });
+        if (!isContinue) {
             return;
         }
     }

@@ -23,16 +23,16 @@
 - (instancetype)sensorsdata_initWithTarget:(id)target action:(SEL)action {
     // 调用原始的初始化方法进行对象初始化
     [self sensorsdata_initWithTarget:target action:action];
-    // 调用添加 Target-Action 方法，添加埋点的 Target-Action 对
+    // 调用添加 Target-Action 方法，添加埋点的 Target-Action
     // 这里其实调用的是 sensorsdata_addTarget:action: 里的实现方法，因为已经进行了 swizzle
     [self addTarget:target action:action];
     return self;
 }
 
 - (void)sensorsdata_addTarget:(id)target action:(SEL)action {
-    // 调用原始的方法，添加 Target-Action 对
+    // 调用原始的方法，添加 Target-Action
     [self sensorsdata_addTarget:target action:action];
-    // 新增 Target-Action 对，用于埋点
+    // 新增 Target-Action，用于埋点
     [self sensorsdata_addTarget:self action:@selector(sensorsdata_trackTapGestureAction:)];
 }
 
@@ -66,20 +66,20 @@
 - (instancetype)sensorsdata_initWithTarget:(id)target action:(SEL)action {
     // 调用原始的初始化方法进行对象初始化
     [self sensorsdata_initWithTarget:target action:action];
-    // 调用添加 Target-Action 方法，添加埋点的 Target-Action 对
+    // 调用添加 Target-Action 方法，添加埋点的 Target-Action
     // 这里其实调用的是 sensorsdata_addTarget:action: 里的实现方法，因为已经进行了 swizzle
     [self addTarget:target action:action];
     return self;
 }
 
 - (void)sensorsdata_addTarget:(id)target action:(SEL)action {
-    // 调用原始的方法，添加 Target-Action 对
+    // 调用原始的方法，添加 Target-Action
     [self sensorsdata_addTarget:target action:action];
-    // 新增 Target-Action 对，用于埋点
-    [self sensorsdata_addTarget:self action:@selector(sensorsdata_trackLongGestureAction:)];
+    // 新增 Target-Action，用于埋点
+    [self sensorsdata_addTarget:self action:@selector(sensorsdata_trackLongPressGestureAction:)];
 }
 
-- (void)sensorsdata_trackLongGestureAction:(UILongPressGestureRecognizer *)sender {
+- (void)sensorsdata_trackLongPressGestureAction:(UILongPressGestureRecognizer *)sender {
     if (sender.state != UIGestureRecognizerStateEnded) {
         return;
     }
