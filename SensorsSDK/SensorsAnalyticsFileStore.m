@@ -51,7 +51,7 @@ static NSString * const SensorsAnalyticsDefaultFileName = @"SensorsAnalyticsData
 
 - (void)saveEvent:(NSDictionary *)event {
     dispatch_async(self.queue, ^{
-        // 当当前事件数据超过最大值时，需要移除之前的老数据
+        // 如果当前事件数据超过最大值，需要移除之前的老数据
         if (self.events.count >= self.maxLocalEventCount) {
             [self.events removeObjectAtIndex:0];
         }

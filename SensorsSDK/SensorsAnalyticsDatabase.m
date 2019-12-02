@@ -37,6 +37,7 @@ static NSString * const SensorsAnalyticsDefaultDatabaseName = @"SensorsAnalytics
         _queue = dispatch_queue_create([label UTF8String], DISPATCH_QUEUE_SERIAL);
 
         [self open];
+        [self queryLocalDatabaseEventCount];
     }
     return self;
 }
@@ -53,10 +54,10 @@ static NSString * const SensorsAnalyticsDefaultDatabaseName = @"SensorsAnalytics
         }
         char *error;
         // 创建数据库表的 sql 语句
-        NSString *sql = @"CREATE TABLE IF NOT EXISTS SensorsData (id INTEGER PRIMARY KEY AUTOINCREMENT, event BLOB);";
+        NSString *sql = @"CREATE TABLE IF NOT EXISTS events (id INTEGER PRIMARY KEY AUTOINCREMENT, event BLOB);";
         // 运行创建表格的 sql 语句
         if (sqlite3_exec(self.database, [sql UTF8String], NULL, NULL, &error) != SQLITE_OK) {
-            return NSLog(@"Create dataCache Failure %s", error);
+            return NSLog(@"Create events Failure %s", error);
         }
     });
 }
@@ -69,7 +70,7 @@ static sqlite3_stmt *insertStmt = NULL;
             sqlite3_reset(insertStmt);
         } else {
             // 插入语句
-            NSString *sql = @"INSERT INTO SensorsData (event) values (?)";
+            NSString *sql = @"INSERT INTO events (event) values (?)";
             // 准备执行 SQL 语句，获取 sqlite3_stmt
             if (sqlite3_prepare_v2(self.database, sql.UTF8String, -1, &insertStmt, NULL) != SQLITE_OK) {
                 // 准备执行 SQL 语句失败，打印 log 返回失败（NO）
@@ -89,7 +90,7 @@ static sqlite3_stmt *insertStmt = NULL;
         // 执行 stmt
         if (sqlite3_step(insertStmt) != SQLITE_DONE) {
             // 执行失败，打印 log 返回失败（NO）
-            return NSLog(@"Insert event into SensorsData error");
+            return NSLog(@"Insert event into events error");
         }
     });
 }
@@ -116,7 +117,7 @@ static sqlite3_stmt *selectStmt = NULL;
             sqlite3_reset(selectStmt);
         } else {
             // 查询语句
-            NSString *sql = [NSString stringWithFormat:@"SELECT id, event FROM SensorsData ORDER BY id ASC LIMIT %lu", (unsigned long)count];
+            NSString *sql = [NSString stringWithFormat:@"SELECT id, event FROM events ORDER BY id ASC LIMIT %lu", (unsigned long)count];
             // 准备执行 SQL 语句，获取 sqlite3_stmt
             if (sqlite3_prepare_v2(self.database, sql.UTF8String, -1, &selectStmt, NULL) != SQLITE_OK) {
                 // 准备执行 SQL 语句失败，打印 log 返回失败（NO）
@@ -148,7 +149,7 @@ static sqlite3_stmt *selectStmt = NULL;
             return ;
         }
         // 删除语句
-        NSString *sql = [NSString stringWithFormat:@"DELETE FROM SensorsData WHERE id IN (SELECT id FROM SensorsData ORDER BY id ASC LIMIT %lu);", (unsigned long)count];
+        NSString *sql = [NSString stringWithFormat:@"DELETE FROM events WHERE id IN (SELECT id FROM events ORDER BY id ASC LIMIT %lu);", (unsigned long)count];
         char *errmsg;
         // 执行删除语句
         if (sqlite3_exec(self.database, sql.UTF8String, NULL, NULL, &errmsg) != SQLITE_OK) {
@@ -163,7 +164,7 @@ static sqlite3_stmt *selectStmt = NULL;
 - (void)queryLocalDatabaseEventCount {
     dispatch_async(self.queue, ^{
         // 查询语句
-        NSString *sql = @"SELECT count(*) FROM SensorsData;";
+        NSString *sql = @"SELECT count(*) FROM events;";
         sqlite3_stmt *stmt = NULL;
         // 准备执行 SQL 语句，获取 sqlite3_stmt
         if (sqlite3_prepare_v2(self.database, sql.UTF8String, -1, &stmt, NULL) != SQLITE_OK) {

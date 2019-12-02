@@ -48,7 +48,7 @@
     // 如果控件本身为 Target 对象，并添加了两个以上的 UIControlEventTouchDown 类型的 Action 方法
     // 那说明开发者自行添加了 Actions 方法
     // 所以返回 YES 触发 $AppClick 事件
-    if ([self actionsForTarget:self forControlEvent:UIControlEventTouchDown].count >= 2) {
+    if ([self actionsForTarget:self forControlEvent:defaultControlEvent].count >= 2) {
         return YES;
     }
     return NO;
