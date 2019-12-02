@@ -14,7 +14,7 @@ static NSString * const SensorsAnalyticsDefaultFileName = @"SensorsAnalyticsData
 
 @property (nonatomic, strong) NSMutableArray<NSDictionary *> *events;
 
-/// 保存一个先进先出的线程
+/// 保存一个先进先出的队列
 @property (nonatomic, strong) dispatch_queue_t queue;
 
 @end
@@ -27,7 +27,7 @@ static NSString * const SensorsAnalyticsDefaultFileName = @"SensorsAnalyticsData
         // 初始化默认事件数据存储地址
          _filePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).lastObject stringByAppendingPathComponent:SensorsAnalyticsDefaultFileName];
 
-        // 初始化线程的唯一标识
+        // 初始化队列的唯一标识
         NSString *label = [NSString stringWithFormat:@"cn.sensorsdata.serialQueue.%p", self];
         // 创建一个 serial 类型的 queue，即 FIFO
         _queue = dispatch_queue_create([label UTF8String], DISPATCH_QUEUE_SERIAL);

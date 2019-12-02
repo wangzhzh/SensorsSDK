@@ -60,19 +60,19 @@ static NSString * const kSensorsDataBlackListFileName = @"sensorsdata_black_list
 
     if ([rootView isKindOfClass:[UIButton class]]) {
         UIButton *button = (UIButton *)rootView;
-        NSString *title = button.currentAttributedTitle.string;
+        NSString *title = button.titleLabel.text;
         if (title.length > 0) {
             [elementContent appendString:title];
         }
     } else if ([rootView isKindOfClass:[UILabel class]]) {
         UILabel *label = (UILabel *)rootView;
-        NSString *title = label.attributedText.string;
+        NSString *title = label.text;
         if (title.length > 0) {
             [elementContent appendString:title];
         }
     } else if ([rootView isKindOfClass:[UITextView class]]) {
         UITextView *textView = (UITextView *)rootView;
-        NSString *title = textView.attributedText.string;
+        NSString *title = textView.text;
         if (title.length > 0) {
             [elementContent appendString:title];
         }

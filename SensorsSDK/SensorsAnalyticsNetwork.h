@@ -25,6 +25,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (instancetype)initWithServerURL:(NSURL *)serverURL NS_DESIGNATED_INITIALIZER;
 
+/**
+同步发送事件数据
+
+@param events JSON 格式的
+@return 初始化对象
+*/
 - (BOOL)flushEvents:(NSArray<NSString *> *)events;
 
 @end

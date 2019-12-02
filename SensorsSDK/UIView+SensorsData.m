@@ -63,7 +63,7 @@
 @implementation UIButton (SensorsData)
 
 - (NSString *)sensorsdata_elementContent {
-    return self.currentTitle ?: super.sensorsdata_elementContent;
+    return self.titleLabel.text ?: super.sensorsdata_elementContent;
 }
 
 @end
@@ -81,7 +81,7 @@
 @implementation UISlider (SensorsData)
 
 - (NSString *)sensorsdata_elementContent {
-    return [NSString stringWithFormat:@"%.2f",self.value];
+    return [NSString stringWithFormat:@"%.2f", self.value];
 }
 
 @end

@@ -20,7 +20,7 @@
 #import <WebKit/WebKit.h>
 #endif
 
-static NSString * const kVersion = @"1.0.0";
+static NSString * const SensorsAnalyticsVersion = @"1.0.0";
 
 static NSString * const SensorsAnalyticsLoginId = @"cn.sensorsdata.login_id";
 static NSString * const SensorsAnalyticsAnonymousId = @"cn.sensorsdata.anonymous_id";
@@ -62,6 +62,7 @@ static NSString * const SensorsAnalyticsJavaScriptTrackEventScheme = @"sensorsan
 /// 数据库存储对象
 @property (nonatomic, strong) SensorsAnalyticsDatabase *database;
 
+@property (nonatomic, strong) NSURL *serverURL;
 /// 数据上传等网络请求对象
 @property (nonatomic, strong) SensorsAnalyticsNetwork *network;
 /// 定时上传事件的 Timer
@@ -78,16 +79,19 @@ static NSString * const SensorsAnalyticsJavaScriptTrackEventScheme = @"sensorsan
     NSString *_anonymousId;
 }
 
-+ (SensorsAnalyticsSDK *)sharedInstance {
+static SensorsAnalyticsSDK *sharedInstance = nil;
++ (void)startWithServerURL:(NSURL *)url {
     static dispatch_once_t onceToken;
-    static SensorsAnalyticsSDK *sdk = nil;
     dispatch_once(&onceToken, ^{
-        sdk = [[SensorsAnalyticsSDK alloc] init];
+        sharedInstance = [[SensorsAnalyticsSDK alloc] initWithServerURL:url];
     });
-    return sdk;
 }
 
-- (instancetype)init {
++ (SensorsAnalyticsSDK *)sharedInstance {
+    return sharedInstance;
+}
+
+- (instancetype)initWithServerURL:(NSURL *)url {
     self = [super init];
     if (self) {
         _passivelyEvents = [NSMutableArray array];
@@ -112,7 +116,7 @@ static NSString * const SensorsAnalyticsJavaScriptTrackEventScheme = @"sensorsan
 
         _flushBulkSize = 100;
         _flushInterval = 15;
-        _network = [[SensorsAnalyticsNetwork alloc] initWithServerURL:[NSURL URLWithString:@""]];
+        _network = [[SensorsAnalyticsNetwork alloc] initWithServerURL:url];
 
         // 调用异常处理单例对象，进行初始化
         [SensorsAnalyticsExceptionHandler sharedInstance];
@@ -171,7 +175,7 @@ static NSString * const SensorsAnalyticsJavaScriptTrackEventScheme = @"sensorsan
     // 设置生产商
     properties[@"$manufacturer"] = @"iOS";
     // 设置 SDK 的版本
-    properties[@"$lib_version"] = kVersion;
+    properties[@"$lib_version"] = SensorsAnalyticsVersion;
     // 设置本机型号
     properties[@"$model"] = [self deviceModel];
     // 设置系统版本
@@ -300,6 +304,9 @@ static NSString * const SensorsAnalyticsJavaScriptTrackEventScheme = @"sensorsan
         }
     }];
 
+    // 停止计时器
+    [self stopFlushTimer];
+
     UIApplication *application = UIApplication.sharedApplication;
     // 初始化标识符
     __block UIBackgroundTaskIdentifier backgroundTaskIdentifier = UIBackgroundTaskInvalid;
@@ -349,6 +356,9 @@ static NSString * const SensorsAnalyticsJavaScriptTrackEventScheme = @"sensorsan
     [self.enterBackgroundTrackTimerEvents removeAllObjects];
     // 开始 $AppEnd 事件计时
     [self trackTimerStart:@"$AppEnd"];
+
+    // 开始计时器
+    [self startFlushTimer];
 }
 
 - (void)applicationWillResignActive:(NSNotification *)notification {

@@ -12,14 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SensorsAnalyticsSDK : NSObject
 
-/**
-@abstract
-获取 SDK 实例
-
-@return 返回单例
-*/
-+ (SensorsAnalyticsSDK *)sharedInstance;
-
 /// 当本地存储的事件达到这个数量时，上传数据（默认为 100）
 @property (nonatomic) NSUInteger flushBulkSize;
 /// 两次数据发送的时间间隔，单位秒
@@ -28,6 +20,21 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) NSString *loginId;
 
 @property (nonatomic, copy) NSString *anonymousId;
+
+- (instancetype)init NS_UNAVAILABLE;
+
+/**
+@abstract
+获取 SDK 实例
+
+@return 返回单例
+*/
++ (SensorsAnalyticsSDK *)sharedInstance;
+
+/**
+初始化 SDK
+*/
++ (void)startWithServerURL:(NSURL *)url;
 
 /**
 用户登录，设置登录 ID
