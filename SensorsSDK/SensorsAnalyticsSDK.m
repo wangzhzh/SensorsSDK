@@ -526,6 +526,7 @@ static SensorsAnalyticsSDK *sharedInstance = nil;
         }
         // 将已经处理完成的数据删除
         [[SensorsAnalyticsExtensionDataManager sharedInstance] deleteAllEventsWithApplicationGroupIdentifier:identifier];
+
         // 将事件上传
         [self flush];
     });
@@ -665,9 +666,11 @@ static SensorsAnalyticsSDK *sharedInstance = nil;
     if (error || !event) {
         return;
     }
-    // 添加一些 JS SDK 中较难获取到的信息，例如 Wi-Fi 信息
-    // 开发者可以自行添加一些其他的事件属性
-    // event[@"$wifi"] = @(YES);
+
+    NSMutableDictionary *properties = [event[@"properties"] mutableCopy];
+    // 预置属性以 SDK 中采集的为主
+    [properties addEntriesFromDictionary:self.automaticProperties];
+    event[@"properties"] = properties;
 
     // 用于区分事件来源字段，表示是 H5 采集到的数据
     event[@"_hybrid_h5"] = @(YES);
@@ -677,7 +680,7 @@ static SensorsAnalyticsSDK *sharedInstance = nil;
     [event removeObjectForKey:@"server_url"];
 
     // 打印最终的入库事件数据
-    NSLog(@"[Event]: %@", event);
+    [self printEvent:event];
 
     // 本地保存事件数据
     // [self.fileStore saveEvent:event];
@@ -708,6 +711,7 @@ static SensorsAnalyticsSDK *sharedInstance = nil;
         }
     }
 
+    // TODO: 采集请求中的数据
     [self trackFromH5WithEvent:queryItems[@"event"]];
 
     return YES;

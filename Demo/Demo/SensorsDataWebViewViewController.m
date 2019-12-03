@@ -35,6 +35,7 @@
 //
 //    [_webView.configuration.userContentController addScriptMessageHandler:self name:@"sensorsData"];
 
+    // 加载 sensorsdata.html
     NSURL *url = [NSBundle.mainBundle.bundleURL URLByAppendingPathComponent:@"sensorsdata.html"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [_webView loadRequest:request];
