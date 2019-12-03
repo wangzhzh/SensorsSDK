@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy, readonly) NSString *loginId;
 
-@property (nonatomic, copy) NSString *anonymousId;
+@property (nonatomic, copy, nullable) NSString *anonymousId;
 
 - (instancetype)init NS_UNAVAILABLE;
 

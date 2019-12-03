@@ -44,6 +44,8 @@
 		8871A0D8238685B800B575EF /* UICollectionView+SensorsData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8871A0D6238685B800B575EF /* UICollectionView+SensorsData.m */; };
 		8871A0DF2386876200B575EF /* UIGestureRecognizer+SensorsData.h in Headers */ = {isa = PBXBuildFile; fileRef = 8871A0DD2386876200B575EF /* UIGestureRecognizer+SensorsData.h */; };
 		8871A0E02386876200B575EF /* UIGestureRecognizer+SensorsData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8871A0DE2386876200B575EF /* UIGestureRecognizer+SensorsData.m */; };
+		888186C723967A5D00CC3A3B /* SensorsAnalyticsKeychainPasswordItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 888186C523967A5D00CC3A3B /* SensorsAnalyticsKeychainPasswordItem.h */; };
+		888186C823967A5D00CC3A3B /* SensorsAnalyticsKeychainPasswordItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 888186C623967A5D00CC3A3B /* SensorsAnalyticsKeychainPasswordItem.m */; };
 		889C2C1F2372D167008FC64D /* SensorsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 889C2C152372D167008FC64D /* SensorsSDK.framework */; };
 		889C2C242372D167008FC64D /* SensorsSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 889C2C232372D167008FC64D /* SensorsSDKTests.m */; };
 		889C2C262372D167008FC64D /* SensorsSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 889C2C182372D167008FC64D /* SensorsSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -99,6 +101,8 @@
 		8871A0D6238685B800B575EF /* UICollectionView+SensorsData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+SensorsData.m"; sourceTree = "<group>"; };
 		8871A0DD2386876200B575EF /* UIGestureRecognizer+SensorsData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIGestureRecognizer+SensorsData.h"; sourceTree = "<group>"; };
 		8871A0DE2386876200B575EF /* UIGestureRecognizer+SensorsData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+SensorsData.m"; sourceTree = "<group>"; };
+		888186C523967A5D00CC3A3B /* SensorsAnalyticsKeychainPasswordItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsAnalyticsKeychainPasswordItem.h; sourceTree = "<group>"; };
+		888186C623967A5D00CC3A3B /* SensorsAnalyticsKeychainPasswordItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsAnalyticsKeychainPasswordItem.m; sourceTree = "<group>"; };
 		889C2C152372D167008FC64D /* SensorsSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SensorsSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		889C2C182372D167008FC64D /* SensorsSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsSDK.h; sourceTree = "<group>"; };
 		889C2C192372D167008FC64D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -169,6 +173,8 @@
 			children = (
 				889C2C752372D2A7008FC64D /* SensorsAnalyticsSDK.h */,
 				889C2C762372D2A7008FC64D /* SensorsAnalyticsSDK.m */,
+				888186C523967A5D00CC3A3B /* SensorsAnalyticsKeychainPasswordItem.h */,
+				888186C623967A5D00CC3A3B /* SensorsAnalyticsKeychainPasswordItem.m */,
 				88400F7A238B80FC00FA28E7 /* SensorsAnalyticsFileStore.h */,
 				88400F7B238B80FC00FA28E7 /* SensorsAnalyticsFileStore.m */,
 				88400F7E238B865500FA28E7 /* SensorsAnalyticsDatabase.h */,
@@ -251,6 +257,7 @@
 				8871A0922382A84D00B575EF /* UIViewController+SensorsData.h in Headers */,
 				8871A0C2238566A200B575EF /* UIControl+SensorsData.h in Headers */,
 				88400F84238BAA2300FA28E7 /* SensorsAnalyticsNetwork.h in Headers */,
+				888186C723967A5D00CC3A3B /* SensorsAnalyticsKeychainPasswordItem.h in Headers */,
 				88400F7C238B80FC00FA28E7 /* SensorsAnalyticsFileStore.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -406,6 +413,7 @@
 				88400F89238BB99600FA28E7 /* SensorsAnalyticsExceptionHandler.m in Sources */,
 				889C2C782372D2A7008FC64D /* SensorsAnalyticsSDK.m in Sources */,
 				8871A0BF2385260C00B575EF /* UIView+SensorsData.m in Sources */,
+				888186C823967A5D00CC3A3B /* SensorsAnalyticsKeychainPasswordItem.m in Sources */,
 				8871A0D8238685B800B575EF /* UICollectionView+SensorsData.m in Sources */,
 				8871A0C3238566A200B575EF /* UIControl+SensorsData.m in Sources */,
 			);

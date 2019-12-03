@@ -89,6 +89,7 @@
 		8880C60B238FAA0D0022EC05 /* sensorsdata.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sensorsdata.html; sourceTree = "<group>"; };
 		8880C611238FAA260022EC05 /* SensorsSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SensorsSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8880C615238FB6480022EC05 /* SensorsAppExtensionSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SensorsAppExtensionSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		888186C92396886000CC3A3B /* Demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Demo.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +134,7 @@
 		8880C5D2238FA91A0022EC05 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				888186C92396886000CC3A3B /* Demo.entitlements */,
 				8880C5D3238FA91A0022EC05 /* AppDelegate.h */,
 				8880C5D4238FA91A0022EC05 /* AppDelegate.m */,
 				8880C5D9238FA91A0022EC05 /* ViewController.h */,
@@ -449,6 +451,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Demo/Demo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 75FYWDWHL5;
 				INFOPLIST_FILE = Demo/Info.plist;
@@ -466,6 +469,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Demo/Demo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 75FYWDWHL5;
 				INFOPLIST_FILE = Demo/Info.plist;

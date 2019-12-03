@@ -13,6 +13,7 @@
 #import "SensorsAnalyticsNetwork.h"
 #import "SensorsAnalyticsExceptionHandler.h"
 #import "SensorsAnalyticsExtensionDataManager.h"
+#import "SensorsAnalyticsKeychainPasswordItem.h"
 #include <sys/sysctl.h>
 #include <objc/runtime.h>
 
@@ -24,6 +25,7 @@ static NSString * const SensorsAnalyticsVersion = @"1.0.0";
 
 static NSString * const SensorsAnalyticsLoginId = @"cn.sensorsdata.login_id";
 static NSString * const SensorsAnalyticsAnonymousId = @"cn.sensorsdata.anonymous_id";
+static NSString * const SensorsAnalyticsKeychainService = @"cn.sensorsdata.SensorsAnalytics.id";
 
 static NSString * const SensorsAnalyticsEventBeginKey = @"event_begin";
 static NSString * const SensorsAnalyticsEventDurationKey = @"event_duration";
@@ -212,42 +214,69 @@ static SensorsAnalyticsSDK *sharedInstance = nil;
 
 - (void)setAnonymousId:(NSString *)anonymousId {
     _anonymousId = anonymousId;
-    [[NSUserDefaults standardUserDefaults] setObject:_anonymousId forKey:SensorsAnalyticsAnonymousId];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    // 保存设备 ID（匿名 ID）
+    [self saveAnonymousId:anonymousId];
 }
 
 - (NSString *)anonymousId {
-    if (!_anonymousId) {
-        // 从 NSUserDefaults 中读取设备 ID
-        NSString *anonymousId = [[NSUserDefaults standardUserDefaults] objectForKey:SensorsAnalyticsAnonymousId];
-        if (anonymousId) {
-            return _anonymousId = anonymousId;
-        }
-        // 获取 IDFA
-        Class cls = NSClassFromString(@"ASIdentifierManager");
-        if (cls) {
+    if (_anonymousId) {
+        return _anonymousId;
+    }
+    // 从 NSUserDefaults 中读取设备 ID
+    _anonymousId = [[NSUserDefaults standardUserDefaults] objectForKey:SensorsAnalyticsAnonymousId];
+    if (_anonymousId) {
+        return _anonymousId;
+    }
+
+    SensorsAnalyticsKeychainPasswordItem *item = [[SensorsAnalyticsKeychainPasswordItem alloc] initWithService:SensorsAnalyticsKeychainService account:SensorsAnalyticsAnonymousId];
+    // 从 Keychain 中读取设备 ID
+    _anonymousId = [item readPassword];
+
+    if (_anonymousId) {
+        // 将设备 ID 保存在 NSUserDefaults 中
+        [[NSUserDefaults standardUserDefaults] setObject:_anonymousId forKey:SensorsAnalyticsAnonymousId];
+        // 返回保存的设备 ID
+        return _anonymousId;
+    }
+
+    // 获取 IDFA
+    Class cls = NSClassFromString(@"ASIdentifierManager");
+    if (cls) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
-            id manager = [cls performSelector:@selector(sharedManager)];
-            if ([[manager performSelector:@selector(isAdvertisingTrackingEnabled)] boolValue]) {
-                // 使用 IDFA 作为设备 ID
-                _anonymousId = [(NSUUID *)[manager performSelector:@selector(advertisingIdentifier)] UUIDString];
-            }
+        id manager = [cls performSelector:@selector(sharedManager)];
+        if ([[manager performSelector:@selector(isAdvertisingTrackingEnabled)] boolValue]) {
+            // 使用 IDFA 作为设备 ID
+            _anonymousId = [(NSUUID *)[manager performSelector:@selector(advertisingIdentifier)] UUIDString];
+        }
 #pragma clang diagnostic pop
-        }
-        if (!_anonymousId) {
-            // 使用 IDFV 作为设备 ID
-            _anonymousId = UIDevice.currentDevice.identifierForVendor.UUIDString;
-        }
-        if (!_anonymousId) {
-            // 使用 UUID 作为设备 ID
-            _anonymousId = NSUUID.UUID.UUIDString;
-        }
-        // 保存设备 ID
-        [[NSUserDefaults standardUserDefaults] setObject:_anonymousId forKey:SensorsAnalyticsAnonymousId];
-        [[NSUserDefaults standardUserDefaults] synchronize];
     }
+    if (!_anonymousId) {
+        // 使用 IDFV 作为设备 ID
+        _anonymousId = UIDevice.currentDevice.identifierForVendor.UUIDString;
+    }
+    if (!_anonymousId) {
+        // 使用 UUID 作为设备 ID
+        _anonymousId = NSUUID.UUID.UUIDString;
+    }
+    
+    // 保存设备 ID（匿名 ID）
+    [self saveAnonymousId:_anonymousId];
+
     return _anonymousId;
+}
+
+- (void)saveAnonymousId:(NSString *)anonymousId {
+    // 保存设备 ID
+    [[NSUserDefaults standardUserDefaults] setObject:anonymousId forKey:SensorsAnalyticsAnonymousId];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    SensorsAnalyticsKeychainPasswordItem *item = [[SensorsAnalyticsKeychainPasswordItem alloc] initWithService:SensorsAnalyticsKeychainService account:SensorsAnalyticsAnonymousId];
+    if (anonymousId) {
+        [item savePassword:anonymousId];
+    } else {
+        [item deleteItem];
+    }
 }
 
 #pragma mark - Application lifecycle
