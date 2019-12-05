@@ -273,8 +273,10 @@ static SensorsAnalyticsSDK *sharedInstance = nil;
 
     SensorsAnalyticsKeychainPasswordItem *item = [[SensorsAnalyticsKeychainPasswordItem alloc] initWithService:SensorsAnalyticsKeychainService account:SensorsAnalyticsAnonymousId];
     if (anonymousId) {
+        // 当设备 ID（匿名 ID）不为空时，将其保存在 Keychain 中
         [item savePassword:anonymousId];
     } else {
+        // 当设备 ID（匿名 ID）为空时，将删除 Keychain 中的值
         [item deleteItem];
     }
 }
@@ -419,7 +421,7 @@ static SensorsAnalyticsSDK *sharedInstance = nil;
     if (background) {
         __block BOOL isContinue = YES;
         dispatch_sync(dispatch_get_main_queue(), ^{
-            // 当运行时间大于于请求的超时时间时，为保证数据库删除时不被应用强杀，不再继续上传
+            // 当运行时间大于于请求的超时时间时，为保证数据库删除时应用不被强杀，不再继续上传
             isContinue = UIApplication.sharedApplication.backgroundTimeRemaining >= 30;
         });
         if (!isContinue) {
@@ -754,7 +756,7 @@ static SensorsAnalyticsSDK *sharedInstance = nil;
 /**
 * 交换两个方法的实现
 *
-* @param className 需要交换的方法名称
+* @param className 需要交换的类名称
 * @param methodName1 被交换的方法名，即原始的方法
 * @param methodName2 交换后的方法名，即新的实现方法
 * @param method2IMP 交换后的方法实现

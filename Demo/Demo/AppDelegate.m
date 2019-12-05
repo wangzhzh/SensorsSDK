@@ -26,7 +26,7 @@ static NSString * const kGroupIdentifier = @"group.com.wangzhzh.demo.extension";
     // 在系统默认的 UserAgent 值中添加默认标记（" /sa-sdk-ios "）
     [[SensorsAnalyticsSDK sharedInstance] addWebViewUserAgent:nil];
 //    [SensorsAnalyticsSDK sharedInstance].anonymousId = nil;
-     
+    NSLog(@"%@", NSSearchPathForDirectoriesInDomains(NSPreferencePanesDirectory, NSUserDomainMask, YES));
 
     // 测试应用层未捕获异常
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

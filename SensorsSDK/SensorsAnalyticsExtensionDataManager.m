@@ -44,7 +44,7 @@ static NSString * const kSensorsExtensionFileName = @"sensors_analytics_extensio
 }
 
 /**
-从一个中获取所有的事件数据
+从一个路径中获取所有的事件数据
 
 @param url 获取所有事件数据的文件地址
 @return 所有的事件数据
@@ -79,7 +79,7 @@ static NSString * const kSensorsExtensionFileName = @"sensors_analytics_extensio
     // 根据 App Group Identifier 获取事件保存的文件地址
     NSURL *url = [self fileURLForApplicationGroupIdentifier:identifier];
 
-    // 获取本地存储的所有事件数据，如果没有初始化数据变量
+    // 获取本地存储的所有事件数据
     NSMutableArray *events = [self allEventsForURL:url];
     // 添加事件数据
     [events addObject:dictionary];

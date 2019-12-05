@@ -94,8 +94,8 @@ static void sensorsdata_signal_exception_handler(int sig, struct __siginfo *info
     NSArray *stacks = [exception callStackSymbols] ?: [NSThread callStackSymbols];
     // 将异常信息组装
     NSString *exceptionInfo = [NSString stringWithFormat:@"Exception name：%@\nException reason：%@\nException stack：%@", name, reason, stacks];
-    // 设置 AppCrash 的事件属性 app_crashed_reason
-    properties[@"app_crashed_reason"] = exceptionInfo;
+    // 设置 $AppCrashed 的事件属性 $app_crashed_reason
+    properties[@"$app_crashed_reason "] = exceptionInfo;
 
 #ifdef DEBUG
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -103,7 +103,7 @@ static void sensorsdata_signal_exception_handler(int sig, struct __siginfo *info
     [defaults synchronize];
 #endif
 
-    [[SensorsAnalyticsSDK sharedInstance] track:@"AppCrashed" properties:properties];
+    [[SensorsAnalyticsSDK sharedInstance] track:@"$AppCrashed" properties:properties];
 
     // 采集 $AppEnd 回调 block
     dispatch_block_t trackAppEndBlock = ^ {

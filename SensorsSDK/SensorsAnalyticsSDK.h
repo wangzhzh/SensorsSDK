@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)login:(NSString *)loginId;
 
 /**
- 向服务器发送本地所有数据方法
+ 向服务器发送本地所有数据
  */
 - (void)flush;
 
