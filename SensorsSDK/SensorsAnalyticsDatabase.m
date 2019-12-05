@@ -92,6 +92,8 @@ static sqlite3_stmt *insertStmt = NULL;
             // 执行失败，打印 log 返回失败（NO）
             return NSLog(@"Insert event into events error");
         }
+        // 数据插入成功，事件数量加一
+        self.eventCount++;
     });
 }
 
