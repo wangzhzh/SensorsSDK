@@ -707,9 +707,8 @@ static SensorsAnalyticsSDK *sharedInstance = nil;
     // 用于区分事件来源字段，表示是 H5 采集到的数据
     event[@"_hybrid_h5"] = @(YES);
 
-    // 移除一些无用的 key
-    [event removeObjectForKey:@"_nocache"];
-    [event removeObjectForKey:@"server_url"];
+    // 设置事件的 distinct_id，用于唯一标识一个用户
+    event[@"distinct_id"] = self.loginId ?: self.anonymousId;
 
     // 打印最终的入库事件数据
     [self printEvent:event];
