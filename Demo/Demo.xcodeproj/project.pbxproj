@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8806E6F52399FE0F00259791 /* SensorsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8880C611238FAA260022EC05 /* SensorsSDK.framework */; };
+		8806E6F62399FE0F00259791 /* SensorsSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8880C611238FAA260022EC05 /* SensorsSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8880C5D5238FA91A0022EC05 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8880C5D4238FA91A0022EC05 /* AppDelegate.m */; };
 		8880C5DB238FA91A0022EC05 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8880C5DA238FA91A0022EC05 /* ViewController.m */; };
 		8880C5DE238FA91A0022EC05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8880C5DC238FA91A0022EC05 /* Main.storyboard */; };
@@ -24,6 +26,7 @@
 		8880C610238FAA0D0022EC05 /* sensorsdata.html in Resources */ = {isa = PBXBuildFile; fileRef = 8880C60B238FAA0D0022EC05 /* sensorsdata.html */; };
 		8880C616238FB6480022EC05 /* SensorsAppExtensionSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8880C615238FB6480022EC05 /* SensorsAppExtensionSDK.framework */; };
 		8880C617238FB6480022EC05 /* SensorsAppExtensionSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8880C615238FB6480022EC05 /* SensorsAppExtensionSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		88BC1F332399F9BF00C6A577 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88BC1F2E2399E37A00C6A577 /* AdSupport.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +40,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		8806E6F72399FE0F00259791 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8806E6F62399FE0F00259791 /* SensorsSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8880C5FF238FA9910022EC05 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -90,6 +104,7 @@
 		8880C611238FAA260022EC05 /* SensorsSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SensorsSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8880C615238FB6480022EC05 /* SensorsAppExtensionSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SensorsAppExtensionSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		888186C92396886000CC3A3B /* Demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Demo.entitlements; sourceTree = "<group>"; };
+		88BC1F2E2399E37A00C6A577 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +112,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8806E6F52399FE0F00259791 /* SensorsSDK.framework in Frameworks */,
+				88BC1F332399F9BF00C6A577 /* AdSupport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,6 +177,7 @@
 		8880C5F1238FA9910022EC05 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				88BC1F2E2399E37A00C6A577 /* AdSupport.framework */,
 				8880C615238FB6480022EC05 /* SensorsAppExtensionSDK.framework */,
 				8880C611238FAA260022EC05 /* SensorsSDK.framework */,
 				8880C5F2238FA9910022EC05 /* NotificationCenter.framework */,
@@ -189,6 +207,7 @@
 				8880C5CD238FA91A0022EC05 /* Frameworks */,
 				8880C5CE238FA91A0022EC05 /* Resources */,
 				8880C5FF238FA9910022EC05 /* Embed App Extensions */,
+				8806E6F72399FE0F00259791 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -452,15 +471,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Demo/Demo.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 75FYWDWHL5;
 				INFOPLIST_FILE = Demo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.sensorsdata.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -470,15 +492,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Demo/Demo.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 75FYWDWHL5;
 				INFOPLIST_FILE = Demo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.sensorsdata.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -486,9 +511,11 @@
 		8880C600238FA9910022EC05 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 75FYWDWHL5;
 				INFOPLIST_FILE = TodayDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -496,6 +523,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.sensorsdata.Demo.TodayDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -504,9 +532,11 @@
 		8880C601238FA9910022EC05 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 75FYWDWHL5;
 				INFOPLIST_FILE = TodayDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -514,6 +544,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.sensorsdata.Demo.TodayDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

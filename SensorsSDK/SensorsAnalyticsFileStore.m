@@ -81,7 +81,7 @@ static NSString * const SensorsAnalyticsDefaultFileName = @"SensorsAnalyticsData
     // json 解析错误信息
     NSError *error = nil;
     // 将字典数据解析成 json data
-    NSData *data = [NSJSONSerialization dataWithJSONObject:_events options:NSJSONWritingPrettyPrinted error:&error];
+    NSData *data = [NSJSONSerialization dataWithJSONObject:self.events options:NSJSONWritingPrettyPrinted error:&error];
     if (error) {
         return NSLog(@"The json object's serialization error: %@", error);
     }

@@ -13,11 +13,11 @@
 #import "SensorsAnalyticsNetwork.h"
 #import "SensorsAnalyticsExceptionHandler.h"
 #import "SensorsAnalyticsExtensionDataManager.h"
-#import "SensorsAnalyticsKeychainPasswordItem.h"
+#import "SensorsAnalyticsKeychainItem.h"
 #include <sys/sysctl.h>
 #include <objc/runtime.h>
 
-#ifndef SENSORS_ANALYTICS_DISENABLE_WKWEBVIEW
+#ifndef SENSORS_ANALYTICS_UIWEBVIEW
 #import <WebKit/WebKit.h>
 #endif
 
@@ -70,7 +70,7 @@ static NSString * const SensorsAnalyticsJavaScriptTrackEventScheme = @"sensorsan
 /// 定时上传事件的 Timer
 @property (nonatomic, strong) NSTimer *flushTimer;
 
-#ifndef SENSORS_ANALYTICS_DISENABLE_WKWEBVIEW
+#ifndef SENSORS_ANALYTICS_UIWEBVIEW
 // 由于 WKWebView 获取 UserAgent 是异步过程，为了在获取过程中创建的 WKWebView 对象不被销毁，需要保存创建的临时对象
 @property (nonatomic, strong) WKWebView *webView;
 #endif
@@ -228,9 +228,9 @@ static SensorsAnalyticsSDK *sharedInstance = nil;
         return _anonymousId;
     }
 
-    SensorsAnalyticsKeychainPasswordItem *item = [[SensorsAnalyticsKeychainPasswordItem alloc] initWithService:SensorsAnalyticsKeychainService account:SensorsAnalyticsAnonymousId];
+    SensorsAnalyticsKeychainItem *item = [[SensorsAnalyticsKeychainItem alloc] initWithService:SensorsAnalyticsKeychainService key:SensorsAnalyticsAnonymousId];
     // 从 Keychain 中读取设备 ID
-    _anonymousId = [item readPassword];
+    _anonymousId = [item value];
 
     if (_anonymousId) {
         // 将设备 ID 保存在 NSUserDefaults 中
@@ -244,8 +244,11 @@ static SensorsAnalyticsSDK *sharedInstance = nil;
     if (cls) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
+        // 获取 ASIdentifierManager 的单利对象
         id manager = [cls performSelector:@selector(sharedManager)];
-        if ([[manager performSelector:@selector(isAdvertisingTrackingEnabled)] boolValue]) {
+        SEL selector = NSSelectorFromString(@"isAdvertisingTrackingEnabled");
+        BOOL (*isAdvertisingTrackingEnabled)(id, SEL) = (BOOL (*)(id, SEL))[manager methodForSelector:selector];
+        if (isAdvertisingTrackingEnabled(manager, selector)) {
             // 使用 IDFA 作为设备 ID
             _anonymousId = [(NSUUID *)[manager performSelector:@selector(advertisingIdentifier)] UUIDString];
         }
@@ -271,13 +274,13 @@ static SensorsAnalyticsSDK *sharedInstance = nil;
     [[NSUserDefaults standardUserDefaults] setObject:anonymousId forKey:SensorsAnalyticsAnonymousId];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
-    SensorsAnalyticsKeychainPasswordItem *item = [[SensorsAnalyticsKeychainPasswordItem alloc] initWithService:SensorsAnalyticsKeychainService account:SensorsAnalyticsAnonymousId];
+    SensorsAnalyticsKeychainItem *item = [[SensorsAnalyticsKeychainItem alloc] initWithService:SensorsAnalyticsKeychainService key:SensorsAnalyticsAnonymousId];
     if (anonymousId) {
         // 当设备 ID（匿名 ID）不为空时，将其保存在 Keychain 中
-        [item savePassword:anonymousId];
+        [item update:anonymousId];
     } else {
         // 当设备 ID（匿名 ID）为空时，将删除 Keychain 中的值
-        [item deleteItem];
+        [item remove];
     }
 }
 
@@ -650,11 +653,9 @@ static SensorsAnalyticsSDK *sharedInstance = nil;
 #pragma mark - WebView
 @implementation SensorsAnalyticsSDK (WebView)
 
-#define SENSORS_ANALYTICS_DISENABLE_WKWEBVIEW
-
 - (void)loadUserAgent:(void(^)(NSString *))completion {
     dispatch_async(dispatch_get_main_queue(), ^{
-#ifdef SENSORS_ANALYTICS_DISENABLE_WKWEBVIEW
+#ifdef SENSORS_ANALYTICS_UIWEBVIEW
         // 创建一个空的 webView
         UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
         // 取出 webView 的 UserAgent
