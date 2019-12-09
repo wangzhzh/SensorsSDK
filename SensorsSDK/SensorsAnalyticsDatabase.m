@@ -30,10 +30,9 @@ static NSString * const SensorsAnalyticsDefaultDatabaseName = @"SensorsAnalytics
     self = [super init];
     if (self) {
         _filePath = filePath ?: [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).lastObject stringByAppendingPathComponent:SensorsAnalyticsDefaultDatabaseName];
-        NSLog(@"Database FilePath: %@", _filePath);
 
         // 初始化队列的唯一标识
-        NSString *label = [NSString stringWithFormat:@"cn.sensorsdata.database"];
+        NSString *label = [NSString stringWithFormat:@"cn.sensorsdata.serialQueue.%p", self];
         // 创建一个 serial 类型的 queue，即 FIFO
         _queue = dispatch_queue_create([label UTF8String], DISPATCH_QUEUE_SERIAL);
 
