@@ -474,13 +474,6 @@ static SensorsAnalyticsSDK *sharedInstance = nil;
     // 设置事件的 distinct_id，用于唯一标识一个用户
     event[@"distinct_id"] = self.loginId ?: self.anonymousId;
 
-    // 判断是否为被动启动过程中记录的事件，不包含被动启动事件
-    if (self.launchedPassively && ![eventName isEqualToString:@"$AppStartPassively"]) {
-        // 保存被动启动状态下记录的事件
-        [self.passivelyEvents addObject:eventProperties];
-        return;
-    }
-
     dispatch_async(self.serialQueue, ^{
         [self printEvent:event];
         [self.fileStore saveEvent:event];

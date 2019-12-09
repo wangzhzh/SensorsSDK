@@ -45,7 +45,6 @@ typedef void(^SAURLSessionTaskCompletionHandler)(NSData * _Nullable data, NSURLR
 }
 
 - (NSString *)buildJSONStringWithEvents:(NSArray<NSString *> *)events {
-    // 将 json 的事件数据转换为 json 数组
     return [NSString stringWithFormat:@"[\n%@\n]", [events componentsJoinedByString:@",\n"]];
 }
 

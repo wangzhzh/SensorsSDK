@@ -74,14 +74,6 @@ static void sensorsdata_signal_exception_handler(int sig, struct __siginfo *info
 
     SensorsAnalyticsExceptionHandler *handler = [SensorsAnalyticsExceptionHandler sharedInstance];
     [handler trackAppCrashedWithException:exception];
-
-    NSSetUncaughtExceptionHandler(NULL);
-    signal(SIGABRT, SIG_DFL);
-    signal(SIGILL, SIG_DFL);
-    signal(SIGSEGV, SIG_DFL);
-    signal(SIGFPE, SIG_DFL);
-    signal(SIGBUS, SIG_DFL);
-    signal(SIGPIPE, SIG_DFL);
 }
 
 - (void)trackAppCrashedWithException:(NSException *)exception {
@@ -123,6 +115,15 @@ static void sensorsdata_signal_exception_handler(int sig, struct __siginfo *info
         // 如果当前线程不是主线程，则同步调用 block
         dispatch_sync(mainQueue, trackAppEndBlock);
     }
+
+    // 获取 SensorsAnalyticsSDK 中的 serialQueue
+    dispatch_queue_t serialQueue = [[SensorsAnalyticsSDK sharedInstance] valueForKeyPath:@"serialQueue"];
+    // 阻塞当前线程，让 serialQueue 执行完成
+    dispatch_sync(serialQueue, ^{});
+    // 获取数据存储时的线程
+    dispatch_queue_t databaseQueue = [[SensorsAnalyticsSDK sharedInstance] valueForKeyPath:@"database.queue"];
+    // 阻塞当前线程，让 $AppCrashed 及 $AppEnd 事件完成入库
+    dispatch_sync(databaseQueue, ^{});
 
     NSSetUncaughtExceptionHandler(NULL);
 
