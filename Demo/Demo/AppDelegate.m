@@ -23,7 +23,7 @@ static NSString * const kGroupIdentifier = @"group.com.wangzhzh.demo.extension";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 
-    [SensorsAnalyticsSDK startWithServerURL:[NSURL URLWithString:@"http://sdk-test.cloud.sensorsdata.cn:8006/sa?project=default&token=95c73ae661f85aa0"]];
+    [SensorsAnalyticsSDK startWithServerURL:@"http://sdk-test.cloud.sensorsdata.cn:8006/sa?project=default&token=95c73ae661f85aa0"];
     // 在系统默认的 UserAgent 值中添加默认标记（" /sa-sdk-ios "）
     [[SensorsAnalyticsSDK sharedInstance] addWebViewUserAgent:nil];
 

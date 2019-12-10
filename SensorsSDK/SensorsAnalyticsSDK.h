@@ -33,8 +33,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
 初始化 SDK
+
+@param urlString 数据上传地址
 */
-+ (void)startWithServerURL:(NSURL *)url;
++ (void)startWithServerURL:(NSString *)urlString;
 
 /**
 用户登录，设置登录 ID

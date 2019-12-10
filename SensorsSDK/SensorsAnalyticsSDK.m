@@ -82,10 +82,10 @@ static NSString * const SensorsAnalyticsJavaScriptTrackEventScheme = @"sensorsan
 }
 
 static SensorsAnalyticsSDK *sharedInstance = nil;
-+ (void)startWithServerURL:(NSURL *)url {
++ (void)startWithServerURL:(NSString *)urlString {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedInstance = [[SensorsAnalyticsSDK alloc] initWithServerURL:url];
+        sharedInstance = [[SensorsAnalyticsSDK alloc] initWithServerURL:urlString];
     });
 }
 
@@ -93,7 +93,7 @@ static SensorsAnalyticsSDK *sharedInstance = nil;
     return sharedInstance;
 }
 
-- (instancetype)initWithServerURL:(NSURL *)url {
+- (instancetype)initWithServerURL:(NSString *)urlString {
     self = [super init];
     if (self) {
         _passivelyEvents = [NSMutableArray array];
@@ -118,7 +118,7 @@ static SensorsAnalyticsSDK *sharedInstance = nil;
 
         _flushBulkSize = 100;
         _flushInterval = 15;
-        _network = [[SensorsAnalyticsNetwork alloc] initWithServerURL:url];
+        _network = [[SensorsAnalyticsNetwork alloc] initWithServerURL:[NSURL URLWithString:urlString]];
 
         // 调用异常处理单例对象，进行初始化
         [SensorsAnalyticsExceptionHandler sharedInstance];
