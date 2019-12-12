@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SensorsAnalyticsDelegateProxy : NSObject <UITableViewDelegate, UICollectionViewDelegate>
+@interface SensorsAnalyticsDelegateProxy : NSProxy <UITableViewDelegate, UICollectionViewDelegate>
 
 + (instancetype)proxyWithTableViewDelegate:(id<UITableViewDelegate>)delegate;
 

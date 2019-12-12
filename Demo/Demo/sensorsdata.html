@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
   <title>Title</title>
   <script type="text/javascript" charset="utf-8">
     (function (para) {
       var p = para.sdk_url, n = para.name, w = window, d = document, s = 'script', x = null, y = null;
       w['sensorsDataAnalytic201505'] = n;
       w[n] = w[n] || function (a) { return function () { (w[n]._q = w[n]._q || []).push([a, arguments]); } };
-      var ifs = ['track', 'quick', 'register', 'registerPage', 'registerOnce', 'trackSignup', 'trackAbtest', 'setProfile', 'setOnceProfile', 'appendProfile', 'incrementProfile', 'deleteProfile', 'unsetProfile', 'identify', 'login', 'logout', 'trackLink', 'clearAllRegister', 'getAppStatus'];
+      var ifs = ['track'];
       for (var i = 0; i < ifs.length; i++) {
         w[n][ifs[i]] = w[n].call(null, ifs[i]);
       }
@@ -24,38 +25,37 @@
 
     })({
       sdk_url: 'http://static.sensorsdata.cn/sdk/test/sensorsdata.full.js',
-      heatmap_url: 'http://static.sensorsdata.cn/sdk/test/heatmap.min.js',
       use_app_track: true,
       name: 'sa',
       server_url: 'http://sdk-test.cloud.sensorsdata.cn:8006/sa?project=default&token=95c73ae661f85aa0'
     });
 
-    function track(name, properties) {
-      if (window.webkit
-        && window.webkit.messageHandlers
-        && window.webkit.messageHandlers.sensorsData) {
-        // 组建数据，可自行实现采集一些事件属性
-        var event = {
-          event: name,
-          lib: {
-            $lib: 'js',
-            $lib_method: 'code',
-            $lib_version: '1.0.1'
-          },
-          properties: properties
-        };
-        var message = {
-          command: 'track',
-          event: JSON.stringify(event)
-        };
-        // 调用接口向原生发送消息
-        window.webkit.messageHandlers.sensorsData.postMessage(message);
-      } else {
-        // 不能调用 iOS 的原生 API 时，调用 JS SDK 的接口
-        console.log("No native APIs found.");
-        sa.track(name, properties);
-      }
-    }
+     function track(name, properties) {
+       if (window.webkit
+         && window.webkit.messageHandlers
+         && window.webkit.messageHandlers.sensorsData) {
+         // 组建数据，可自行实现采集一些事件属性
+         var event = {
+           event: name,
+           lib: {
+             $lib: 'js',
+             $lib_method: 'code',
+             $lib_version: '1.0.1'
+           },
+           properties: properties
+         };
+         var message = {
+           command: 'track',
+           event: JSON.stringify(event)
+         };
+         // 调用接口向原生发送消息
+         window.webkit.messageHandlers.sensorsData.postMessage(message);
+       } else {
+         // 不能调用 iOS 的原生 API 时，调用 JS SDK 的接口
+         console.log("No native APIs found.");
+         sa.track(name, properties)
+       }
+     }
 
     function buttonClick() {
       // 追踪浏览商品事件。
@@ -71,8 +71,6 @@
 </head>
 <body>
   <br />
-  body区域
-  <br />
-  <button id='button' value='点击' onclick="buttonClick();" style="height:100px;width:100px;"></button>
+  <button onclick="buttonClick();" > Test </button>
 </body>
 </html>

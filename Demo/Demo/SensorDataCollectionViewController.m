@@ -54,6 +54,9 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"Did Select Item: %ld, %ld", indexPath.section, indexPath.item);
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    SensorDataCollectionViewController *vc = [sb instantiateViewControllerWithIdentifier:@"SensorDataCollectionViewController"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end
