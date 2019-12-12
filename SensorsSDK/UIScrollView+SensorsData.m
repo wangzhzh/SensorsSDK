@@ -12,7 +12,7 @@
 @implementation UIScrollView (SensorsData)
 
 - (void)setSensorsdata_delegateProxy:(SensorsAnalyticsDelegateProxy *)sensorsdata_delegateProxy {
-    objc_setAssociatedObject(self, @selector(setSensorsdata_delegateProxy:), sensorsdata_delegateProxy, OBJC_ASSOCIATION_RETAIN);
+    objc_setAssociatedObject(self, @selector(setSensorsdata_delegateProxy:), sensorsdata_delegateProxy, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (SensorsAnalyticsDelegateProxy *)sensorsdata_delegateProxy {

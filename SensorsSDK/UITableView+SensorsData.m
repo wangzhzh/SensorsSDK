@@ -38,16 +38,16 @@
 //    [SensorsAnalyticsDynamicDelegate proxyWithTableViewDelegate:delegate];
 
     // 方案三：NSProxy 消息转发
+    // 销毁保存的委托对象
+    self.sensorsdata_delegateProxy = nil;
     if (delegate) {
         SensorsAnalyticsDelegateProxy *proxy = [SensorsAnalyticsDelegateProxy proxyWithTableViewDelegate:delegate];
         // 保存委托对象
         self.sensorsdata_delegateProxy = proxy;
-        // 将 delegate 设置成委托类
+        // 调用原始方法，将代理设置为委托对象
         [self sensorsdata_setDelegate:proxy];
     } else {
-        // 销毁保存的委托对象
-        self.sensorsdata_delegateProxy = nil;
-        // 设置委托对象为 nil
+        // 调用原始方法，将代理设置为 nil
         [self sensorsdata_setDelegate:nil];
     }
 }

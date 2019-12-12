@@ -18,15 +18,12 @@
 }
 
 - (void)sensorsdata_setDelegate:(id<UICollectionViewDelegate>)delegate {
-    if (self.delegate == delegate) {
-        return;
-    }
+    self.sensorsdata_delegateProxy = nil;
     if (delegate) {
         SensorsAnalyticsDelegateProxy *proxy = [SensorsAnalyticsDelegateProxy proxyWithCollectionViewDelegate:delegate];
         self.sensorsdata_delegateProxy = proxy;
         [self sensorsdata_setDelegate:proxy];
     } else {
-        self.sensorsdata_delegateProxy = nil;
         [self sensorsdata_setDelegate:nil];
     }
 }
