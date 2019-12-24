@@ -2,7 +2,7 @@
 //  UIApplication+SensorsData.h
 //  SensorsSDK
 //
-//  Created by 张敏超🍎 on 2019/11/20.
+//  Created by 王灼洲 on 2019/08/08.
 //  Copyright © 2019 SensorsData. All rights reserved.
 //
 
